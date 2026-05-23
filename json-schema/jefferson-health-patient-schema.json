@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/jefferson-health/refs/heads/main/json-schema/jefferson-health-patient-schema.json",
+  "title": "Jefferson Health FHIR R4 Patient (US Core Subset)",
+  "description": "Subset JSON Schema for the US Core Patient profile as returned by the Jefferson Health (Epic) FHIR R4 endpoint.",
+  "type": "object",
+  "required": ["resourceType", "id", "identifier", "name"],
+  "properties": {
+    "resourceType": { "type": "string", "const": "Patient" },
+    "id": { "type": "string", "description": "FHIR logical id." },
+    "identifier": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["system", "value"],
+        "properties": {
+          "use": { "type": "string", "enum": ["usual","official","temp","secondary","old"] },
+          "system": { "type": "string", "format": "uri" },
+          "value": { "type": "string" }
+        }
+      }
+    },
+    "name": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "use": { "type": "string" },
+          "family": { "type": "string" },
+          "given": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "gender": { "type": "string", "enum": ["male","female","other","unknown"] },
+    "birthDate": { "type": "string", "format": "date" },
+    "address": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "use": { "type": "string" },
+          "line": { "type": "array", "items": { "type": "string" } },
+          "city": { "type": "string" },
+          "state": { "type": "string" },
+          "postalCode": { "type": "string" },
+          "country": { "type": "string" }
+        }
+      }
+    }
+  }
+}

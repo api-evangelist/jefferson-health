@@ -1,0 +1,85 @@
+apiCommonsPlans: '0.1'
+info:
+  title: Jefferson Health API Plans and Pricing
+  description: >-
+    Commercial plan and pricing surface for Jefferson Health's published APIs.
+    The CMS Interoperability and Patient Access (CMS-9115-F) FHIR APIs from
+    Thomas Jefferson University Hospital and Jefferson Health Plans are
+    free at the point of use for patient-authorized applications, with cost
+    of access governed by the CMS rule and HIPAA — not by a developer
+    pricing tier. There is no public commercial developer marketplace.
+  created: '2026-05-23'
+  modified: '2026-05-23'
+provider:
+  name: Jefferson Health
+  url: https://www.jeffersonhealth.org/
+plans:
+- id: tjuh-patient-access-fhir
+  name: Thomas Jefferson University Hospital Patient Access FHIR (Free)
+  description: >-
+    Free patient-authorized access to USCDI-aligned EHR data via the
+    Jefferson FHIR R4 endpoint under CMS-9115-F. Apps must register with
+    Epic on FHIR and obtain Jefferson approval to access production data;
+    the API itself is not metered or charged.
+  audience: Patient-facing third-party applications, individual patients.
+  scope: Patient-level read access via SMART on FHIR.
+  pricing:
+    model: free
+    currency: USD
+    amount: 0
+  termsOfService:
+  - https://fhir.epic.com/
+  - https://www.healthit.gov/curesrule/
+  registration:
+    url: https://fhir.epic.com/Developer/Apps
+  notes:
+  - Production access requires Epic on FHIR app registration and Jefferson Health onboarding.
+  - Bulk Data Group export is supported but typically restricted to organizational data-use agreements.
+
+- id: jhp-patient-access-fhir
+  name: Jefferson Health Plans Patient Access FHIR (Free)
+  description: >-
+    Free member-authorized access to adjudicated claims, encounter data,
+    formulary, and clinical data for Jefferson Health Plans members under
+    CMS-9115-F via OAuth 2.0 / OpenID Connect on the Smile CDR-powered
+    Patient Access API.
+  audience: JHP-member-facing third-party applications.
+  scope: Member-level read access via CARIN BB profiles.
+  pricing:
+    model: free
+    currency: USD
+    amount: 0
+  termsOfService:
+  - https://www.jeffersonhealthplans.com/home/about-us/interoperability/terms-of-service.html
+  registration:
+    url: https://appgallery.healthpartnersplans.com/app-gallery/portal/#/login
+
+- id: jhp-provider-directory-fhir
+  name: Jefferson Health Plans Provider Directory FHIR (Public)
+  description: >-
+    Public, unauthenticated FHIR R4 provider directory required by
+    CMS-9115-F. No registration or payment required.
+  audience: Open public, app developers, consumers, researchers.
+  scope: Public read across Practitioner, PractitionerRole, Organization, Location, HealthcareService, InsurancePlan, Endpoint.
+  pricing:
+    model: free
+    currency: USD
+    amount: 0
+  registration: null
+  notes:
+  - No API key required; rate limits and abuse controls may apply at the network edge.
+
+- id: clinical-care
+  name: Clinical Care (Out of Scope for Developer Pricing)
+  description: >-
+    Jefferson Health's hospital and physician services are billed under
+    standard insurance and self-pay arrangements; cost-of-care information
+    is published through the Hospital Price Transparency program (charge
+    description master) and Price Estimator tool, not the developer APIs.
+  audience: Patients, payers.
+  scope: Out of scope for API monetization.
+  pricing:
+    model: unmetered-clinical-billing
+  references:
+  - https://www.jeffersonhealth.org/pay-my-bill/charge-description
+  - https://www.jeffersonhealth.org/pay-my-bill/price-estimator

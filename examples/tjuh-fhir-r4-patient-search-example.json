@@ -1,0 +1,52 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/Patient?identifier=urn:oid:1.2.840.114350.1.13.0.1.7.5.737384.0%7CE12345&_format=json",
+    "headers": {
+      "Accept": "application/fhir+json",
+      "Authorization": "Bearer eyJraWQiOiI...redacted..."
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "resourceType": "Bundle",
+      "type": "searchset",
+      "total": 1,
+      "entry": [
+        {
+          "resource": {
+            "resourceType": "Patient",
+            "id": "eXq8H1A9KEX0lpDJxCQ-zJg3",
+            "identifier": [
+              {
+                "use": "usual",
+                "system": "urn:oid:1.2.840.114350.1.13.0.1.7.5.737384.0",
+                "value": "E12345"
+              }
+            ],
+            "name": [
+              {
+                "use": "official",
+                "family": "Lane",
+                "given": ["Kin"]
+              }
+            ],
+            "gender": "male",
+            "birthDate": "1974-04-23",
+            "address": [
+              {
+                "use": "home",
+                "line": ["111 S 11th St"],
+                "city": "Philadelphia",
+                "state": "PA",
+                "postalCode": "19107",
+                "country": "US"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

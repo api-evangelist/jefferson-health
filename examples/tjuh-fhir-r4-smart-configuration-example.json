@@ -1,0 +1,40 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/.well-known/smart-configuration",
+    "headers": { "Accept": "application/json" }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "authorization_endpoint": "https://fhir.jefferson.edu/FHIRProxy/oauth2/authorize",
+      "token_endpoint": "https://fhir.jefferson.edu/FHIRProxy/oauth2/token",
+      "scopes_supported": [
+        "epic.scanning.dmsusername",
+        "fhirUser",
+        "launch",
+        "openid",
+        "profile"
+      ],
+      "capabilities": [
+        "launch-ehr",
+        "launch-standalone",
+        "client-public",
+        "client-confidential-symmetric",
+        "client-confidential-asymmetric",
+        "context-banner",
+        "context-style",
+        "context-ehr-patient",
+        "context-ehr-encounter",
+        "context-standalone-patient",
+        "permission-offline",
+        "permission-patient",
+        "permission-user",
+        "permission-v1",
+        "permission-v2",
+        "sso-openid-connect",
+        "authorize-post"
+      ]
+    }
+  }
+}

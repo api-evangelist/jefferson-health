@@ -1,0 +1,49 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "fhir": "http://hl7.org/fhir/",
+    "uscore": "http://hl7.org/fhir/us/core/",
+    "plannet": "http://hl7.org/fhir/us/davinci-pdex-plan-net/",
+    "carin": "http://hl7.org/fhir/us/carin-bb/",
+    "loinc": "http://loinc.org/",
+    "snomed": "http://snomed.info/sct/",
+    "rxnorm": "http://www.nlm.nih.gov/research/umls/rxnorm/",
+    "ucum": "http://unitsofmeasure.org/",
+    "npi": "http://hl7.org/fhir/sid/us-npi/",
+
+    "JeffersonHealth": "schema:Hospital",
+    "JeffersonHealthPlans": "schema:HealthInsurancePlan",
+    "ThomasJeffersonUniversityHospital": "schema:Hospital",
+    "FhirEndpoint": "fhir:Endpoint",
+    "FhirCapabilityStatement": "fhir:CapabilityStatement",
+    "SmartConfiguration": "fhir:SmartOnFhir",
+
+    "Patient": "fhir:Patient",
+    "Observation": "fhir:Observation",
+    "Condition": "fhir:Condition",
+    "Encounter": "fhir:Encounter",
+    "MedicationRequest": "fhir:MedicationRequest",
+    "AllergyIntolerance": "fhir:AllergyIntolerance",
+    "DocumentReference": "fhir:DocumentReference",
+    "Practitioner": "fhir:Practitioner",
+    "PractitionerRole": "fhir:PractitionerRole",
+    "Organization": "fhir:Organization",
+    "Location": "fhir:Location",
+    "HealthcareService": "fhir:HealthcareService",
+    "InsurancePlan": "fhir:InsurancePlan",
+    "Endpoint": "fhir:Endpoint",
+
+    "identifier": "schema:identifier",
+    "name": "schema:name",
+    "address": "schema:address",
+    "telephone": "schema:telephone",
+    "gender": "schema:gender",
+    "birthDate": "schema:birthDate",
+
+    "scopes": "fhir:scope",
+    "authorizationEndpoint": "fhir:authorize",
+    "tokenEndpoint": "fhir:token",
+    "fhirVersion": "fhir:version"
+  }
+}

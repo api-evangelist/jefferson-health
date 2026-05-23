@@ -1,0 +1,59 @@
+apiCommonsRateLimits: '0.1'
+info:
+  title: Jefferson Health API Rate Limits
+  description: >-
+    Rate-limit and quota disclosures for Jefferson Health's published FHIR
+    APIs. Jefferson Health does not publish per-endpoint quantitative
+    rate-limit numbers (requests-per-minute, requests-per-day) on its
+    public CMS-9115-F APIs. Limits are enforced at the network edge of
+    Epic (for the hospital FHIR endpoint) and Smile CDR / Jefferson Health
+    Plans infrastructure (for the payer endpoints), governed by app
+    registration agreements rather than a public throttle table.
+  created: '2026-05-23'
+  modified: '2026-05-23'
+provider:
+  name: Jefferson Health
+  url: https://www.jeffersonhealth.org/
+
+apis:
+- id: tjuh-fhir-r4-api
+  name: Thomas Jefferson University Hospital FHIR R4 API
+  baseURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
+  policies:
+  - type: per-app-throttle
+    description: >-
+      Per-application throttling enforced by Epic's interconnect proxy.
+      Concrete limits are not publicly documented and are set during
+      Jefferson app onboarding under the Epic on FHIR developer program.
+    documented: false
+    source: https://fhir.epic.com/Documentation
+  - type: bulk-data-export
+    description: >-
+      HL7 FHIR Bulk Data Group $export jobs are queued and rate-controlled
+      separately from synchronous reads; concurrency is typically capped per
+      registered system.
+    documented: false
+
+- id: jhp-patient-access-fhir-api
+  name: Jefferson Health Plans Patient Access FHIR API
+  baseURL: https://smilercdr.healthpartnersplans.com/
+  policies:
+  - type: per-app-throttle
+    description: Rate limits enforced by Smile CDR at the JHP edge; not publicly published.
+    documented: false
+    source: https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/
+
+- id: jhp-provider-directory-fhir-api
+  name: Jefferson Health Plans Provider Directory FHIR API
+  baseURL: https://providerfhirapi.healthpartnersplans.com
+  policies:
+  - type: anonymous-edge-throttle
+    description: >-
+      Public unauthenticated endpoint; per-IP throttling and bot-mitigation
+      apply at the network edge (CDN / WAF) but specific limits are not
+      published.
+    documented: false
+
+notes:
+- CMS-9115-F does not require publication of quantitative rate limits, only that the API be available to authorized patients.
+- Production-scale integrations should contact Jefferson Health / Jefferson Health Plans for negotiated quota agreements.

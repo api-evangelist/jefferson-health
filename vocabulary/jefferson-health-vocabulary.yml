@@ -1,0 +1,112 @@
+name: Jefferson Health Vocabulary
+description: >-
+  Operational and capability vocabulary for the Jefferson Health enterprise:
+  the academic hospital system (Jefferson Health / Thomas Jefferson University
+  Hospital) and its sister insurance organization (Jefferson Health Plans,
+  formerly Health Partners Plans). Anchored on HL7 FHIR R4, US Core, Da Vinci
+  Plan-Net, CARIN Blue Button, SMART App Launch, and the CMS Interoperability
+  and Patient Access Final Rule.
+created: '2026-05-23'
+modified: '2026-05-23'
+
+domains:
+- name: Organizations
+  terms:
+  - term: Jefferson Health
+    description: Multi-state nonprofit academic health system based in Philadelphia, PA.
+  - term: Thomas Jefferson University
+    description: Academic arm of the Jefferson enterprise.
+  - term: Thomas Jefferson University Hospital (TJUH)
+    description: Flagship 11th Street academic medical center; FHIR endpoint host.
+  - term: Jefferson Health Plans (JHP)
+    description: Insurance subsidiary, formerly branded Health Partners Plans (HPP).
+  - term: MyJeffersonHealth
+    description: Patient-facing Epic MyChart deployment for Jefferson Health.
+  - term: MyChart Central
+    description: Epic feature enabling single-login MyChart access across participating health systems.
+
+- name: Standards and Implementation Guides
+  terms:
+  - term: HL7 FHIR R4 (4.0.1)
+    description: Healthcare data interoperability standard used at fhir.jefferson.edu.
+  - term: US Core 6.1.0
+    description: HL7 US Core Implementation Guide for USCDI data classes.
+  - term: USCDI
+    description: ONC's United States Core Data for Interoperability dataset.
+  - term: SMART App Launch
+    description: OAuth 2.0-based launch framework for FHIR apps.
+  - term: HL7 FHIR Bulk Data Access
+    description: Asynchronous group-level export protocol (ndjson).
+  - term: HL7 CARIN BB
+    description: CARIN Consumer Directed Payer Data Exchange (Blue Button) IG for payer Patient Access APIs.
+  - term: HL7 Da Vinci PDEX Plan-Net
+    description: Payer Data Exchange Plan-Net IG for provider directories.
+
+- name: Regulations
+  terms:
+  - term: CMS-9115-F
+    description: CMS Interoperability and Patient Access Final Rule (Patient Access API and Provider Directory API).
+  - term: 21st Century Cures Act
+    description: ONC information-blocking rule that mandates patient access to electronic health information via FHIR.
+  - term: HIPAA
+    description: Health Insurance Portability and Accountability Act privacy and security rules governing PHI.
+
+- name: FHIR Resources (TJUH R4)
+  terms:
+  - term: Patient
+  - term: Observation
+  - term: Condition
+  - term: Encounter
+  - term: MedicationRequest
+  - term: AllergyIntolerance
+  - term: DocumentReference
+  - term: Procedure
+  - term: DiagnosticReport
+  - term: Immunization
+  - term: CarePlan
+  - term: Goal
+
+- name: FHIR Resources (JHP Plan-Net)
+  terms:
+  - term: Practitioner
+  - term: PractitionerRole
+  - term: Organization
+  - term: Location
+  - term: HealthcareService
+  - term: InsurancePlan
+  - term: Endpoint
+
+- name: Authentication and Endpoints
+  terms:
+  - term: TJUH FHIR R4 Base
+    value: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
+  - term: TJUH OAuth 2.0 Authorize
+    value: https://fhir.jefferson.edu/FHIRProxy/oauth2/authorize
+  - term: TJUH OAuth 2.0 Token
+    value: https://fhir.jefferson.edu/FHIRProxy/oauth2/token
+  - term: TJUH SMART Configuration
+    value: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/.well-known/smart-configuration
+  - term: TJUH FHIR DSTU2 Base (legacy)
+    value: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/DSTU2/
+  - term: JHP Patient Access FHIR Swagger
+    value: https://smilercdr.healthpartnersplans.com/fhir-request-apps/swagger-ui/
+  - term: JHP SMART OIDC well-known
+    value: https://smilercdr.healthpartnersplans.com/smartauth/well-known/openid-configuration
+  - term: JHP Provider Directory FHIR Base
+    value: https://providerfhirapi.healthpartnersplans.com/
+  - term: Epic Endpoint Directory
+    value: https://open.epic.com/Endpoints/R4
+  - term: Epic App Registration
+    value: https://fhir.epic.com/Developer/Apps
+
+- name: Tags
+  terms:
+  - term: Academic Medical Center
+  - term: Patient Access
+  - term: Provider Directory
+  - term: Hospital System
+  - term: Payer
+  - term: Healthcare
+  - term: Interoperability
+  - term: Epic
+  - term: Smile CDR

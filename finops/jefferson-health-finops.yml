@@ -1,0 +1,63 @@
+finopsFramework: '2024.0'
+focus: '1.1'
+info:
+  title: Jefferson Health FinOps Disclosure
+  description: >-
+    FinOps disclosure for Jefferson Health's published API surface. Because
+    Jefferson Health's CMS Interoperability and Patient Access FHIR APIs
+    are free at point of use for patient-authorized apps, there is no
+    consumer-facing billing surface to map to the FinOps Framework /
+    FOCUS data spec. The operational cost is borne by Jefferson Health
+    internally as part of regulatory compliance with CMS-9115-F and the
+    21st Century Cures Act. Clinical billing (hospital and professional
+    services) is governed by payer contracts, HIPAA, and the Hospital
+    Price Transparency rule — not by an API monetization layer.
+  created: '2026-05-23'
+  modified: '2026-05-23'
+provider:
+  name: Jefferson Health
+  url: https://www.jeffersonhealth.org/
+
+scope:
+  inScope:
+  - id: tjuh-fhir-r4-api
+    name: Thomas Jefferson University Hospital FHIR R4 API
+    billingModel: free
+    chargeCategory: Usage
+    chargeClass: null
+    pricingModel: Free
+    notes: No developer billing. CMS-mandated free access for patient-authorized apps.
+  - id: jhp-patient-access-fhir-api
+    name: Jefferson Health Plans Patient Access FHIR API
+    billingModel: free
+    chargeCategory: Usage
+    pricingModel: Free
+    notes: No developer billing. Member-authorized access.
+  - id: jhp-provider-directory-fhir-api
+    name: Jefferson Health Plans Provider Directory FHIR API
+    billingModel: free
+    chargeCategory: Usage
+    pricingModel: Free
+    notes: Public unauthenticated; no developer billing.
+  outOfScope:
+  - id: clinical-services
+    name: Clinical Services Billing
+    rationale: Hospital and professional services billing is governed by payer contracts and Hospital Price Transparency, not a developer API meter.
+    references:
+    - https://www.jeffersonhealth.org/pay-my-bill/charge-description
+    - https://www.jeffersonhealth.org/pay-my-bill/price-estimator
+  - id: health-insurance-premiums
+    name: Jefferson Health Plans Premiums
+    rationale: Insurance product premiums are sold through enrollment channels and Marketplaces, not as developer-priced API consumption.
+
+invoicing:
+  developerInvoicing: false
+  internalCostRecovery: not-disclosed
+
+tags:
+- name: ChargeCategory
+  values: [Usage]
+- name: PricingModel
+  values: [Free]
+- name: BillingAccountType
+  values: [None]

@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Thomas Jefferson University Hospital FHIR R4 — Medication Request
+  description: Search MedicationRequest resources (prescriptions, medication orders) for a patient on Jefferson Health's Epic FHIR R4 endpoint.
+  tags:
+  - Jefferson Health
+  - Epic
+  - FHIR
+  - MedicationRequest
+  - USCDI
+  created: '2026-05-23'
+  modified: '2026-05-23'
+binds:
+- namespace: env
+  keys:
+    JEFFERSON_FHIR_TOKEN: JEFFERSON_FHIR_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: tjuh-fhir-r4-medication-request
+    baseUri: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
+    resources:
+    - name: MedicationRequest
+      path: /MedicationRequest
+      operations:
+      - name: searchMedicationRequest
+        method: GET
+        description: Search MedicationRequest resources for a patient.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: patient
+          in: query
+          type: string
+        - name: status
+          in: query
+          type: string
+        - name: intent
+          in: query
+          type: string
+    authentication:
+      type: bearer
+      token: '{{env.JEFFERSON_FHIR_TOKEN}}'
+  exposes:
+  - type: rest
+    namespace: tjuh-fhir-r4-medication-request-rest
+    port: 8080
+    resources:
+    - path: /v1/medication-request
+      name: medicationRequest
+      operations:
+      - method: GET
+        name: searchMedicationRequest
+        call: tjuh-fhir-r4-medication-request.searchMedicationRequest
+        with:
+          patient: rest.patient
+          status: rest.status
+          intent: rest.intent
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: tjuh-fhir-r4-medication-request-mcp
+    port: 9090
+    transport: http
+    tools:
+    - name: search-medication-request
+      description: Search MedicationRequest on Jefferson Health FHIR R4.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: tjuh-fhir-r4-medication-request.searchMedicationRequest
+      with:
+        patient: tool.patient
+        status: tool.status
+        intent: tool.intent

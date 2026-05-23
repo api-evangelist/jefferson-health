@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Thomas Jefferson University Hospital FHIR R4 — Encounter
+  description: Search Encounter resources for a patient on Jefferson Health's Epic FHIR R4 endpoint.
+  tags:
+  - Jefferson Health
+  - Epic
+  - FHIR
+  - Encounter
+  - USCDI
+  created: '2026-05-23'
+  modified: '2026-05-23'
+binds:
+- namespace: env
+  keys:
+    JEFFERSON_FHIR_TOKEN: JEFFERSON_FHIR_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: tjuh-fhir-r4-encounter
+    baseUri: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
+    resources:
+    - name: Encounter
+      path: /Encounter
+      operations:
+      - name: searchEncounter
+        method: GET
+        description: Search Encounter resources for a patient.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: patient
+          in: query
+          type: string
+        - name: date
+          in: query
+          type: string
+        - name: class
+          in: query
+          type: string
+    authentication:
+      type: bearer
+      token: '{{env.JEFFERSON_FHIR_TOKEN}}'
+  exposes:
+  - type: rest
+    namespace: tjuh-fhir-r4-encounter-rest
+    port: 8080
+    resources:
+    - path: /v1/encounter
+      name: encounter
+      operations:
+      - method: GET
+        name: searchEncounter
+        call: tjuh-fhir-r4-encounter.searchEncounter
+        with:
+          patient: rest.patient
+          date: rest.date
+          class: rest.class
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: tjuh-fhir-r4-encounter-mcp
+    port: 9090
+    transport: http
+    tools:
+    - name: search-encounter
+      description: Search Encounter on Jefferson Health FHIR R4.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: tjuh-fhir-r4-encounter.searchEncounter
+      with:
+        patient: tool.patient
+        date: tool.date
+        class: tool.class

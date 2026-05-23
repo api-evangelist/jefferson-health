@@ -1,0 +1,89 @@
+extends:
+- spectral:oas
+rules:
+  jefferson-fhir-r4-base-url:
+    description: Server URL must be the canonical Jefferson Health FHIR R4 endpoint.
+    message: Server URL should match https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: '^https://fhir\.jefferson\.edu/FHIRProxy/api/FHIR/R4$'
+
+  jefferson-fhir-r4-fhir-version-tag:
+    description: API version must report FHIR R4 (4.0.1).
+    message: FHIR version must be 4.0.1.
+    severity: error
+    given: $.info.version
+    then:
+      function: pattern
+      functionOptions:
+        match: '^4\.0\.1$'
+
+  jefferson-fhir-r4-fhir-media-type:
+    description: All FHIR responses must use the application/fhir+json media type.
+    message: Use application/fhir+json for FHIR responses.
+    severity: warn
+    given: $.paths[*][*].responses[*].content
+    then:
+      function: truthy
+      field: application/fhir+json
+
+  jefferson-fhir-r4-summary-title-case:
+    description: Operation summaries must use Title Case.
+    message: Operation summary should be Title Case.
+    severity: warn
+    given: $.paths[*][*].summary
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[A-Z][A-Za-z0-9]*(\s[A-Z][A-Za-z0-9]*)*$'
+
+  jefferson-fhir-r4-smart-on-fhir-security:
+    description: API must declare SMART on FHIR / OAuth 2.0 security.
+    message: smartOnFhir security scheme is required.
+    severity: error
+    given: $.components.securitySchemes
+    then:
+      field: smartOnFhir
+      function: truthy
+
+  jefferson-fhir-r4-smart-authorization-url:
+    description: Authorization URL must be Jefferson's OAuth 2.0 authorize endpoint.
+    message: Use https://fhir.jefferson.edu/FHIRProxy/oauth2/authorize as authorizationUrl.
+    severity: error
+    given: $.components.securitySchemes.smartOnFhir.flows.authorizationCode.authorizationUrl
+    then:
+      function: pattern
+      functionOptions:
+        match: '^https://fhir\.jefferson\.edu/FHIRProxy/oauth2/authorize$'
+
+  jefferson-fhir-r4-smart-token-url:
+    description: Token URL must be Jefferson's OAuth 2.0 token endpoint.
+    message: Use https://fhir.jefferson.edu/FHIRProxy/oauth2/token as tokenUrl.
+    severity: error
+    given: $.components.securitySchemes.smartOnFhir.flows.authorizationCode.tokenUrl
+    then:
+      function: pattern
+      functionOptions:
+        match: '^https://fhir\.jefferson\.edu/FHIRProxy/oauth2/token$'
+
+  jefferson-fhir-r4-uscdi-resources:
+    description: API should document core USCDI FHIR resources (Patient, Observation, Condition, Encounter, MedicationRequest, AllergyIntolerance, DocumentReference).
+    message: Document the USCDI core resource paths.
+    severity: warn
+    given: $.paths
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          required:
+          - /Patient
+          - /Observation
+          - /Condition
+          - /Encounter
+          - /MedicationRequest
+          - /AllergyIntolerance
+          - /DocumentReference

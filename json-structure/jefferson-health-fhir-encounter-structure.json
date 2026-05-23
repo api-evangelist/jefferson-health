@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-structure.org/draft/2025/schema",
+  "title": "Jefferson Health FHIR R4 Encounter Structure",
+  "description": "Structural shape of a US Core Encounter resource as returned by the Jefferson Health (Epic) FHIR R4 endpoint.",
+  "type": "object",
+  "properties": {
+    "resourceType": { "type": "string" },
+    "id": { "type": "string" },
+    "status": { "type": "string" },
+    "class": {
+      "type": "object",
+      "properties": {
+        "system": { "type": "string" },
+        "code": { "type": "string" },
+        "display": { "type": "string" }
+      }
+    },
+    "type": { "type": "array" },
+    "subject": { "type": "object" },
+    "participant": { "type": "array" },
+    "period": {
+      "type": "object",
+      "properties": {
+        "start": { "type": "string" },
+        "end": { "type": "string" }
+      }
+    },
+    "reasonCode": { "type": "array" },
+    "diagnosis": { "type": "array" },
+    "hospitalization": { "type": "object" },
+    "location": { "type": "array" },
+    "serviceProvider": { "type": "object" }
+  }
+}

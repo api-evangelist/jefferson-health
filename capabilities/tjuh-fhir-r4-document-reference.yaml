@@ -1,0 +1,85 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Thomas Jefferson University Hospital FHIR R4 — Document Reference
+  description: Search DocumentReference resources (clinical notes, CCDA documents, discharge summaries) for a patient on Jefferson Health's Epic FHIR R4 endpoint.
+  tags:
+  - Jefferson Health
+  - Epic
+  - FHIR
+  - DocumentReference
+  - USCDI
+  created: '2026-05-23'
+  modified: '2026-05-23'
+binds:
+- namespace: env
+  keys:
+    JEFFERSON_FHIR_TOKEN: JEFFERSON_FHIR_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: tjuh-fhir-r4-document-reference
+    baseUri: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
+    resources:
+    - name: DocumentReference
+      path: /DocumentReference
+      operations:
+      - name: searchDocumentReference
+        method: GET
+        description: Search DocumentReference resources for a patient.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: patient
+          in: query
+          type: string
+        - name: type
+          in: query
+          type: string
+        - name: category
+          in: query
+          type: string
+        - name: date
+          in: query
+          type: string
+    authentication:
+      type: bearer
+      token: '{{env.JEFFERSON_FHIR_TOKEN}}'
+  exposes:
+  - type: rest
+    namespace: tjuh-fhir-r4-document-reference-rest
+    port: 8080
+    resources:
+    - path: /v1/document-reference
+      name: documentReference
+      operations:
+      - method: GET
+        name: searchDocumentReference
+        call: tjuh-fhir-r4-document-reference.searchDocumentReference
+        with:
+          patient: rest.patient
+          type: rest.type
+          category: rest.category
+          date: rest.date
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: tjuh-fhir-r4-document-reference-mcp
+    port: 9090
+    transport: http
+    tools:
+    - name: search-document-reference
+      description: Search DocumentReference on Jefferson Health FHIR R4.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: tjuh-fhir-r4-document-reference.searchDocumentReference
+      with:
+        patient: tool.patient
+        type: tool.type
+        category: tool.category
+        date: tool.date

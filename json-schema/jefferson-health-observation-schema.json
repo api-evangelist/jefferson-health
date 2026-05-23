@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/jefferson-health/refs/heads/main/json-schema/jefferson-health-observation-schema.json",
+  "title": "Jefferson Health FHIR R4 Observation (US Core Subset)",
+  "description": "Subset JSON Schema for the US Core Observation profile as returned by the Jefferson Health (Epic) FHIR R4 endpoint.",
+  "type": "object",
+  "required": ["resourceType", "status", "code", "subject"],
+  "properties": {
+    "resourceType": { "type": "string", "const": "Observation" },
+    "id": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["registered","preliminary","final","amended","corrected","cancelled","entered-in-error","unknown"]
+    },
+    "category": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/CodeableConcept" }
+    },
+    "code": { "$ref": "#/$defs/CodeableConcept" },
+    "subject": { "$ref": "#/$defs/Reference" },
+    "effectiveDateTime": { "type": "string", "format": "date-time" },
+    "valueQuantity": { "$ref": "#/$defs/Quantity" },
+    "component": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": { "$ref": "#/$defs/CodeableConcept" },
+          "valueQuantity": { "$ref": "#/$defs/Quantity" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "CodeableConcept": {
+      "type": "object",
+      "properties": {
+        "coding": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "system": { "type": "string", "format": "uri" },
+              "code": { "type": "string" },
+              "display": { "type": "string" }
+            }
+          }
+        },
+        "text": { "type": "string" }
+      }
+    },
+    "Reference": {
+      "type": "object",
+      "properties": {
+        "reference": { "type": "string" },
+        "display": { "type": "string" }
+      }
+    },
+    "Quantity": {
+      "type": "object",
+      "properties": {
+        "value": { "type": "number" },
+        "unit": { "type": "string" },
+        "system": { "type": "string", "format": "uri" },
+        "code": { "type": "string" }
+      }
+    }
+  }
+}

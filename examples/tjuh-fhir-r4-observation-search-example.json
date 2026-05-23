@@ -1,0 +1,58 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/Observation?patient=eXq8H1A9KEX0lpDJxCQ-zJg3&category=vital-signs&_count=20",
+    "headers": {
+      "Accept": "application/fhir+json",
+      "Authorization": "Bearer eyJraWQiOiI...redacted..."
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "resourceType": "Bundle",
+      "type": "searchset",
+      "total": 1,
+      "entry": [
+        {
+          "resource": {
+            "resourceType": "Observation",
+            "id": "obs-bp-1",
+            "status": "final",
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                    "code": "vital-signs"
+                  }
+                ]
+              }
+            ],
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "85354-9",
+                  "display": "Blood pressure panel with all children optional"
+                }
+              ]
+            },
+            "subject": { "reference": "Patient/eXq8H1A9KEX0lpDJxCQ-zJg3" },
+            "effectiveDateTime": "2026-05-22T09:30:00-04:00",
+            "component": [
+              {
+                "code": { "coding": [{"system":"http://loinc.org","code":"8480-6","display":"Systolic blood pressure"}] },
+                "valueQuantity": { "value": 122, "unit": "mmHg", "system":"http://unitsofmeasure.org", "code":"mm[Hg]" }
+              },
+              {
+                "code": { "coding": [{"system":"http://loinc.org","code":"8462-4","display":"Diastolic blood pressure"}] },
+                "valueQuantity": { "value": 78, "unit": "mmHg", "system":"http://unitsofmeasure.org", "code":"mm[Hg]" }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,51 @@
+extends:
+- spectral:oas
+rules:
+  jhp-provider-directory-base-url:
+    description: Server URL must be the public Jefferson Health Plans Provider Directory endpoint.
+    message: Server URL should be https://providerfhirapi.healthpartnersplans.com
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: '^https://providerfhirapi\.healthpartnersplans\.com/?$'
+
+  jhp-provider-directory-fhir-version:
+    description: API version must report FHIR R4 (4.0.1).
+    message: FHIR version must be 4.0.1.
+    severity: error
+    given: $.info.version
+    then:
+      function: pattern
+      functionOptions:
+        match: '^4\.0\.1$'
+
+  jhp-provider-directory-plan-net-resources:
+    description: Da Vinci Plan-Net requires Practitioner, PractitionerRole, Organization, Location, HealthcareService, InsurancePlan, and Endpoint.
+    message: Document all Plan-Net core resources.
+    severity: error
+    given: $.paths
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          required:
+          - /Practitioner
+          - /PractitionerRole
+          - /Organization
+          - /Location
+          - /HealthcareService
+          - /InsurancePlan
+          - /Endpoint
+
+  jhp-provider-directory-summary-title-case:
+    description: Operation summaries must use Title Case.
+    message: Operation summary should be Title Case.
+    severity: warn
+    given: $.paths[*][*].summary
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[A-Z][A-Za-z0-9]*(\s[A-Z][A-Za-z0-9]*)*$'
