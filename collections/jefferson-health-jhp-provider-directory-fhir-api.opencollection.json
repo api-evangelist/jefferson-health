@@ -1,0 +1,434 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Jefferson Health Plans Provider Directory FHIR API",
+    "version": "4.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get FHIR Capability Statement",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://providerfhirapi.healthpartnersplans.com/metadata"
+          },
+          "docs": "Returns the FHIR CapabilityStatement describing the Provider Directory's supported resources and search parameters."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Practitioner",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Read Practitioner By Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://providerfhirapi.healthpartnersplans.com/Practitioner/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "FHIR logical id of the resource."
+              }
+            ]
+          },
+          "docs": "Read Practitioner By Id"
+        },
+        {
+          "info": {
+            "name": "Search Practitioner",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://providerfhirapi.healthpartnersplans.com/Practitioner",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Practitioner name."
+              },
+              {
+                "name": "family",
+                "value": "",
+                "type": "query",
+                "description": "Family name."
+              },
+              {
+                "name": "given",
+                "value": "",
+                "type": "query",
+                "description": "Given name."
+              },
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Number of resources to return per page."
+              }
+            ]
+          },
+          "docs": "Search Practitioner resources by name, family, given, or resource id."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Practitioner Role",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Practitioner Role",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://providerfhirapi.healthpartnersplans.com/PractitionerRole",
+            "params": [
+              {
+                "name": "specialty",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "role",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "network",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "organization",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "practitioner",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "location",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endpoint",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Number of resources to return per page."
+              }
+            ]
+          },
+          "docs": "Search PractitionerRole resources by specialty, role, network, organization, practitioner, service, location, or endpoint."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Organization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Read Organization By Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://providerfhirapi.healthpartnersplans.com/Organization/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "FHIR logical id of the resource."
+              }
+            ]
+          },
+          "docs": "Read Organization By Id"
+        },
+        {
+          "info": {
+            "name": "Search Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://providerfhirapi.healthpartnersplans.com/Organization",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endpoint",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "coverage-area",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Number of resources to return per page."
+              }
+            ]
+          },
+          "docs": "Search Organization resources by type, endpoint, coverage area, name, address, or id."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Location",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://providerfhirapi.healthpartnersplans.com/Location",
+            "params": [
+              {
+                "name": "address-state",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "address-city",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "address-postalcode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endpoint",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "organization",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Number of resources to return per page."
+              }
+            ]
+          },
+          "docs": "Search Location resources by address components, type, endpoint, organization, or hierarchy."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Healthcare Service",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Healthcare Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://providerfhirapi.healthpartnersplans.com/HealthcareService",
+            "params": [
+              {
+                "name": "specialty",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service-category",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service-type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "coverage-area",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "organization",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "location",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Number of resources to return per page."
+              }
+            ]
+          },
+          "docs": "Search HealthcareService resources by specialty, service category/type, coverage area, organization, name, location, or id."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Insurance Plan",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Insurance Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://providerfhirapi.healthpartnersplans.com/InsurancePlan",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "coverage-area",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "administered-by",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Number of resources to return per page."
+              }
+            ]
+          },
+          "docs": "Search InsurancePlan resources by plan type, coverage area, identifier, administered-by organization, or name."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Endpoint",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://providerfhirapi.healthpartnersplans.com/Endpoint",
+            "params": [
+              {
+                "name": "organization",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Number of resources to return per page."
+              }
+            ]
+          },
+          "docs": "Search Endpoint resources by managing organization or resource id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

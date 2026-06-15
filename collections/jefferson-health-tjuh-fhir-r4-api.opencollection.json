@@ -1,0 +1,459 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thomas Jefferson University Hospital FHIR R4 API",
+    "version": "4.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://fhir.jefferson.edu/FHIRProxy/oauth2/authorize",
+      "accessTokenUrl": "https://fhir.jefferson.edu/FHIRProxy/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get FHIR Capability Statement",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/metadata"
+          },
+          "docs": "Returns the FHIR CapabilityStatement describing this server's supported resources, search parameters, and security."
+        },
+        {
+          "info": {
+            "name": "Get Smart Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/.well-known/smart-configuration"
+          },
+          "docs": "Returns the SMART App Launch configuration document describing OAuth 2.0 endpoints, scopes, and capabilities."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Patient",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Read Patient By Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/Patient/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "FHIR logical id of the resource."
+              }
+            ]
+          },
+          "docs": "Read a single Patient resource by FHIR logical id."
+        },
+        {
+          "info": {
+            "name": "Search Patient",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/Patient",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "query",
+                "description": "A patient identifier (e.g. MRN, system|value)."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "A portion of either family or given name of the patient."
+              },
+              {
+                "name": "family",
+                "value": "",
+                "type": "query",
+                "description": "Family (last) name."
+              },
+              {
+                "name": "given",
+                "value": "",
+                "type": "query",
+                "description": "Given (first) name."
+              },
+              {
+                "name": "birthdate",
+                "value": "",
+                "type": "query",
+                "description": "The patient's date of birth."
+              },
+              {
+                "name": "gender",
+                "value": "",
+                "type": "query",
+                "description": "Administrative gender."
+              },
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Number of resources to return per page."
+              }
+            ]
+          },
+          "docs": "Search Patient resources by identifier, name, birthdate, or other US Core search parameters."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Observation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Observation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/Observation",
+            "params": [
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query",
+                "description": "Reference to the Patient (id or Patient/{id})."
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "US Core observation category (laboratory, vital-signs, social-history, smoking-status, survey)."
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "query",
+                "description": "LOINC or SNOMED CT code identifying the observation."
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "Observation date (effective)."
+              },
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Number of resources to return per page."
+              }
+            ]
+          },
+          "docs": "Search Observation resources for a patient, supporting US Core Lab, Vital Signs, Smoking Status, and other categories."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Condition",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Condition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/Condition",
+            "params": [
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query",
+                "description": "Reference to the Patient (id or Patient/{id})."
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "US Core Condition category (problem-list-item, encounter-diagnosis, health-concern)."
+              },
+              {
+                "name": "clinical-status",
+                "value": "",
+                "type": "query",
+                "description": "Clinical status (active, recurrence, relapse, inactive, remission, resolved)."
+              },
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Number of resources to return per page."
+              }
+            ]
+          },
+          "docs": "Search Condition resources for a patient (problems, encounter diagnoses, health concerns)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Encounter",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Encounter",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/Encounter",
+            "params": [
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query",
+                "description": "Reference to the Patient (id or Patient/{id})."
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "Encounter period start date."
+              },
+              {
+                "name": "class",
+                "value": "",
+                "type": "query",
+                "description": "Encounter class (ambulatory, emergency, inpatient, etc.)."
+              },
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Number of resources to return per page."
+              }
+            ]
+          },
+          "docs": "Search Encounter resources for a patient."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Medication Request",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Medication Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/MedicationRequest",
+            "params": [
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query",
+                "description": "Reference to the Patient (id or Patient/{id})."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Medication request status (active, on-hold, completed, stopped, etc.)."
+              },
+              {
+                "name": "intent",
+                "value": "",
+                "type": "query",
+                "description": "Intent (proposal, plan, order, original-order, instance-order)."
+              },
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Number of resources to return per page."
+              }
+            ]
+          },
+          "docs": "Search MedicationRequest resources for a patient (prescriptions, medication orders)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Allergy Intolerance",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Allergy Intolerance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/AllergyIntolerance",
+            "params": [
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query",
+                "description": "Reference to the Patient (id or Patient/{id})."
+              },
+              {
+                "name": "clinical-status",
+                "value": "",
+                "type": "query",
+                "description": "Allergy clinical status (active, inactive, resolved)."
+              },
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Number of resources to return per page."
+              }
+            ]
+          },
+          "docs": "Search AllergyIntolerance resources for a patient."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Document Reference",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Document Reference",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/DocumentReference",
+            "params": [
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query",
+                "description": "Reference to the Patient (id or Patient/{id})."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "LOINC code identifying the document type."
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "US Core DocumentReference category (clinical-note)."
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "Document date."
+              },
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Number of resources to return per page."
+              }
+            ]
+          },
+          "docs": "Search DocumentReference resources for a patient (clinical notes, CCDA documents, discharge summaries)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Bulk Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Group Level Bulk Export",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/Group/:id/$export",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Prefer",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "FHIR logical id of the resource."
+              },
+              {
+                "name": "_type",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of FHIR resource types to include in the export."
+              },
+              {
+                "name": "_since",
+                "value": "",
+                "type": "query",
+                "description": "Only include resources modified after this instant."
+              }
+            ]
+          },
+          "docs": "Kick off an HL7 FHIR Bulk Data Access Group-level asynchronous export of patient resources for a defined Group."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
