@@ -36,6 +36,8 @@ description: >-
   Health Plans separately exposes CARIN-aligned Patient Access and Da Vinci Plan-Net Provider Directory FHIR APIs
   powered by Smile CDR for its insurance members and the public.
 common:
+  - type: OAuthScopes
+    url: scopes/jefferson-health-scopes.yml
   - type: Website
     url: https://www.jeffersonhealth.org/
   - type: PatientPortal

@@ -1,0 +1,91 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
+schemes:
+- name: smartOnFhir
+  source: openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://fhir.jefferson.edu/FHIRProxy/oauth2/authorize
+    tokenUrl: https://fhir.jefferson.edu/FHIRProxy/oauth2/token
+  description: SMART on FHIR / OAuth 2.0 with PKCE for patient-facing and provider-facing app
+    launches.
+scopes:
+- scope: fhirUser
+  description: Identity of the user launching the app
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
+- scope: launch
+  description: EHR launch context for provider-launched apps
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
+- scope: offline_access
+  description: Refresh token for long-lived access
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
+- scope: openid
+  description: OpenID Connect authentication
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
+- scope: patient/AllergyIntolerance.read
+  description: Read the launching patient's allergies
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
+- scope: patient/Condition.read
+  description: Read the launching patient's conditions
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
+- scope: patient/DocumentReference.read
+  description: Read the launching patient's documents
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
+- scope: patient/Encounter.read
+  description: Read the launching patient's encounters
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
+- scope: patient/MedicationRequest.read
+  description: Read the launching patient's medication requests
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
+- scope: patient/Observation.read
+  description: Read the launching patient's observations
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
+- scope: patient/Patient.read
+  description: Read the launching patient's demographics
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
+- scope: system/Patient.read
+  description: System-level Patient read (Bulk Data)
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
+- scope: user/Patient.read
+  description: Read Patient as the launching user
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
