@@ -1,0 +1,20 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
+summary:
+  types:
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+schemes:
+- name: smartOnFhir
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://fhir.jefferson.edu/FHIRProxy/oauth2/authorize
+    tokenUrl: https://fhir.jefferson.edu/FHIRProxy/oauth2/token
+    scopes: 13
+  description: SMART on FHIR / OAuth 2.0 with PKCE for patient-facing and provider-facing app
+    launches.
+  sources:
+  - openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
