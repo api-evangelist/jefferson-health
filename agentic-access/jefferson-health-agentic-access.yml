@@ -1,0 +1,356 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/jefferson-health-jhp-provider-directory-fhir-api-openapi.yml, openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 21
+  by_action_class:
+    connected: 21
+  by_consequence:
+    read: 21
+  human_in_the_loop_required: 0
+operations:
+- path: /metadata
+  method: get
+  operationId: getMetadata
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Practitioner/{id}
+  method: get
+  operationId: readPractitioner
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Practitioner
+  method: get
+  operationId: searchPractitioner
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /PractitionerRole
+  method: get
+  operationId: searchPractitionerRole
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Organization/{id}
+  method: get
+  operationId: readOrganization
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Organization
+  method: get
+  operationId: searchOrganization
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Location
+  method: get
+  operationId: searchLocation
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /HealthcareService
+  method: get
+  operationId: searchHealthcareService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /InsurancePlan
+  method: get
+  operationId: searchInsurancePlan
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Endpoint
+  method: get
+  operationId: searchEndpoint
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /metadata
+  method: get
+  operationId: getMetadata
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - fhirUser
+    - launch
+    - offline_access
+    - openid
+    - patient/AllergyIntolerance.read
+    - patient/Condition.read
+    - patient/DocumentReference.read
+    - patient/Encounter.read
+    - patient/MedicationRequest.read
+    - patient/Observation.read
+    - patient/Patient.read
+- path: /.well-known/smart-configuration
+  method: get
+  operationId: getSmartConfiguration
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - fhirUser
+    - launch
+    - offline_access
+    - openid
+    - patient/AllergyIntolerance.read
+    - patient/Condition.read
+    - patient/DocumentReference.read
+    - patient/Encounter.read
+    - patient/MedicationRequest.read
+    - patient/Observation.read
+    - patient/Patient.read
+- path: /Patient/{id}
+  method: get
+  operationId: readPatient
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - fhirUser
+    - launch
+    - offline_access
+    - openid
+    - patient/AllergyIntolerance.read
+    - patient/Condition.read
+    - patient/DocumentReference.read
+    - patient/Encounter.read
+    - patient/MedicationRequest.read
+    - patient/Observation.read
+    - patient/Patient.read
+- path: /Patient
+  method: get
+  operationId: searchPatient
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - fhirUser
+    - launch
+    - offline_access
+    - openid
+    - patient/AllergyIntolerance.read
+    - patient/Condition.read
+    - patient/DocumentReference.read
+    - patient/Encounter.read
+    - patient/MedicationRequest.read
+    - patient/Observation.read
+    - patient/Patient.read
+- path: /Observation
+  method: get
+  operationId: searchObservation
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - fhirUser
+    - launch
+    - offline_access
+    - openid
+    - patient/AllergyIntolerance.read
+    - patient/Condition.read
+    - patient/DocumentReference.read
+    - patient/Encounter.read
+    - patient/MedicationRequest.read
+    - patient/Observation.read
+    - patient/Patient.read
+- path: /Condition
+  method: get
+  operationId: searchCondition
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - fhirUser
+    - launch
+    - offline_access
+    - openid
+    - patient/AllergyIntolerance.read
+    - patient/Condition.read
+    - patient/DocumentReference.read
+    - patient/Encounter.read
+    - patient/MedicationRequest.read
+    - patient/Observation.read
+    - patient/Patient.read
+- path: /Encounter
+  method: get
+  operationId: searchEncounter
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - fhirUser
+    - launch
+    - offline_access
+    - openid
+    - patient/AllergyIntolerance.read
+    - patient/Condition.read
+    - patient/DocumentReference.read
+    - patient/Encounter.read
+    - patient/MedicationRequest.read
+    - patient/Observation.read
+    - patient/Patient.read
+- path: /MedicationRequest
+  method: get
+  operationId: searchMedicationRequest
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - fhirUser
+    - launch
+    - offline_access
+    - openid
+    - patient/AllergyIntolerance.read
+    - patient/Condition.read
+    - patient/DocumentReference.read
+    - patient/Encounter.read
+    - patient/MedicationRequest.read
+    - patient/Observation.read
+    - patient/Patient.read
+- path: /AllergyIntolerance
+  method: get
+  operationId: searchAllergyIntolerance
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - fhirUser
+    - launch
+    - offline_access
+    - openid
+    - patient/AllergyIntolerance.read
+    - patient/Condition.read
+    - patient/DocumentReference.read
+    - patient/Encounter.read
+    - patient/MedicationRequest.read
+    - patient/Observation.read
+    - patient/Patient.read
+- path: /DocumentReference
+  method: get
+  operationId: searchDocumentReference
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - fhirUser
+    - launch
+    - offline_access
+    - openid
+    - patient/AllergyIntolerance.read
+    - patient/Condition.read
+    - patient/DocumentReference.read
+    - patient/Encounter.read
+    - patient/MedicationRequest.read
+    - patient/Observation.read
+    - patient/Patient.read
+- path: /Group/{id}/$export
+  method: get
+  operationId: bulkExportGroup
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - fhirUser
+    - launch
+    - offline_access
+    - openid
+    - patient/AllergyIntolerance.read
+    - patient/Condition.read
+    - patient/DocumentReference.read
+    - patient/Encounter.read
+    - patient/MedicationRequest.read
+    - patient/Observation.read
+    - patient/Patient.read

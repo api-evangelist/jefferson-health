@@ -36,6 +36,8 @@ description: >-
   Health Plans separately exposes CARIN-aligned Patient Access and Da Vinci Plan-Net Provider Directory FHIR APIs
   powered by Smile CDR for its insurance members and the public.
 common:
+  - type: AgenticAccess
+    url: agentic-access/jefferson-health-agentic-access.yml
   - type: DomainSecurity
     url: security/jefferson-health-domain-security.yml
   - type: Authentication
