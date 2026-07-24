@@ -1,0 +1,90 @@
+openapi: 3.0.3
+info:
+  title: Jefferson Health Plans Provider Directory FHIR Allergy Intolerance Location API
+  description: OpenAPI surface for the Jefferson Health Plans (formerly Health Partners Plans) Provider Directory FHIR API — a public HL7 FHIR Release 4.0.1 endpoint powered by Smile CDR 2025.02.R04 that surfaces JHP's network of in-network practitioners, organizations, locations, healthcare services, and insurance plans for the CMS Interoperability and Patient Access Provider Directory requirement. Aligned with the HL7 Da Vinci Payer Data Exchange Plan-Net implementation guide.
+  version: 4.0.1
+  contact:
+    name: Jefferson Health Plans Interoperability
+    url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/
+  license:
+    name: HL7 FHIR License
+    url: https://www.hl7.org/fhir/license.html
+servers:
+- url: https://providerfhirapi.healthpartnersplans.com
+  description: Jefferson Health Plans Provider Directory FHIR R4 production endpoint
+tags:
+- name: Location
+  description: Details and position information for a physical place.
+paths:
+  /Location:
+    get:
+      tags:
+      - Location
+      summary: Search Location
+      description: Search Location resources by address components, type, endpoint, organization, or hierarchy.
+      operationId: searchLocation
+      parameters:
+      - name: address-state
+        in: query
+        schema:
+          type: string
+      - name: address-city
+        in: query
+        schema:
+          type: string
+      - name: address-postalcode
+        in: query
+        schema:
+          type: string
+      - name: type
+        in: query
+        schema:
+          type: string
+      - name: endpoint
+        in: query
+        schema:
+          type: string
+      - name: organization
+        in: query
+        schema:
+          type: string
+      - $ref: '#/components/parameters/Count'
+      responses:
+        '200':
+          description: Bundle of Location resources
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/Bundle'
+components:
+  schemas:
+    Bundle:
+      type: object
+      description: HL7 FHIR Bundle resource (searchset).
+      properties:
+        resourceType:
+          type: string
+          enum:
+          - Bundle
+        type:
+          type: string
+          enum:
+          - searchset
+        total:
+          type: integer
+        entry:
+          type: array
+          items:
+            type: object
+  parameters:
+    Count:
+      name: _count
+      in: query
+      description: Number of resources to return per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 1000
+externalDocs:
+  description: HL7 Da Vinci PDEX Plan-Net Implementation Guide
+  url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/

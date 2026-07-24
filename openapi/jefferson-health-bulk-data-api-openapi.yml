@@ -1,0 +1,73 @@
+openapi: 3.0.3
+info:
+  title: Jefferson Health Plans Provider Directory FHIR Allergy Intolerance Bulk Data API
+  description: OpenAPI surface for the Jefferson Health Plans (formerly Health Partners Plans) Provider Directory FHIR API — a public HL7 FHIR Release 4.0.1 endpoint powered by Smile CDR 2025.02.R04 that surfaces JHP's network of in-network practitioners, organizations, locations, healthcare services, and insurance plans for the CMS Interoperability and Patient Access Provider Directory requirement. Aligned with the HL7 Da Vinci Payer Data Exchange Plan-Net implementation guide.
+  version: 4.0.1
+  contact:
+    name: Jefferson Health Plans Interoperability
+    url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/
+  license:
+    name: HL7 FHIR License
+    url: https://www.hl7.org/fhir/license.html
+servers:
+- url: https://providerfhirapi.healthpartnersplans.com
+  description: Jefferson Health Plans Provider Directory FHIR R4 production endpoint
+tags:
+- name: Bulk Data
+  description: HL7 FHIR Bulk Data Access Group-level export.
+paths:
+  /Group/{id}/$export:
+    get:
+      tags:
+      - Bulk Data
+      summary: Group Level Bulk Export
+      description: Kick off an HL7 FHIR Bulk Data Access Group-level asynchronous export of patient resources for a defined Group.
+      operationId: bulkExportGroup
+      parameters:
+      - $ref: '#/components/parameters/ResourceId'
+      - name: _type
+        in: query
+        description: Comma-separated list of FHIR resource types to include in the export.
+        schema:
+          type: string
+      - name: _since
+        in: query
+        description: Only include resources modified after this instant.
+        schema:
+          type: string
+          format: date-time
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - application/fhir+json
+      - name: Prefer
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - respond-async
+      responses:
+        '202':
+          description: Accepted — polling URL returned in Content-Location header.
+          headers:
+            Content-Location:
+              description: Polling URL for the export status.
+              schema:
+                type: string
+                format: uri
+components:
+  parameters:
+    ResourceId:
+      name: id
+      in: path
+      required: true
+      description: FHIR logical id of the resource.
+      schema:
+        type: string
+externalDocs:
+  description: HL7 Da Vinci PDEX Plan-Net Implementation Guide
+  url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/

@@ -1,0 +1,120 @@
+openapi: 3.0.3
+info:
+  title: Jefferson Health Plans Provider Directory FHIR Allergy Intolerance Practitioner API
+  description: OpenAPI surface for the Jefferson Health Plans (formerly Health Partners Plans) Provider Directory FHIR API — a public HL7 FHIR Release 4.0.1 endpoint powered by Smile CDR 2025.02.R04 that surfaces JHP's network of in-network practitioners, organizations, locations, healthcare services, and insurance plans for the CMS Interoperability and Patient Access Provider Directory requirement. Aligned with the HL7 Da Vinci Payer Data Exchange Plan-Net implementation guide.
+  version: 4.0.1
+  contact:
+    name: Jefferson Health Plans Interoperability
+    url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/
+  license:
+    name: HL7 FHIR License
+    url: https://www.hl7.org/fhir/license.html
+servers:
+- url: https://providerfhirapi.healthpartnersplans.com
+  description: Jefferson Health Plans Provider Directory FHIR R4 production endpoint
+tags:
+- name: Practitioner
+  description: A person who is directly or indirectly involved in the provisioning of healthcare.
+paths:
+  /Practitioner/{id}:
+    get:
+      tags:
+      - Practitioner
+      summary: Read Practitioner By Id
+      operationId: readPractitioner
+      parameters:
+      - $ref: '#/components/parameters/ResourceId'
+      responses:
+        '200':
+          description: Practitioner resource
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/Practitioner'
+  /Practitioner:
+    get:
+      tags:
+      - Practitioner
+      summary: Search Practitioner
+      description: Search Practitioner resources by name, family, given, or resource id.
+      operationId: searchPractitioner
+      parameters:
+      - name: name
+        in: query
+        description: Practitioner name.
+        schema:
+          type: string
+      - name: family
+        in: query
+        description: Family name.
+        schema:
+          type: string
+      - name: given
+        in: query
+        description: Given name.
+        schema:
+          type: string
+      - $ref: '#/components/parameters/Count'
+      responses:
+        '200':
+          description: Bundle of Practitioner resources
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/Bundle'
+components:
+  schemas:
+    Practitioner:
+      type: object
+      properties:
+        resourceType:
+          type: string
+          enum:
+          - Practitioner
+        id:
+          type: string
+        identifier:
+          type: array
+          items:
+            type: object
+        name:
+          type: array
+          items:
+            type: object
+    Bundle:
+      type: object
+      description: HL7 FHIR Bundle resource (searchset).
+      properties:
+        resourceType:
+          type: string
+          enum:
+          - Bundle
+        type:
+          type: string
+          enum:
+          - searchset
+        total:
+          type: integer
+        entry:
+          type: array
+          items:
+            type: object
+  parameters:
+    Count:
+      name: _count
+      in: query
+      description: Number of resources to return per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 1000
+    ResourceId:
+      name: id
+      in: path
+      required: true
+      description: FHIR logical id of the resource.
+      schema:
+        type: string
+externalDocs:
+  description: HL7 Da Vinci PDEX Plan-Net Implementation Guide
+  url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/

@@ -1,0 +1,85 @@
+openapi: 3.0.3
+info:
+  title: Jefferson Health Plans Provider Directory FHIR Allergy Intolerance Metadata API
+  description: OpenAPI surface for the Jefferson Health Plans (formerly Health Partners Plans) Provider Directory FHIR API — a public HL7 FHIR Release 4.0.1 endpoint powered by Smile CDR 2025.02.R04 that surfaces JHP's network of in-network practitioners, organizations, locations, healthcare services, and insurance plans for the CMS Interoperability and Patient Access Provider Directory requirement. Aligned with the HL7 Da Vinci Payer Data Exchange Plan-Net implementation guide.
+  version: 4.0.1
+  contact:
+    name: Jefferson Health Plans Interoperability
+    url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/
+  license:
+    name: HL7 FHIR License
+    url: https://www.hl7.org/fhir/license.html
+servers:
+- url: https://providerfhirapi.healthpartnersplans.com
+  description: Jefferson Health Plans Provider Directory FHIR R4 production endpoint
+tags:
+- name: Metadata
+  description: FHIR conformance discovery.
+paths:
+  /metadata:
+    get:
+      tags:
+      - Metadata
+      summary: Get FHIR Capability Statement
+      description: Returns the FHIR CapabilityStatement describing the Provider Directory's supported resources and search parameters.
+      operationId: getMetadata
+      responses:
+        '200':
+          description: FHIR CapabilityStatement resource
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/CapabilityStatement'
+  /.well-known/smart-configuration:
+    get:
+      tags:
+      - Metadata
+      summary: Get Smart Configuration
+      description: Returns the SMART App Launch configuration document describing OAuth 2.0 endpoints, scopes, and capabilities.
+      operationId: getSmartConfiguration
+      responses:
+        '200':
+          description: SMART configuration JSON document
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SmartConfiguration'
+components:
+  schemas:
+    SmartConfiguration:
+      type: object
+      properties:
+        authorization_endpoint:
+          type: string
+          format: uri
+        token_endpoint:
+          type: string
+          format: uri
+        scopes_supported:
+          type: array
+          items:
+            type: string
+        capabilities:
+          type: array
+          items:
+            type: string
+    CapabilityStatement:
+      type: object
+      description: HL7 FHIR CapabilityStatement resource.
+      properties:
+        resourceType:
+          type: string
+          enum:
+          - CapabilityStatement
+        fhirVersion:
+          type: string
+          example: 4.0.1
+        software:
+          type: object
+        rest:
+          type: array
+          items:
+            type: object
+externalDocs:
+  description: HL7 Da Vinci PDEX Plan-Net Implementation Guide
+  url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
