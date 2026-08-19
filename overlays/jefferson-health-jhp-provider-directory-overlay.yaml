@@ -1,0 +1,105 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Jefferson Health Plans Provider Directory FHIR API
+  version: 1.0.0
+x-generated: '2026-08-15'
+x-method: generated
+x-source: >-
+  Live CapabilityStatement and observed search responses fetched 2026-08-15 from
+  https://providerfhirapi.healthpartnersplans.com, plus the artifacts in
+  conformance/, conventions/, errors/ and data-model/.
+extends: openapi/_original/jefferson-health-jhp-provider-directory-fhir-api-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: jefferson-health
+      x-apievangelist-api: jhp-provider-directory
+      x-fhir-version: 4.0.1
+      x-server-software: Smile CDR
+      x-server-version: 2026.02.R02
+      x-server-engine: HAPI FHIR 8.8.1
+      x-capability-statement: https://providerfhirapi.healthpartnersplans.com/metadata
+      x-capability-statement-artifact: conformance/jefferson-health-jhp-provider-directory-capabilitystatement.json
+      x-implementation-guide: http://hl7.org/fhir/us/davinci-pdex-plan-net/
+      x-implementation-guide-version: 1.2.0
+      x-implementation-guide-evidence: >-
+        Returned resources carry meta.profile
+        http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Practitioner|1.2.0
+      x-anonymous-access: true
+      x-anonymous-access-evidence: >-
+        GET https://providerfhirapi.healthpartnersplans.com/InsurancePlan?_count=1
+        returned HTTP 200 with a searchset Bundle and no credentials, as the
+        Da Vinci Plan-Net IG requires of a public provider directory.
+      x-resource-types-served: 8
+      x-resource-types-described: 7
+      x-coverage-note: >-
+        OrganizationAffiliation is served live but is not described in this
+        contract.
+
+  - target: $.info
+    update:
+      x-conventions: conventions/jefferson-health-conventions.yml
+      x-error-catalog: errors/jefferson-health-problem-types.yml
+      x-lifecycle: lifecycle/jefferson-health-lifecycle.yml
+      x-data-model: data-model/jefferson-health-data-model.yml
+      x-conformance: conformance/jefferson-health-conformance.yml
+
+  - target: $.info
+    update:
+      x-pagination:
+        style: continuation-link
+        follow: Bundle.link[relation=next]
+        params: [_count, _getpages, _getpagesoffset]
+        total_returned: false
+      x-request-id-header: X-Request-ID
+      x-error-envelope: FHIR OperationOutcome with a HAPI-nnnn diagnostic code
+      x-cache-control: 'no-cache, no-store, max-age=0, must-revalidate'
+      x-hsts: 'max-age=31536000; includeSubDomains'
+      x-rate-limit-headers: []
+
+  - target: $.servers
+    update:
+      - url: https://providerfhirapi.healthpartnersplans.com
+        description: >-
+          Production Jefferson Health Plans Da Vinci Plan-Net Provider Directory,
+          verified live 2026-08-15 (GET /metadata -> 200). The
+          healthpartnersplans.com domain is the legacy Health Partners Plans
+          brand that was renamed Jefferson Health Plans; the payer's own
+          interoperability pages at jeffersonhealthplans.com point integrators
+          at this host.
+        x-verified: '2026-08-15'
+        x-http-status: 200
+
+  - target: $.paths['/Practitioner'].get
+    update:
+      x-search-includes: ['*', 'Practitioner:endpoint']
+      x-search-revincludes: ['PractitionerRole:practitioner']
+      x-invalid-param-behavior: >-
+        HTTP 400 OperationOutcome HAPI-0323, whose diagnostics enumerate every
+        valid search parameter — machine-recoverable.
+
+  - target: $.paths['/PractitionerRole'].get
+    update:
+      x-join-entity: true
+      x-search-includes:
+        - PractitionerRole:practitioner
+        - PractitionerRole:organization
+        - PractitionerRole:location
+        - PractitionerRole:network
+        - PractitionerRole:service
+        - PractitionerRole:endpoint
+      x-agent-note: >-
+        This is the resource that answers "is this doctor in my network, at which
+        location, for which service" in a single request when combined with
+        _include.
+
+  - target: $.paths['/InsurancePlan'].get
+    update:
+      x-search-includes:
+        - InsurancePlan:administered-by
+        - InsurancePlan:owned-by
+        - InsurancePlan:coverage-area
+        - InsurancePlan:network
+        - InsurancePlan:coverage-network
+        - InsurancePlan:plan-network
+        - InsurancePlan:endpoint

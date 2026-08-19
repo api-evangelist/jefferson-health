@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Jefferson Health Plans Provider Directory FHIR Allergy Intolerance Observation API",
+    "version": "4.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Observation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Observation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://providerfhirapi.healthpartnersplans.com/Observation",
+            "params": [
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query",
+                "description": "Reference to the Patient (id or Patient/{id})."
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "US Core observation category (laboratory, vital-signs, social-history, smoking-status, survey)."
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "query",
+                "description": "LOINC or SNOMED CT code identifying the observation."
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "Observation date (effective)."
+              },
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Number of resources to return per page."
+              }
+            ]
+          },
+          "docs": "Search Observation resources for a patient, supporting US Core Lab, Vital Signs, Smoking Status, and other categories."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Jefferson Health Plans Provider Directory FHIR Allergy Intolerance Location API",
+    "version": "4.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Location",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://providerfhirapi.healthpartnersplans.com/Location",
+            "params": [
+              {
+                "name": "address-state",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "address-city",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "address-postalcode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endpoint",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "organization",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Number of resources to return per page."
+              }
+            ]
+          },
+          "docs": "Search Location resources by address components, type, endpoint, organization, or hierarchy."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

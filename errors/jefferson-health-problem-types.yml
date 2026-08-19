@@ -1,0 +1,153 @@
+generated: '2026-08-15'
+method: probed
+source: >-
+  Live unauthenticated error probes against
+  https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4 and
+  https://providerfhirapi.healthpartnersplans.com on 2026-08-15, plus the 404
+  response component declared in
+  openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml.
+format: fhir-operationoutcome
+rfc9457: false
+description: >-
+  Jefferson Health's FHIR surfaces do not use RFC 9457 application/problem+json.
+  The error envelope on the Jefferson Health Plans Provider Directory is the FHIR
+  OperationOutcome resource served as application/fhir+json, with a HAPI FHIR
+  diagnostic code (HAPI-nnnn) inside issue[].diagnostics. The Thomas Jefferson
+  University Hospital Epic proxy behaves differently and worse for agents: an
+  unauthenticated request returns HTTP 401 with an EMPTY body and
+  content-type application/json, and an unknown resource type falls through to an
+  IIS HTML 404 page rather than an OperationOutcome. Both facts were observed, not
+  inferred, and are recorded here because an agent must handle the empty-401 case.
+
+envelope:
+  primary:
+    resource_type: OperationOutcome
+    media_type: application/fhir+json
+    fields:
+      - path: issue[].severity
+        values: [fatal, error, warning, information]
+      - path: issue[].code
+        note: FHIR issue-type code, e.g. processing
+      - path: issue[].diagnostics
+        note: >-
+          Human-readable text; on the Smile CDR/HAPI-backed Provider Directory it
+          is prefixed with a stable HAPI code such as HAPI-2001 or HAPI-0323.
+  deviations:
+    - server: tjuh-fhir-r4
+      status: 401
+      body: empty string
+      content_type: application/json
+      note: >-
+        No OperationOutcome and no WWW-Authenticate challenge body. An agent
+        cannot distinguish "unauthorized" from "unavailable" from the payload;
+        it must branch on the status code alone.
+    - server: tjuh-fhir-r4
+      status: 404
+      body: IIS HTML error page
+      content_type: text/html
+      note: >-
+        Unknown resource type paths (e.g. /NotAResource) are answered by the web
+        server, not the FHIR layer, so the response is not FHIR-shaped.
+
+problems:
+  - status: 401
+    title: Unauthorized — no valid SMART on FHIR access token
+    server: tjuh-fhir-r4
+    observed: true
+    observed_url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/Patient?family=Smith
+    content_type: application/json
+    body: '(empty)'
+    remediation: >-
+      Obtain an access token from
+      https://fhir.jefferson.edu/FHIRProxy/oauth2/token using the SMART App Launch
+      authorization-code flow (PKCE S256) with a client registered at
+      https://fhir.epic.com/Developer/Apps and approved by Jefferson Health for
+      production. Every clinical resource on this base requires a token.
+    source_operations:
+      - openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml#readPatient
+      - openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml#searchPatient
+      - openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml#searchObservation
+      - openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml#searchCondition
+      - openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml#searchEncounter
+      - openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml#searchMedicationRequest
+      - openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml#searchAllergyIntolerance
+      - openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml#searchDocumentReference
+      - openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml#bulkExportGroup
+
+  - status: 404
+    title: Resource instance not known
+    server: jhp-provider-directory
+    observed: true
+    observed_url: https://providerfhirapi.healthpartnersplans.com/Practitioner/does-not-exist
+    content_type: application/fhir+json
+    diagnostic_code: HAPI-2001
+    diagnostics_template: 'HAPI-2001: Resource {ResourceType}/{id} is not known'
+    remediation: >-
+      Resolve the logical id from a search Bundle before issuing a read; do not
+      construct FHIR ids.
+    source_operations:
+      - openapi/_original/jefferson-health-jhp-provider-directory-fhir-api-openapi.yml#readPractitioner
+      - openapi/_original/jefferson-health-jhp-provider-directory-fhir-api-openapi.yml#readOrganization
+
+  - status: 404
+    title: Unknown resource type
+    server: jhp-provider-directory
+    observed: true
+    observed_url: https://providerfhirapi.healthpartnersplans.com/NotAResource
+    content_type: application/fhir+json
+    diagnostic_code: HAPI-0302
+    diagnostics_template: "HAPI-0302: Unknown resource type '{type}' - Server knows how to handle: [...]"
+    remediation: >-
+      The Provider Directory only serves the Da Vinci Plan-Net set —
+      InsurancePlan, Location, Organization, OrganizationAffiliation,
+      Practitioner, HealthcareService, PractitionerRole, Endpoint. Read
+      /metadata before assuming a resource type is available.
+
+  - status: 404
+    title: Patient not found
+    server: tjuh-fhir-r4
+    observed: false
+    declared_in: openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml#/components/responses/NotFound
+    note: >-
+      Declared in the OpenAPI as the NotFound response component; could not be
+      observed live because the endpoint 401s before reaching the FHIR layer.
+    source_operations:
+      - openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml#readPatient
+
+  - status: 400
+    title: Unknown search parameter
+    server: jhp-provider-directory
+    observed: true
+    observed_url: https://providerfhirapi.healthpartnersplans.com/Practitioner?bogusparam=1
+    content_type: application/fhir+json
+    diagnostic_code: HAPI-0323
+    diagnostics_template: >-
+      HAPI-0323: Unknown search parameter "{name}" for resource type "{type}".
+      Valid search parameters for this search are: [...]
+    remediation: >-
+      The diagnostics string enumerates every valid search parameter for the
+      resource — an agent can recover automatically by re-reading it. The
+      supported parameter set per resource is also in
+      conformance/jefferson-health-jhp-provider-directory-capabilitystatement.json.
+
+  - status: 403
+    title: Access denied at the edge
+    server: tjuh-fhir-r4
+    observed: true
+    observed_url: https://fhir.jefferson.edu/.well-known/security.txt
+    content_type: text/html
+    body: '<html><body>Invalid Application, Access Denied</body></html>'
+    note: >-
+      Any path on fhir.jefferson.edu outside /FHIRProxy/ is rejected by the Epic
+      interconnect edge with this fixed HTML body. Not a FHIR error.
+
+  - status: 202
+    title: Bulk export accepted
+    server: tjuh-fhir-r4
+    kind: async-acknowledgement
+    observed: false
+    declared_in: openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml#bulkExportGroup
+    note: >-
+      Not an error, but the only non-200 success an agent must handle: the
+      polling URL is returned in the Content-Location header per the HL7 FHIR
+      Bulk Data Access IG.

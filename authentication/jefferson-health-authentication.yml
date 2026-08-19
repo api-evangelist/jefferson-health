@@ -1,20 +1,166 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
+generated: '2026-08-15'
+method: probed
+source: >-
+  Live discovery documents fetched 2026-08-15 —
+  https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/.well-known/smart-configuration,
+  https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/.well-known/openid-configuration,
+  https://appgallery.healthpartnersplans.com/smartauth-fhir/.well-known/openid-configuration,
+  and the security blocks of both live CapabilityStatements. Supersedes the
+  2026-07-11 pass, which was derived from
+  openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml alone.
+docs:
+  - https://www.jeffersonhealthplans.com/home/about-us/interoperability/authentication-and-data-endpoints/
+  - https://fhir.epic.com/Documentation
+description: >-
+  Jefferson Health runs two independent authorization surfaces that share a
+  brand and nothing else. The Thomas Jefferson University Hospital clinical FHIR
+  endpoint requires a patient- or user-authorized SMART on FHIR token for every
+  resource. The Jefferson Health Plans Da Vinci Plan-Net provider directory is
+  served ANONYMOUSLY, as the implementation guide requires; its SMART
+  authorization server exists for the separate Patient Access API and lives on a
+  third host, appgallery.healthpartnersplans.com.
+
 summary:
-  types:
-  - oauth2
-  oauth2_flows:
-  - authorizationCode
+  types: [oauth2, openIdConnect, none]
+  oauth2_flows: [authorizationCode, clientCredentials, jwtBearer, tokenExchange]
+  api_key_in: []
+  anonymous_surfaces: 1
+  authorization_servers: 2
+
 schemes:
-- name: smartOnFhir
-  type: oauth2
-  flows:
-  - flow: authorizationCode
-    authorizationUrl: https://fhir.jefferson.edu/FHIRProxy/oauth2/authorize
-    tokenUrl: https://fhir.jefferson.edu/FHIRProxy/oauth2/token
-    scopes: 13
-  description: SMART on FHIR / OAuth 2.0 with PKCE for patient-facing and provider-facing app
-    launches.
-  sources:
-  - openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
+  - name: smartOnFhir
+    type: oauth2
+    server: tjuh-fhir-r4
+    applies_to: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
+    required: true
+    description: >-
+      SMART App Launch over OAuth 2.0 with mandatory PKCE. Covers both
+      patient-facing standalone launches and provider-facing EHR launches.
+    issuer: https://fhir.jefferson.edu/FHIRProxy/oauth2
+    flows:
+      - flow: authorizationCode
+        authorizationUrl: https://fhir.jefferson.edu/FHIRProxy/oauth2/authorize
+        tokenUrl: https://fhir.jefferson.edu/FHIRProxy/oauth2/token
+        scopes: 13
+    grant_types_supported:
+      - authorization_code
+      - refresh_token
+      - client_credentials
+      - urn:ietf:params:oauth:grant-type:jwt-bearer
+      - urn:ietf:params:oauth:grant-type:token-exchange
+    token_endpoint_auth_methods_supported:
+      - client_secret_post
+      - client_secret_basic
+      - private_key_jwt
+    code_challenge_methods_supported: [S256]
+    pkce_required: true
+    response_types_supported: [code]
+    response_modes_supported: [query]
+    jwks_uri: https://fhir.jefferson.edu/FHIRProxy/api/epic/2019/Security/Open/PublicKeys/530027/OIDC
+    id_token_signing_alg_values_supported: [RS256]
+    subject_types_supported: [public]
+    smart_capabilities:
+      - launch-ehr
+      - launch-standalone
+      - client-public
+      - client-confidential-symmetric
+      - client-confidential-asymmetric
+      - context-banner
+      - context-style
+      - context-ehr-patient
+      - context-ehr-encounter
+      - context-standalone-patient
+      - permission-offline
+      - permission-patient
+      - permission-user
+      - permission-v1
+      - permission-v2
+      - sso-openid-connect
+      - authorize-post
+    backend_services: true
+    backend_services_evidence: >-
+      private_key_jwt + jwt-bearer grant + a published jwks_uri is the SMART
+      Backend Services (system-level) shape, which is what the Bulk Data export
+      requires.
+    registration: https://fhir.epic.com/Developer/Apps
+    registration_note: >-
+      Client registration is handled by Epic on FHIR, not by Jefferson Health
+      directly; Jefferson approves the app for production against its own
+      endpoint.
+    sources:
+      - well-known/jefferson-health-tjuh-smart-configuration.json
+      - well-known/jefferson-health-tjuh-openid-configuration.json
+      - conformance/jefferson-health-tjuh-fhir-r4-capabilitystatement.json
+      - openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml
+
+  - name: jhpSmartAuth
+    type: oauth2
+    server: jhp-patient-access
+    applies_to: https://smilercdr.healthpartnersplans.com/
+    required: true
+    description: >-
+      Jefferson Health Plans SMART on FHIR authorization server for the CARIN
+      Blue Button Patient Access API. Developer registration runs through the
+      JHP App Gallery developer portal.
+    issuer: https://appgallery.healthpartnersplans.com/smartauth-fhir
+    flows:
+      - flow: authorizationCode
+        authorizationUrl: https://appgallery.healthpartnersplans.com/smartauth-fhir/oauth/authorize
+        tokenUrl: https://appgallery.healthpartnersplans.com/smartauth-fhir/oauth/token
+    response_types_supported: [code, code id_token, token, token id_token]
+    code_challenge_methods_supported: [plain, S256]
+    pkce_required: false
+    pkce_note: >-
+      'plain' is advertised alongside S256. Clients should insist on S256; the
+      server permitting 'plain' is a weaker posture than the hospital endpoint,
+      which offers S256 only.
+    introspection_endpoint: https://appgallery.healthpartnersplans.com/smartauth-fhir/oauth/token/introspect
+    userinfo_endpoint: https://appgallery.healthpartnersplans.com/smartauth-fhir/userinfo
+    revocation_endpoint: https://appgallery.healthpartnersplans.com/smartauth-fhir/oauth/token/revoke
+    session_management_endpoint: https://appgallery.healthpartnersplans.com/smartauth-fhir/session/management
+    jwks_uri: https://appgallery.healthpartnersplans.com/smartauth-fhir/jwk
+    id_token_signing_alg_values_supported: [RS256]
+    subject_types_supported: [public]
+    registration: https://appgallery.healthpartnersplans.com/app-gallery/portal/
+    sources:
+      - well-known/jefferson-health-jhp-openid-configuration.json
+      - conformance/jefferson-health-jhp-provider-directory-capabilitystatement.json
+
+  - name: anonymous
+    type: none
+    server: jhp-provider-directory
+    applies_to: https://providerfhirapi.healthpartnersplans.com
+    required: false
+    description: >-
+      The Da Vinci Plan-Net provider directory requires no credentials. Verified
+      live: GET /InsurancePlan?_count=1 and GET /Practitioner?_count=2 both
+      returned HTTP 200 searchset Bundles with no Authorization header.
+    note: >-
+      The CapabilityStatement still advertises SMART oauth-uris pointing at the
+      appgallery authorization server, which is a decoy for this host — do not
+      build an auth flow for the directory.
+
+observed_behaviour:
+  - server: tjuh-fhir-r4
+    request: GET /Patient?family=Smith with no Authorization header
+    http_status: 401
+    content_type: application/json
+    body: '(empty)'
+    note: >-
+      No OperationOutcome and no challenge body. An agent must branch on the
+      status code alone.
+  - server: jhp-provider-directory
+    request: GET /Practitioner?_count=2 with no Authorization header
+    http_status: 200
+    note: Anonymous read confirmed.
+
+gaps:
+  - >-
+    No published token lifetime, refresh-token lifetime, or client-credential
+    rotation policy on either authorization server.
+  - >-
+    The Jefferson Health Plans Patient Access SMART configuration is not served:
+    https://smilercdr.healthpartnersplans.com/smartauth/well-known/openid-configuration
+    returns the portal HTML shell (soft 200), and
+    https://appgallery.healthpartnersplans.com/smartauth-fhir/.well-known/smart-configuration
+    likewise. Only the OIDC discovery document is machine-readable.

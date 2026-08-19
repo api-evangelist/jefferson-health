@@ -1,0 +1,117 @@
+generated: '2026-08-15'
+method: probed
+source: >-
+  Live CapabilityStatements (2026-08-15) for version/software facts, plus probes
+  for a status page and a deprecation policy on jeffersonhealth.org,
+  jefferson.edu and healthpartnersplans.com.
+description: >-
+  Jefferson Health runs its API lifecycle inside its vendors' release trains —
+  Epic for the hospital FHIR endpoint and Smile CDR for the Jefferson Health
+  Plans endpoints — and publishes no lifecycle policy of its own. There is no
+  Jefferson status page, no deprecation or sunset policy, no SLA and no dated
+  changelog. Versioning is FHIR-release versioning expressed in the URL path
+  (.../FHIR/DSTU2 vs .../FHIR/R4). The DSTU2 endpoint is still live and still
+  listed in Epic's public endpoint directory with no machine-readable sunset
+  signal, which is the single clearest lifecycle gap on this provider.
+
+versioning:
+  scheme: uri-path
+  pattern: '{base}/api/FHIR/{fhirRelease}'
+  current: R4 (FHIR 4.0.1)
+  releases:
+    - id: R4
+      base_url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
+      fhir_version: 4.0.1
+      status: current
+      probe:
+        url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/metadata
+        http_status: 200
+        checked: '2026-08-15'
+    - id: DSTU2
+      base_url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/DSTU2
+      status: legacy
+      probe:
+        url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/DSTU2/metadata
+        http_status: 200
+        checked: '2026-08-15'
+        note: >-
+          Still serving a FHIR DSTU2 Conformance resource. Epic recommends R4 for
+          all new development, but no sunset date is published by Epic or by
+          Jefferson Health for this endpoint.
+    - id: jhp-provider-directory
+      base_url: https://providerfhirapi.healthpartnersplans.com
+      fhir_version: 4.0.1
+      status: current
+      probe:
+        url: https://providerfhirapi.healthpartnersplans.com/metadata
+        http_status: 200
+        checked: '2026-08-15'
+
+platform_versions:
+  note: >-
+    These are the only dated version signals Jefferson publishes for its API
+    surface, and they are readable only by fetching /metadata. A consumer
+    watching for change has no feed, no changelog and no notification channel.
+  servers:
+    - server: tjuh-fhir-r4
+      software: Epic
+      version: February 2026
+      release_date: '2026-05-28'
+      source: CapabilityStatement.software
+    - server: jhp-provider-directory
+      software: Smile CDR
+      version: 2026.02.R02
+      source: CapabilityStatement.software
+
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  deprecated_operations: []
+  evidence:
+    - probe: >-
+        No Sunset or Deprecation response header on
+        https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/metadata (200) or
+        https://providerfhirapi.healthpartnersplans.com/metadata (200).
+    - note: >-
+        The DSTU2 endpoint carries no deprecation marker of any kind despite
+        being superseded by R4; no OpenAPI operation in openapi/ is flagged
+        deprecated: true.
+
+status_page:
+  url: null
+  published: false
+  evidence:
+    - {url: 'https://status.jeffersonhealth.org/', status: 0, note: DNS does not resolve}
+    - {url: 'https://status.jefferson.edu/', status: 0, note: DNS does not resolve}
+    - {url: 'https://status.healthpartnersplans.com/', status: 0, note: DNS does not resolve}
+    - {url: 'https://www.jeffersonhealth.org/status', status: 404}
+    - url: 'https://jeffersonhealth.statuspage.io/'
+      status: 200
+      note: >-
+        Redirects to the Atlassian Statuspage marketing site — the subdomain is
+        not provisioned. NOT a Jefferson status page; no StatusPage pointer is
+        emitted.
+
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    No API SLA published. Access is governed by the Epic on FHIR app agreement
+    and the Jefferson Health Plans Interoperability Terms of Service, neither of
+    which states an availability target.
+
+changelog:
+  url: null
+  published: false
+  note: >-
+    No dated API changelog. Platform change is visible only as the software
+    version inside /metadata.
+
+support:
+  app_registration:
+    - https://fhir.epic.com/Developer/Apps
+    - https://appgallery.healthpartnersplans.com/app-gallery/portal/
+  endpoint_directory: https://open.epic.com/Endpoints/R4
+  interoperability_terms: https://www.jeffersonhealthplans.com/home/about-us/interoperability/terms-of-service.html

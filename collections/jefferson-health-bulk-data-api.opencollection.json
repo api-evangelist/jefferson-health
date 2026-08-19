@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Jefferson Health Plans Provider Directory FHIR Allergy Intolerance Bulk Data API",
+    "version": "4.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bulk Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Group Level Bulk Export",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://providerfhirapi.healthpartnersplans.com/Group/:id/$export",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Prefer",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "FHIR logical id of the resource."
+              },
+              {
+                "name": "_type",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of FHIR resource types to include in the export."
+              },
+              {
+                "name": "_since",
+                "value": "",
+                "type": "query",
+                "description": "Only include resources modified after this instant."
+              }
+            ]
+          },
+          "docs": "Kick off an HL7 FHIR Bulk Data Access Group-level asynchronous export of patient resources for a defined Group."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

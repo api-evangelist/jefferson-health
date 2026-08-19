@@ -1,0 +1,42 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Jefferson Health Plans Provider Directory FHIR Allergy Intolerance Endpoint API",
+    "version": "4.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Endpoint",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://providerfhirapi.healthpartnersplans.com/Endpoint",
+            "params": [
+              {
+                "name": "organization",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Number of resources to return per page."
+              }
+            ]
+          },
+          "docs": "Search Endpoint resources by managing organization or resource id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

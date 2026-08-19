@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Jefferson Health Plans Provider Directory FHIR Allergy Intolerance API",
+    "version": "4.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Allergy Intolerance",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Allergy Intolerance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://providerfhirapi.healthpartnersplans.com/AllergyIntolerance",
+            "params": [
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query",
+                "description": "Reference to the Patient (id or Patient/{id})."
+              },
+              {
+                "name": "clinical-status",
+                "value": "",
+                "type": "query",
+                "description": "Allergy clinical status (active, inactive, resolved)."
+              },
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Number of resources to return per page."
+              }
+            ]
+          },
+          "docs": "Search AllergyIntolerance resources for a patient."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

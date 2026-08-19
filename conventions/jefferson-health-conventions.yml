@@ -1,0 +1,188 @@
+generated: '2026-08-15'
+method: probed
+source: >-
+  Observed live on 2026-08-15 against
+  https://providerfhirapi.healthpartnersplans.com and
+  https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4 (response headers, Bundle
+  paging links, CapabilityStatement conditional-interaction flags, SMART and
+  OIDC discovery documents), cross-referenced with openapi/_original/.
+description: >-
+  Cross-cutting request/response semantics for the Jefferson Health FHIR
+  surfaces. Both are HL7 FHIR R4 servers, so the conventions are FHIR's rather
+  than a house style: resource-typed paths, search-parameter queries, searchset
+  Bundles with continuation links, and OperationOutcome errors. The two servers
+  are not interchangeable — different auth servers, different paging tokens,
+  different error fidelity — so each convention below records which server it was
+  observed on.
+
+servers:
+  tjuh-fhir-r4:
+    base_url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
+    software: Epic February 2026
+    anonymous: false
+  jhp-provider-directory:
+    base_url: https://providerfhirapi.healthpartnersplans.com
+    software: Smile CDR 2026.02.R02 (HAPI FHIR 8.8.1)
+    anonymous: true
+
+authentication:
+  style: oauth2-bearer
+  detail: >-
+    SMART on FHIR / OAuth 2.0 bearer token in the Authorization header. See
+    authentication/jefferson-health-authentication.yml and
+    scopes/jefferson-health-scopes.yml.
+  per_server:
+    tjuh-fhir-r4:
+      required: true
+      authorization_endpoint: https://fhir.jefferson.edu/FHIRProxy/oauth2/authorize
+      token_endpoint: https://fhir.jefferson.edu/FHIRProxy/oauth2/token
+      pkce: S256
+      client_auth: [client_secret_post, client_secret_basic, private_key_jwt]
+    jhp-provider-directory:
+      required: false
+      note: >-
+        The Da Vinci Plan-Net provider directory is served anonymously, as the
+        implementation guide requires. Verified: GET /InsurancePlan?_count=1
+        returned HTTP 200 with a searchset Bundle and no credentials.
+      authorization_endpoint: https://appgallery.healthpartnersplans.com/smartauth-fhir/oauth/authorize
+      token_endpoint: https://appgallery.healthpartnersplans.com/smartauth-fhir/oauth/token
+      introspection_endpoint: https://appgallery.healthpartnersplans.com/smartauth-fhir/oauth/token/introspect
+
+idempotency:
+  supported: false
+  mechanism: null
+  evidence: >-
+    Every one of the 59 resources in the Thomas Jefferson University Hospital
+    CapabilityStatement declares conditionalCreate: false, conditionalUpdate:
+    false, conditionalDelete: not-supported and updateCreate: false. FHIR's
+    idempotency mechanisms (If-None-Exist conditional create, If-Match
+    version-aware update) are therefore all switched off, and no
+    Idempotency-Key style header is documented anywhere. There is no idempotency
+    contract on this provider.
+  agent_guidance: >-
+    A retried create against the TJUH endpoint can duplicate a clinical record.
+    Treat every write as non-idempotent: confirm the outcome with a search
+    before retrying, and prefer the read/search surface.
+  note: >-
+    No Idempotency pointer is emitted in apis.yml — asserting one would credit
+    Jefferson Health with a contract its own CapabilityStatement denies.
+
+pagination:
+  style: continuation-link
+  spec: HL7 FHIR R4 searchset Bundle paging
+  request_params:
+    - name: _count
+      description: Page size hint.
+    - name: _getpages
+      description: >-
+        Opaque server-issued search-result-set id (Smile CDR / HAPI). Never
+        construct it; only follow it from a link.
+    - name: _getpagesoffset
+      description: Offset into the cached result set (Smile CDR / HAPI).
+  response_fields:
+    - Bundle.link[relation=self]
+    - Bundle.link[relation=next]
+    - Bundle.entry[].fullUrl
+    - Bundle.entry[].search.mode
+  total_returned: false
+  observed:
+    url: https://providerfhirapi.healthpartnersplans.com/Practitioner?_count=2
+    next_link: >-
+      https://providerfhirapi.healthpartnersplans.com?_getpages=<uuid>&_getpagesoffset=2&_count=2&_pretty=true&_bundletype=searchset
+    note: >-
+      Bundle.total is absent, so a client cannot know the result-set size or
+      pre-plan how many pages to fetch. Follow link[relation=next] until it is
+      absent; do not paginate by incrementing offsets yourself.
+
+field_selection:
+  style: fhir-search-modifiers
+  params:
+    - name: _include
+      description: >-
+        Pull referenced resources into the Bundle. The Provider Directory
+        declares an explicit whitelist per resource (e.g. PractitionerRole
+        supports PractitionerRole:practitioner, :organization, :location,
+        :network, :service, :endpoint). TJUH declares '*'.
+    - name: _revinclude
+      description: >-
+        Pull resources that reference this one. TJUH supports
+        Provenance:target on nearly every resource; the Provider Directory
+        publishes a resource-specific list.
+    - name: _elements
+      supported: unverified
+    - name: _summary
+      supported: unverified
+  source: CapabilityStatement.rest.resource.searchInclude / searchRevInclude
+
+metadata:
+  resource_meta:
+    - meta.versionId
+    - meta.lastUpdated
+    - meta.source
+    - meta.profile
+  observed_profile: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Practitioner|1.2.0
+  note: >-
+    meta.profile is the authoritative statement of which implementation guide a
+    given instance claims — the Provider Directory stamps Da Vinci Plan-Net
+    1.2.0 on returned resources.
+
+request_tracing:
+  header: X-Request-ID
+  direction: response
+  servers: [jhp-provider-directory]
+  observed_value_shape: 16-character opaque token
+  note: >-
+    Smile CDR returns X-Request-ID on every response; quote it in any support
+    request. No equivalent correlation header was observed on the Epic proxy.
+
+content_negotiation:
+  default_media_type_tjuh: application/xml
+  formats_tjuh: [xml, json]
+  formats_jhp: [json]
+  guidance: >-
+    The Epic proxy defaults to XML: GET /metadata with no Accept header returns
+    a <CapabilityStatement> XML document. Always send
+    Accept: application/fhir+json (or _format=json) — an agent that omits it
+    will be handed XML.
+
+versioning:
+  style: uri-path
+  detail: FHIR release in the path segment (/api/FHIR/R4, /api/FHIR/DSTU2).
+  cross_reference: lifecycle/jefferson-health-lifecycle.yml
+
+error_envelope:
+  primary: FHIR OperationOutcome (application/fhir+json)
+  deviations:
+    - 'tjuh-fhir-r4 returns HTTP 401 with an EMPTY body and content-type application/json'
+    - 'tjuh-fhir-r4 returns an IIS HTML page for an unknown resource type'
+  cross_reference: errors/jefferson-health-problem-types.yml
+
+rate_limit_signaling:
+  headers_observed: []
+  documented: false
+  note: >-
+    No X-RateLimit-*, RateLimit-* or Retry-After header was present on any
+    observed 200. Throttling is enforced at the Epic interconnect and Smile CDR
+    edges under the app-registration agreement, invisible to the client until it
+    is applied.
+  cross_reference: rate-limits/jefferson-health-rate-limits.yml
+
+caching:
+  headers_observed_jhp:
+    - 'Cache-Control: no-cache, no-store, max-age=0, must-revalidate'
+    - 'Pragma: no-cache'
+    - 'Expires: 0'
+  note: >-
+    The Provider Directory explicitly forbids caching of FHIR responses even
+    though the directory data itself is public and slow-moving.
+
+transport_security_observed:
+  jhp_provider_directory:
+    - 'Strict-Transport-Security: max-age=31536000 ; includeSubDomains'
+    - 'X-Frame-Options: DENY'
+    - 'X-Content-Type-Options: nosniff'
+  cross_reference: security/jefferson-health-domain-security.yml
+
+cors:
+  tjuh-fhir-r4: true
+  evidence: CapabilityStatement.rest.security.cors = true

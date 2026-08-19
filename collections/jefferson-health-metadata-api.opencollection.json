@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Jefferson Health Plans Provider Directory FHIR Allergy Intolerance Metadata API",
+    "version": "4.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get FHIR Capability Statement",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://providerfhirapi.healthpartnersplans.com/metadata"
+          },
+          "docs": "Returns the FHIR CapabilityStatement describing the Provider Directory's supported resources and search parameters."
+        },
+        {
+          "info": {
+            "name": "Get Smart Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://providerfhirapi.healthpartnersplans.com/.well-known/smart-configuration"
+          },
+          "docs": "Returns the SMART App Launch configuration document describing OAuth 2.0 endpoints, scopes, and capabilities."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

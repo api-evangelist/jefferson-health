@@ -1,4 +1,23 @@
 apiCommonsPlans: '0.1'
+generated: '2026-08-15'
+method: searched
+source: >-
+  https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/
+  (HTTP 200), https://fhir.epic.com/Developer/Apps (HTTP 200),
+  https://appgallery.healthpartnersplans.com/app-gallery/portal/ (HTTP 200) and
+  https://www.jeffersonhealth.org/pay-my-bill/price-estimator (HTTP 200),
+  re-verified 2026-08-15.
+plan_count: 4
+paid_plan_count: 0
+pricing_page: null
+pricing_note: >-
+  Jefferson Health publishes no developer pricing page, because there is no
+  commercial API product. All four entries below are free-at-point-of-use
+  regulatory surfaces published under CMS-9115-F; the only gate is app
+  registration and organizational approval, not payment. Recorded as four real
+  free tiers rather than as an absence, because the access terms of each differ
+  materially (patient-authorized, member-authorized, fully public,
+  out-of-scope).
 info:
   title: Jefferson Health API Plans and Pricing
   description: >-

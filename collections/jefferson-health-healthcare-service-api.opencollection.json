@@ -1,0 +1,72 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Jefferson Health Plans Provider Directory FHIR Allergy Intolerance Healthcare Service API",
+    "version": "4.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Healthcare Service",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Healthcare Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://providerfhirapi.healthpartnersplans.com/HealthcareService",
+            "params": [
+              {
+                "name": "specialty",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service-category",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "service-type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "coverage-area",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "organization",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "location",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Number of resources to return per page."
+              }
+            ]
+          },
+          "docs": "Search HealthcareService resources by specialty, service category/type, coverage area, organization, name, location, or id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

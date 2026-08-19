@@ -1,4 +1,26 @@
 apiCommonsRateLimits: '0.1'
+generated: '2026-08-15'
+method: probed
+source: >-
+  Live response-header inspection 2026-08-15 on
+  https://providerfhirapi.healthpartnersplans.com/Practitioner?_count=2 (200) and
+  https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/metadata (200), plus a search
+  of https://fhir.epic.com/Documentation and
+  https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/
+  for published limits.
+limit_count: 0
+documented: false
+response_headers_observed: []
+retry_after_observed: false
+exhaustion_status_code: unknown
+probe_note: >-
+  No X-RateLimit-*, RateLimit-* or Retry-After header was present on any observed
+  200 from either FHIR endpoint. Jefferson Health publishes no quantitative rate
+  limits and emits no runtime rate-limit signal, so a client cannot tell how much
+  budget it has left or when a throttle is approaching — it only finds out when a
+  request fails. This is an honest zero, confirmed by probe rather than assumed.
+  The qualitative policies recorded below are real (throttling exists at the Epic
+  interconnect and Smile CDR edges) but carry no published numbers.
 info:
   title: Jefferson Health API Rate Limits
   description: >-

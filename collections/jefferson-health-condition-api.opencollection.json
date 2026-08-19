@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Jefferson Health Plans Provider Directory FHIR Allergy Intolerance Condition API",
+    "version": "4.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Condition",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Condition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://providerfhirapi.healthpartnersplans.com/Condition",
+            "params": [
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query",
+                "description": "Reference to the Patient (id or Patient/{id})."
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "US Core Condition category (problem-list-item, encounter-diagnosis, health-concern)."
+              },
+              {
+                "name": "clinical-status",
+                "value": "",
+                "type": "query",
+                "description": "Clinical status (active, recurrence, relapse, inactive, remission, resolved)."
+              },
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Number of resources to return per page."
+              }
+            ]
+          },
+          "docs": "Search Condition resources for a patient (problems, encounter diagnoses, health concerns)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

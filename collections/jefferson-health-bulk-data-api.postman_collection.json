@@ -1,0 +1,160 @@
+{
+  "item": [
+    {
+      "id": "9f236f8f-7ced-4a5d-b638-3a3d85c61666",
+      "name": "Bulk Data",
+      "description": {
+        "content": "HL7 FHIR Bulk Data Access Group-level export.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e679ba20-fe6f-45fc-8bf7-661950534343",
+          "name": "Group Level Bulk Export",
+          "request": {
+            "name": "Group Level Bulk Export",
+            "description": {
+              "content": "Kick off an HL7 FHIR Bulk Data Access Group-level asynchronous export of patient resources for a defined Group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Group",
+                ":id",
+                "$export"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "_type",
+                  "value": "<string>",
+                  "description": "Comma-separated list of FHIR resource types to include in the export."
+                },
+                {
+                  "disabled": false,
+                  "key": "_since",
+                  "value": "<dateTime>",
+                  "description": "Only include resources modified after this instant."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) FHIR logical id of the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "Prefer",
+                "value": "<string>"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "76c6f1ee-e210-4917-a21c-bf8548f9ed05",
+              "name": "Accepted — polling URL returned in Content-Location header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Group",
+                    ":id",
+                    "$export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_since",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) FHIR logical id of the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Prefer",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Polling URL for the export status.",
+                  "key": "Content-Location",
+                  "value": "http://hXpQEKOeBUIVkENELzvwcbmThkTQj.szj5NYZDB1pggyJnS3xoEyeMyfdeiYb2fcPEFt-Mpt5P5txN08Vd4dj8ZsXzrfwSNyxmQji9IC"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://providerfhirapi.healthpartnersplans.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7ee57de9-fc66-4d60-bd5c-99253261c34e",
+    "name": "Jefferson Health Plans Provider Directory FHIR Allergy Intolerance Bulk Data API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "OpenAPI surface for the Jefferson Health Plans (formerly Health Partners Plans) Provider Directory FHIR API — a public HL7 FHIR Release 4.0.1 endpoint powered by Smile CDR 2025.02.R04 that surfaces JHP's network of in-network practitioners, organizations, locations, healthcare services, and insurance plans for the CMS Interoperability and Patient Access Provider Directory requirement. Aligned with the HL7 Da Vinci Payer Data Exchange Plan-Net implementation guide.\n\nContact Support:\n Name: Jefferson Health Plans Interoperability",
+      "type": "text/plain"
+    }
+  }
+}

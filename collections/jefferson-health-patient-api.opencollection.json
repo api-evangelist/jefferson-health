@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Jefferson Health Plans Provider Directory FHIR Allergy Intolerance Patient API",
+    "version": "4.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Patient",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Read Patient By Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://providerfhirapi.healthpartnersplans.com/Patient/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "FHIR logical id of the resource."
+              }
+            ]
+          },
+          "docs": "Read a single Patient resource by FHIR logical id."
+        },
+        {
+          "info": {
+            "name": "Search Patient",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://providerfhirapi.healthpartnersplans.com/Patient",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "query",
+                "description": "A patient identifier (e.g. MRN, system|value)."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "A portion of either family or given name of the patient."
+              },
+              {
+                "name": "family",
+                "value": "",
+                "type": "query",
+                "description": "Family (last) name."
+              },
+              {
+                "name": "given",
+                "value": "",
+                "type": "query",
+                "description": "Given (first) name."
+              },
+              {
+                "name": "birthdate",
+                "value": "",
+                "type": "query",
+                "description": "The patient's date of birth."
+              },
+              {
+                "name": "gender",
+                "value": "",
+                "type": "query",
+                "description": "Administrative gender."
+              },
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Number of resources to return per page."
+              }
+            ]
+          },
+          "docs": "Search Patient resources by identifier, name, birthdate, or other US Core search parameters."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

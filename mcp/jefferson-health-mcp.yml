@@ -1,0 +1,174 @@
+generated: '2026-08-15'
+method: derived
+status: candidate
+source: >-
+  openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml,
+  openapi/_original/jefferson-health-jhp-provider-directory-fhir-api-openapi.yml,
+  and the live CapabilityStatements in conformance/.
+description: >-
+  Jefferson Health ships no MCP server. This file is a DERIVED CANDIDATE tool
+  surface, computed one-tool-per-OpenAPI-operation so the shape of an agent
+  interface over these FHIR endpoints is legible — it is not a claim that
+  anything is deployed. Nothing below is callable by an MCP client today.
+
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: derived
+  note: >-
+    Searched the Jefferson Health and Jefferson Health Plans developer pages,
+    npm, and the web for an official hosted or stdio MCP server; none exists.
+    No endpoint URL is guessed here — a fabricated MCP path that happened to
+    answer 200 would read as a verified agent surface.
+
+search_evidence:
+  - {registry: npm, query: 'jefferson-health / jeffersonhealth', result: no MCP package}
+  - {source: web search, query: 'Jefferson Health MCP server model context protocol FHIR', result: 'only generic third-party FHIR MCP servers (wso2/fhir-mcp-server, the-momentum/fhir-mcp-server, xSoVx/fhir-mcp) — none Jefferson-operated'}
+  - {url: 'https://github.com/jefferson-health', http_status: 200, result: '24 public repos, no MCP server'}
+
+auth_note: >-
+  If a server were built over these endpoints, the two halves would need
+  different auth: the Provider Directory is anonymous, while every clinical tool
+  requires a patient-authorized SMART on FHIR token, which means a per-user
+  OAuth flow rather than a service credential. An MCP server fronting the
+  clinical side is a consent surface, not a data surface.
+
+servers_described:
+  - id: tjuh-fhir-r4
+    base_url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
+    auth: oauth2 (SMART on FHIR, patient-authorized)
+  - id: jhp-provider-directory
+    base_url: https://providerfhirapi.healthpartnersplans.com
+    auth: none
+
+tools:
+  # --- Jefferson Health Plans Provider Directory (anonymous) ---
+  - name: search_practitioner_directory
+    description: Search the Jefferson Health Plans network directory for practitioners by name.
+    server: jhp-provider-directory
+    source_operation: openapi/_original/jefferson-health-jhp-provider-directory-fhir-api-openapi.yml#searchPractitioner
+    auth: none
+  - name: get_practitioner
+    description: Read one practitioner from the network directory by FHIR logical id.
+    server: jhp-provider-directory
+    source_operation: openapi/_original/jefferson-health-jhp-provider-directory-fhir-api-openapi.yml#readPractitioner
+    auth: none
+  - name: search_practitioner_roles
+    description: >-
+      Find which practitioners work at which organizations and locations, in
+      which networks, delivering which services.
+    server: jhp-provider-directory
+    source_operation: openapi/_original/jefferson-health-jhp-provider-directory-fhir-api-openapi.yml#searchPractitionerRole
+    auth: none
+  - name: search_organizations
+    description: Search provider organizations in the Jefferson Health Plans directory.
+    server: jhp-provider-directory
+    source_operation: openapi/_original/jefferson-health-jhp-provider-directory-fhir-api-openapi.yml#searchOrganization
+    auth: none
+  - name: get_organization
+    description: Read one provider organization by FHIR logical id.
+    server: jhp-provider-directory
+    source_operation: openapi/_original/jefferson-health-jhp-provider-directory-fhir-api-openapi.yml#readOrganization
+    auth: none
+  - name: search_locations
+    description: Search care locations by city, state, postal code or owning organization.
+    server: jhp-provider-directory
+    source_operation: openapi/_original/jefferson-health-jhp-provider-directory-fhir-api-openapi.yml#searchLocation
+    auth: none
+  - name: search_healthcare_services
+    description: Search services offered, by specialty, service type or location.
+    server: jhp-provider-directory
+    source_operation: openapi/_original/jefferson-health-jhp-provider-directory-fhir-api-openapi.yml#searchHealthcareService
+    auth: none
+  - name: search_insurance_plans
+    description: Search Jefferson Health Plans insurance products and their coverage areas.
+    server: jhp-provider-directory
+    source_operation: openapi/_original/jefferson-health-jhp-provider-directory-fhir-api-openapi.yml#searchInsurancePlan
+    auth: none
+  - name: search_endpoints
+    description: Search the directory's technical endpoint records for participating organizations.
+    server: jhp-provider-directory
+    source_operation: openapi/_original/jefferson-health-jhp-provider-directory-fhir-api-openapi.yml#searchEndpoint
+    auth: none
+  - name: get_provider_directory_capabilities
+    description: Read the Provider Directory FHIR CapabilityStatement.
+    server: jhp-provider-directory
+    source_operation: openapi/_original/jefferson-health-jhp-provider-directory-fhir-api-openapi.yml#getMetadata
+    auth: none
+
+  # --- Thomas Jefferson University Hospital clinical (patient-authorized) ---
+  - name: get_patient
+    description: Read the authorized patient's demographics.
+    server: tjuh-fhir-r4
+    source_operation: openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml#readPatient
+    auth: oauth2
+    scopes: [patient/Patient.read]
+  - name: search_patient
+    description: Search Patient within the authorized context.
+    server: tjuh-fhir-r4
+    source_operation: openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml#searchPatient
+    auth: oauth2
+    scopes: [patient/Patient.read]
+  - name: search_observations
+    description: Retrieve labs, vitals and other observations for the authorized patient.
+    server: tjuh-fhir-r4
+    source_operation: openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml#searchObservation
+    auth: oauth2
+    scopes: [patient/Observation.read]
+  - name: search_conditions
+    description: Retrieve problems, diagnoses and health concerns for the authorized patient.
+    server: tjuh-fhir-r4
+    source_operation: openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml#searchCondition
+    auth: oauth2
+    scopes: [patient/Condition.read]
+  - name: search_encounters
+    description: Retrieve visits and encounters for the authorized patient.
+    server: tjuh-fhir-r4
+    source_operation: openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml#searchEncounter
+    auth: oauth2
+    scopes: [patient/Encounter.read]
+  - name: search_medication_requests
+    description: Retrieve prescriptions and medication orders for the authorized patient.
+    server: tjuh-fhir-r4
+    source_operation: openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml#searchMedicationRequest
+    auth: oauth2
+    scopes: [patient/MedicationRequest.read]
+  - name: search_allergies
+    description: Retrieve allergies and intolerances for the authorized patient.
+    server: tjuh-fhir-r4
+    source_operation: openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml#searchAllergyIntolerance
+    auth: oauth2
+    scopes: [patient/AllergyIntolerance.read]
+  - name: search_documents
+    description: Retrieve clinical notes and C-CDA documents for the authorized patient.
+    server: tjuh-fhir-r4
+    source_operation: openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml#searchDocumentReference
+    auth: oauth2
+    scopes: [patient/DocumentReference.read]
+  - name: export_group_bulk_data
+    description: >-
+      Kick off an asynchronous HL7 Bulk Data group-level export. Returns 202
+      with a polling URL in Content-Location.
+    server: tjuh-fhir-r4
+    source_operation: openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml#bulkExportGroup
+    auth: oauth2
+    long_running: true
+  - name: get_clinical_capabilities
+    description: Read the Epic FHIR R4 CapabilityStatement for the hospital endpoint.
+    server: tjuh-fhir-r4
+    source_operation: openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml#getMetadata
+    auth: none
+  - name: get_smart_configuration
+    description: Read the SMART App Launch discovery document for the hospital endpoint.
+    server: tjuh-fhir-r4
+    source_operation: openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml#getSmartConfiguration
+    auth: none
+
+coverage:
+  tools_derived: 21
+  rest_operations_total: 21
+  rest_operations_bound: 21
+  published_tools: 0

@@ -1,0 +1,418 @@
+generated: '2026-08-15'
+method: derived
+source: >-
+  conformance/jefferson-health-jhp-provider-directory-capabilitystatement.json
+  (searchInclude / searchRevInclude reference graph, observed live 2026-08-15),
+  conformance/jefferson-health-tjuh-fhir-r4-capabilitystatement.json
+  (supportedProfile + searchRevInclude), and the $ref graph in
+  openapi/_original/.
+description: >-
+  Entity-relationship graph for the two Jefferson Health FHIR surfaces. Unlike a
+  bespoke REST API, the entity model here is not Jefferson's invention: it is
+  HL7 FHIR R4 constrained by US Core 6.1.0 on the hospital side and Da Vinci
+  PDEX Plan-Net 1.2.0 on the payer side. What IS provider-specific — and what is
+  captured below — is which resources each server actually exposes and which
+  reference traversals it will honour, both read directly out of the servers'
+  own searchInclude/searchRevInclude declarations rather than inferred.
+
+id_convention:
+  style: fhir-logical-id
+  format: '{ResourceType}/{id}'
+  example_observed: Practitioner/8742377
+  note: >-
+    Ids are server-assigned opaque strings with no type prefix embedded in the
+    id itself; the type lives in the path. Never construct one — resolve it
+    from Bundle.entry[].fullUrl. Ids are NOT portable between the TJUH and JHP
+    servers even for the same real-world practitioner.
+
+domains:
+  - id: clinical
+    name: Clinical record (Thomas Jefferson University Hospital)
+    server: tjuh-fhir-r4
+    base_url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
+    profile_set: US Core 6.1.0
+    root_entity: Patient
+    entities_exposed: 59
+    described_in_openapi: 10
+  - id: provider-directory
+    name: Provider directory (Jefferson Health Plans, Da Vinci Plan-Net)
+    server: jhp-provider-directory
+    base_url: https://providerfhirapi.healthpartnersplans.com
+    profile_set: Da Vinci PDEX Plan-Net 1.2.0
+    root_entity: Organization
+    entities_exposed: 8
+
+entities:
+  - name: Patient
+    domain: clinical
+    profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-patient|6.1.0
+    interactions: [create, read, search-type]
+    operations: [$match, $summary]
+    openapi: openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml
+    operation_ids: [readPatient, searchPatient]
+    note: The compartment root — every clinical query below is scoped by patient.
+  - name: Observation
+    domain: clinical
+    profile_count: 22
+    profile_examples:
+      - us-core-observation-lab|6.1.0
+      - us-core-blood-pressure|6.1.0
+      - us-core-smokingstatus|6.1.0
+    interactions: [create, read, search-type, update]
+    operation_ids: [searchObservation]
+  - name: Condition
+    domain: clinical
+    profiles:
+      - us-core-condition-encounter-diagnosis|6.1.0
+      - us-core-condition-problems-health-concerns|6.1.0
+    interactions: [create, read, search-type]
+    operation_ids: [searchCondition]
+  - name: Encounter
+    domain: clinical
+    profile: us-core-encounter|6.1.0
+    interactions: [read, search-type]
+    operation_ids: [searchEncounter]
+  - name: MedicationRequest
+    domain: clinical
+    profile: us-core-medicationrequest|6.1.0
+    interactions: [read, search-type]
+    operation_ids: [searchMedicationRequest]
+  - name: AllergyIntolerance
+    domain: clinical
+    profile: us-core-allergyintolerance|6.1.0
+    interactions: [create, read, search-type]
+    operation_ids: [searchAllergyIntolerance]
+  - name: DocumentReference
+    domain: clinical
+    profile: us-core-documentreference|6.1.0
+    interactions: [create, read, search-type, update]
+    operation_ids: [searchDocumentReference]
+    note: Carries C-CDA documents and clinical notes as Binary attachments.
+  - name: Group
+    domain: clinical
+    interactions: [read, search-type]
+    operations: [$export]
+    operation_ids: [bulkExportGroup]
+    note: The Bulk Data Access entry point; a Group is a cohort of Patients.
+  - name: Provenance
+    domain: clinical
+    note: >-
+      Not exposed as its own search path in our OpenAPI, but reachable from
+      almost every clinical resource via _revinclude=Provenance:target.
+
+  - name: Organization
+    domain: provider-directory
+    profile: plannet-Organization
+    interactions: [read, search-type]
+    operation_ids: [readOrganization, searchOrganization]
+    search_params: [_id, _lastUpdated, type, endpoint, coverage-area, partof, address, name]
+  - name: Practitioner
+    domain: provider-directory
+    profile: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Practitioner|1.2.0
+    profile_observed: true
+    interactions: [read, search-type]
+    operation_ids: [readPractitioner, searchPractitioner]
+    search_params: [_id, _lastUpdated, name, family, given]
+  - name: PractitionerRole
+    domain: provider-directory
+    profile: plannet-PractitionerRole
+    interactions: [search-type]
+    operation_ids: [searchPractitionerRole]
+    search_params: [_id, _lastUpdated, specialty, role, network, endpoint, practitioner, service, organization, location]
+    note: The join entity — practitioner x organization x location x network x service.
+  - name: Location
+    domain: provider-directory
+    profile: plannet-Location
+    interactions: [search-type]
+    operation_ids: [searchLocation]
+    search_params: [_id, _lastUpdated, type, endpoint, address, address-city, address-state, address-postalcode, organization, partof]
+  - name: HealthcareService
+    domain: provider-directory
+    profile: plannet-HealthcareService
+    interactions: [search-type]
+    operation_ids: [searchHealthcareService]
+    search_params: [_id, _lastUpdated, specialty, service-category, service-type, coverage-area, organization, name, location]
+  - name: InsurancePlan
+    domain: provider-directory
+    profile: plannet-InsurancePlan
+    interactions: [search-type]
+    operation_ids: [searchInsurancePlan]
+    search_params: [_id, _lastUpdated, type, plan-type, administered-by, owned-by, coverage-area, identifier, name]
+  - name: OrganizationAffiliation
+    domain: provider-directory
+    profile: plannet-Network / plannet-OrganizationAffiliation
+    interactions: [search-type]
+    search_params: [_id, _lastUpdated, specialty, role, network, endpoint, primary-organization, participating-organization, service, location]
+    note: >-
+      Exposed live but NOT described in openapi/ — a genuine gap between the
+      catalog description and the server. See gaps[] below.
+  - name: Endpoint
+    domain: provider-directory
+    profile: plannet-Endpoint
+    interactions: [search-type]
+    operation_ids: [searchEndpoint]
+    search_params: [_id, _lastUpdated, organization]
+    note: >-
+      The directory's own machine-readable pointer to other systems' technical
+      endpoints — the FHIR-native equivalent of an API catalog entry.
+
+relationships:
+  # Provider directory — derived from the server's declared searchInclude /
+  # searchRevInclude whitelists, which are an explicit, machine-readable
+  # statement of every traversal the server will perform.
+  - from: PractitionerRole
+    to: Practitioner
+    type: belongs_to
+    via: practitioner
+    include: PractitionerRole:practitioner
+    domain: provider-directory
+  - from: PractitionerRole
+    to: Organization
+    type: belongs_to
+    via: organization
+    include: PractitionerRole:organization
+    domain: provider-directory
+  - from: PractitionerRole
+    to: Location
+    type: has_many
+    via: location
+    include: PractitionerRole:location
+    domain: provider-directory
+  - from: PractitionerRole
+    to: HealthcareService
+    type: has_many
+    via: service
+    include: PractitionerRole:service
+    domain: provider-directory
+  - from: PractitionerRole
+    to: Organization
+    type: belongs_to
+    via: network
+    include: PractitionerRole:network
+    domain: provider-directory
+    note: network references an Organization playing the plannet-Network role.
+  - from: PractitionerRole
+    to: Endpoint
+    type: has_many
+    via: endpoint
+    include: PractitionerRole:endpoint
+    domain: provider-directory
+  - from: Practitioner
+    to: Endpoint
+    type: has_many
+    via: endpoint
+    include: Practitioner:endpoint
+    domain: provider-directory
+  - from: Practitioner
+    to: Organization
+    type: belongs_to
+    via: qualification-issuer
+    include: Organization:_revinclude Practitioner:qualification-issuer
+    domain: provider-directory
+  - from: Organization
+    to: Organization
+    type: belongs_to
+    via: partof
+    include: Organization:partof
+    domain: provider-directory
+  - from: Organization
+    to: Location
+    type: has_many
+    via: coverage-area
+    include: Organization:coverage-area
+    domain: provider-directory
+  - from: Organization
+    to: Endpoint
+    type: has_many
+    via: endpoint
+    include: Organization:endpoint
+    domain: provider-directory
+  - from: Location
+    to: Organization
+    type: belongs_to
+    via: organization
+    include: Location:organization
+    domain: provider-directory
+  - from: Location
+    to: Location
+    type: belongs_to
+    via: partof
+    include: Location:partof
+    domain: provider-directory
+  - from: Location
+    to: Endpoint
+    type: has_many
+    via: endpoint
+    include: Location:endpoint
+    domain: provider-directory
+  - from: HealthcareService
+    to: Organization
+    type: belongs_to
+    via: organization
+    include: HealthcareService:organization
+    domain: provider-directory
+  - from: HealthcareService
+    to: Location
+    type: has_many
+    via: location
+    include: HealthcareService:location
+    domain: provider-directory
+  - from: HealthcareService
+    to: Location
+    type: has_many
+    via: coverage-area
+    include: HealthcareService:coverage-area
+    domain: provider-directory
+  - from: HealthcareService
+    to: Organization
+    type: belongs_to
+    via: network
+    include: HealthcareService:network
+    domain: provider-directory
+  - from: HealthcareService
+    to: Endpoint
+    type: has_many
+    via: endpoint
+    include: HealthcareService:endpoint
+    domain: provider-directory
+  - from: InsurancePlan
+    to: Organization
+    type: belongs_to
+    via: owned-by
+    include: InsurancePlan:owned-by
+    domain: provider-directory
+  - from: InsurancePlan
+    to: Organization
+    type: belongs_to
+    via: administered-by
+    include: InsurancePlan:administered-by
+    domain: provider-directory
+  - from: InsurancePlan
+    to: Organization
+    type: has_many
+    via: network
+    include: InsurancePlan:network
+    domain: provider-directory
+  - from: InsurancePlan
+    to: Location
+    type: has_many
+    via: coverage-area
+    include: InsurancePlan:coverage-area
+    domain: provider-directory
+  - from: InsurancePlan
+    to: Endpoint
+    type: has_many
+    via: endpoint
+    include: InsurancePlan:endpoint
+    domain: provider-directory
+  - from: OrganizationAffiliation
+    to: Organization
+    type: belongs_to
+    via: primary-organization
+    include: OrganizationAffiliation:primary-organization
+    domain: provider-directory
+  - from: OrganizationAffiliation
+    to: Organization
+    type: belongs_to
+    via: participating-organization
+    include: OrganizationAffiliation:participating-organization
+    domain: provider-directory
+  - from: OrganizationAffiliation
+    to: HealthcareService
+    type: has_many
+    via: service
+    include: OrganizationAffiliation:service
+    domain: provider-directory
+  - from: OrganizationAffiliation
+    to: Location
+    type: has_many
+    via: location
+    include: OrganizationAffiliation:location
+    domain: provider-directory
+  - from: Endpoint
+    to: Organization
+    type: belongs_to
+    via: organization
+    include: Endpoint:organization
+    domain: provider-directory
+
+  # Clinical — FHIR R4 / US Core patient-compartment references. Every clinical
+  # resource below is retrieved by the patient search parameter, and every one
+  # of them supports _revinclude=Provenance:target per the CapabilityStatement.
+  - from: Observation
+    to: Patient
+    type: belongs_to
+    via: patient
+    domain: clinical
+  - from: Condition
+    to: Patient
+    type: belongs_to
+    via: patient
+    domain: clinical
+  - from: Encounter
+    to: Patient
+    type: belongs_to
+    via: patient
+    domain: clinical
+  - from: MedicationRequest
+    to: Patient
+    type: belongs_to
+    via: patient
+    domain: clinical
+  - from: AllergyIntolerance
+    to: Patient
+    type: belongs_to
+    via: patient
+    domain: clinical
+  - from: DocumentReference
+    to: Patient
+    type: belongs_to
+    via: patient
+    domain: clinical
+  - from: Observation
+    to: Encounter
+    type: belongs_to
+    via: encounter
+    domain: clinical
+  - from: Condition
+    to: Encounter
+    type: belongs_to
+    via: encounter
+    domain: clinical
+  - from: Group
+    to: Patient
+    type: has_many
+    via: member
+    domain: clinical
+  - from: Provenance
+    to: Patient
+    type: belongs_to
+    via: target
+    revinclude: Provenance:target
+    domain: clinical
+
+cross_domain:
+  - note: >-
+      Patient (clinical) and Practitioner/Organization (provider directory) live
+      on different servers with different id spaces and different auth. There is
+      no reference between them and no shared identifier system published. An
+      agent that wants "which Jefferson doctor wrote this MedicationRequest, and
+      is that doctor in my network" must join on NPI or name across two
+      unrelated FHIR endpoints.
+
+gaps:
+  - entity: OrganizationAffiliation
+    issue: >-
+      Served live by providerfhirapi.healthpartnersplans.com but absent from
+      openapi/ and from apis.yml apis[]. The catalog under-describes the
+      Provider Directory by one resource.
+  - entity: 'TJUH clinical resources (49 of 59)'
+    issue: >-
+      The Epic CapabilityStatement exposes 59 resource types; the OpenAPI in
+      openapi/_original/ describes 10 paths. Immunization, Procedure,
+      DiagnosticReport, CarePlan, CareTeam, Goal, Coverage,
+      ExplanationOfBenefit, ImagingStudy and 40 more are callable and
+      undescribed. Harvesting them is a future round, not a fabrication for
+      this one.
+
+render: null

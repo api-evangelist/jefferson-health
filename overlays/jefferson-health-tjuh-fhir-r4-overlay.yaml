@@ -1,0 +1,112 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Thomas Jefferson University Hospital FHIR R4 API
+  version: 1.0.0
+x-generated: '2026-08-15'
+x-method: generated
+x-source: >-
+  Live CapabilityStatement, SMART configuration and OIDC discovery documents
+  fetched 2026-08-15, plus the artifacts in conformance/, conventions/, errors/,
+  lifecycle/ and scopes/. Applies API Evangelist findings on top of the harvested
+  contract without mutating it.
+extends: openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: jefferson-health
+      x-apievangelist-api: tjuh-fhir-r4
+      x-fhir-version: 4.0.1
+      x-server-software: Epic
+      x-server-version: February 2026
+      x-server-release-date: '2026-05-28'
+      x-capability-statement: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/metadata
+      x-capability-statement-artifact: conformance/jefferson-health-tjuh-fhir-r4-capabilitystatement.json
+      x-implementation-guides:
+        - http://hl7.org/fhir/us/core/CapabilityStatement/us-core-server|6.1.0
+        - http://hl7.org/fhir/uv/bulkdata/CapabilityStatement/bulk-data
+      x-resource-types-served: 59
+      x-resource-types-described: 10
+      x-coverage-note: >-
+        The live server exposes 59 FHIR resource types; this contract describes
+        10. Immunization, Procedure, DiagnosticReport, CarePlan, CareTeam, Goal,
+        Coverage, ExplanationOfBenefit and ImagingStudy are among the callable,
+        undescribed resources.
+
+  - target: $.info
+    update:
+      x-conventions: conventions/jefferson-health-conventions.yml
+      x-error-catalog: errors/jefferson-health-problem-types.yml
+      x-lifecycle: lifecycle/jefferson-health-lifecycle.yml
+      x-authentication: authentication/jefferson-health-authentication.yml
+      x-oauth-scopes: scopes/jefferson-health-scopes.yml
+      x-data-model: data-model/jefferson-health-data-model.yml
+      x-agentic-access: agentic-access/jefferson-health-agentic-access.yml
+
+  - target: $.info
+    update:
+      x-idempotency:
+        supported: false
+        evidence: >-
+          Every resource in the live CapabilityStatement declares
+          conditionalCreate false, conditionalUpdate false, conditionalDelete
+          not-supported and updateCreate false.
+      x-rate-limit-headers: []
+      x-content-negotiation:
+        default: application/xml
+        recommended: application/fhir+json
+        note: Send an explicit Accept header or the server returns XML.
+
+  - target: $.servers
+    update:
+      - url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
+        description: >-
+          Production Thomas Jefferson University Hospital FHIR R4 endpoint,
+          verified live 2026-08-15 (GET /metadata -> 200).
+        x-verified: '2026-08-15'
+        x-http-status: 200
+
+  - target: $.components.securitySchemes.smartOnFhir
+    update:
+      x-discovery:
+        smart_configuration: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/.well-known/smart-configuration
+        openid_configuration: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/.well-known/openid-configuration
+        jwks_uri: https://fhir.jefferson.edu/FHIRProxy/api/epic/2019/Security/Open/PublicKeys/530027/OIDC
+        issuer: https://fhir.jefferson.edu/FHIRProxy/oauth2
+      x-pkce-methods: [S256]
+      x-token-endpoint-auth-methods: [client_secret_post, client_secret_basic, private_key_jwt]
+      x-grant-types:
+        - authorization_code
+        - refresh_token
+        - client_credentials
+        - urn:ietf:params:oauth:grant-type:jwt-bearer
+        - urn:ietf:params:oauth:grant-type:token-exchange
+      x-smart-capabilities:
+        - launch-ehr
+        - launch-standalone
+        - client-public
+        - client-confidential-symmetric
+        - client-confidential-asymmetric
+        - context-ehr-patient
+        - context-ehr-encounter
+        - context-standalone-patient
+        - permission-offline
+        - permission-patient
+        - permission-user
+        - permission-v1
+        - permission-v2
+        - sso-openid-connect
+        - authorize-post
+
+  - target: $.paths['/Patient/{id}'].get
+    update:
+      x-observed-unauthenticated-status: 401
+      x-observed-unauthenticated-body: '(empty)'
+      x-agent-note: >-
+        A 401 from this endpoint carries no body and no OperationOutcome. Branch
+        on the status code; do not try to parse the response.
+
+  - target: $.paths['/Group/{id}/$export'].get
+    update:
+      x-async: true
+      x-async-pattern: HL7 FHIR Bulk Data Access — poll the Content-Location URL returned with 202.
+      x-required-header: 'Prefer: respond-async'

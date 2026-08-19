@@ -1,0 +1,206 @@
+generated: '2026-08-15'
+method: probed
+source: live HTTP probes of every apis.yml baseURL host, OpenAPI servers[] host and web host
+description: >-
+  Well-known discovery surface for Jefferson Health. The organization serves no
+  RFC 9116 security.txt and no /.well-known/api-catalog on any host. What it DOES
+  serve — and what an agent can actually read anonymously — is the SMART on FHIR
+  discovery set required by the CMS Interoperability and Patient Access Final Rule:
+  a SMART configuration document and an OpenID Connect discovery document on the
+  Thomas Jefferson University Hospital Epic FHIR proxy, and an OpenID Connect
+  discovery document on the Jefferson Health Plans SMART authorization server.
+  Those are real, parsed JSON documents, which is why the WellKnown pointer is
+  emitted. Note the false positive recorded below: www.jeffersonhealth.org answers
+  HTTP 200 for /.well-known/security.txt but returns an Adobe Experience Manager
+  HTML/JS shell, not a security.txt — it is recorded as a MISS.
+
+hosts:
+  - host: fhir.jefferson.edu
+    role: Thomas Jefferson University Hospital Epic FHIR proxy (TJUH FHIR R4/DSTU2)
+    documents:
+      - path: /FHIRProxy/api/FHIR/R4/.well-known/smart-configuration
+        status: 200
+        content_type: application/json
+        real_document: true
+        file: jefferson-health-tjuh-smart-configuration.json
+        spec: SMART App Launch 2.x well-known/smart-configuration
+      - path: /FHIRProxy/api/FHIR/R4/.well-known/openid-configuration
+        status: 200
+        content_type: application/json
+        real_document: true
+        file: jefferson-health-tjuh-openid-configuration.json
+        spec: OpenID Connect Discovery 1.0
+      - path: /.well-known/security.txt
+        status: 403
+        real_document: false
+        note: 'Host root returns "Invalid Application, Access Denied" for every non-FHIRProxy path.'
+      - path: /.well-known/openid-configuration
+        status: 403
+        real_document: false
+      - path: /.well-known/oauth-authorization-server
+        status: 403
+        real_document: false
+      - path: /.well-known/api-catalog
+        status: 403
+        real_document: false
+      - path: /.well-known/ai-plugin.json
+        status: 403
+        real_document: false
+      - path: /.well-known/agent-card.json
+        status: 403
+        real_document: false
+      - path: /.well-known/agent.json
+        status: 403
+        real_document: false
+
+  - host: appgallery.healthpartnersplans.com
+    role: Jefferson Health Plans SMART on FHIR authorization server + developer portal
+    documents:
+      - path: /smartauth-fhir/.well-known/openid-configuration
+        status: 200
+        content_type: application/json
+        real_document: true
+        file: jefferson-health-jhp-openid-configuration.json
+        spec: OpenID Connect Discovery 1.0
+      - path: /smartauth-fhir/.well-known/smart-configuration
+        status: 200
+        real_document: false
+        note: >-
+          Returns the developer-portal HTML shell (<!DOCTYPE html>, Build 1.1.768.0),
+          not a SMART configuration document. Soft-200 — treated as a miss.
+      - path: /.well-known/agent-card.json
+        status: 404
+        real_document: false
+
+  - host: providerfhirapi.healthpartnersplans.com
+    role: Jefferson Health Plans Da Vinci Plan-Net Provider Directory FHIR API (Smile CDR)
+    documents:
+      - path: /.well-known/smart-configuration
+        status: 200
+        real_document: false
+        note: >-
+          Returns an empty JSON object "{}" — a 200 with no discovery content.
+          Recorded as a miss; nothing for an agent to read.
+      - path: /.well-known/security.txt
+        status: 404
+        real_document: false
+      - path: /.well-known/openid-configuration
+        status: 404
+        real_document: false
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        real_document: false
+      - path: /.well-known/api-catalog
+        status: 404
+        real_document: false
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        real_document: false
+      - path: /.well-known/agent-card.json
+        status: 404
+        real_document: false
+      - path: /.well-known/agent.json
+        status: 404
+        real_document: false
+
+  - host: smilercdr.healthpartnersplans.com
+    role: Jefferson Health Plans Patient Access FHIR API (Smile CDR)
+    documents:
+      - path: /smartauth/well-known/openid-configuration
+        status: 200
+        real_document: false
+        note: >-
+          Returns the Smile CDR portal HTML shell, not JSON. The apis.yml
+          SmartConfiguration pointer for this API resolves to a soft-200 page.
+      - path: /.well-known/security.txt
+        status: 404
+        real_document: false
+      - path: /.well-known/agent-card.json
+        status: 404
+        real_document: false
+      - path: /.well-known/agent.json
+        status: 404
+        real_document: false
+
+  - host: www.jeffersonhealth.org
+    role: Jefferson Health public website (Adobe Experience Manager)
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        real_document: false
+        note: >-
+          SOFT 200 / FALSE POSITIVE. Body is an Adobe Experience Manager
+          JS/HTML shell opening with an Apache-2.0 Adobe copyright banner, not an
+          RFC 9116 security.txt. No SecurityTxt pointer is emitted for this host.
+      - path: /llms.txt
+        status: 200
+        content_type: text/plain
+        real_document: true
+        note: >-
+          Not a /.well-known/ path, but a real provider-published agent-guidance
+          document. Saved verbatim to llms/jefferson-health-llms.txt.
+      - path: /.well-known/api-catalog
+        status: 404
+        real_document: false
+      - path: /.well-known/openid-configuration
+        status: 404
+        real_document: false
+      - path: /.well-known/ai-plugin.json
+        status: 403
+        real_document: false
+      - path: /.well-known/agent-card.json
+        status: 403
+        real_document: false
+      - path: /.well-known/agent.json
+        status: 403
+        real_document: false
+
+  - host: www.jeffersonhealthplans.com
+    role: Jefferson Health Plans public website
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        real_document: false
+      - path: /llms.txt
+        status: 404
+        real_document: false
+      - path: /.well-known/agent-card.json
+        status: 403
+        real_document: false
+      - path: /.well-known/agent.json
+        status: 403
+        real_document: false
+
+  - host: my.jeffersonhealth.org
+    role: MyJeffersonHealth Epic MyChart patient portal
+    documents:
+      - path: /.well-known/security.txt
+        status: 403
+        real_document: false
+      - path: /.well-known/agent-card.json
+        status: 403
+        real_document: false
+
+  - host: www.jefferson.edu
+    role: Thomas Jefferson University
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        real_document: false
+      - path: /.well-known/agent-card.json
+        status: 403
+        real_document: false
+
+summary:
+  hosts_probed: 8
+  paths_probed: 41
+  real_documents: 3
+  security_txt: false
+  api_catalog: false
+  agent_card: false
+  ai_plugin: false
+  soft_200_false_positives:
+    - https://www.jeffersonhealth.org/.well-known/security.txt
+    - https://appgallery.healthpartnersplans.com/smartauth-fhir/.well-known/smart-configuration
+    - https://smilercdr.healthpartnersplans.com/smartauth/well-known/openid-configuration
+    - https://providerfhirapi.healthpartnersplans.com/.well-known/smart-configuration

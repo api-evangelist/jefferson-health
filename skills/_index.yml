@@ -1,0 +1,52 @@
+generated: '2026-08-15'
+method: generated
+source: >-
+  Authored from the operationIds in openapi/_original/, the live
+  CapabilityStatements in conformance/, the SMART/OIDC discovery documents in
+  well-known/, and the conventions/ + errors/ artifacts. Every operationId
+  referenced was verified present in the spec.
+description: >-
+  Packaged Agent Skills for the Jefferson Health FHIR surfaces. Jefferson Health
+  publishes no AGENTS.md or provider-authored skill files; these are generated
+  operating instructions grounded in the real contracts.
+skills:
+  - file: jefferson-health-capability-discovery.md
+    name: Discover what a Jefferson Health FHIR endpoint can actually do
+    api: openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml
+    auth: none
+    operations: [getMetadata, getSmartConfiguration]
+  - file: jefferson-health-provider-directory-search.md
+    name: Search the Jefferson Health Plans provider directory
+    api: openapi/_original/jefferson-health-jhp-provider-directory-fhir-api-openapi.yml
+    auth: none
+    operations:
+      - getMetadata
+      - searchPractitioner
+      - readPractitioner
+      - searchPractitionerRole
+      - searchOrganization
+      - readOrganization
+      - searchLocation
+      - searchHealthcareService
+      - searchInsurancePlan
+      - searchEndpoint
+  - file: jefferson-health-patient-record-retrieval.md
+    name: Retrieve a patient's Jefferson Health record with SMART on FHIR
+    api: openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml
+    auth: oauth2
+    operations:
+      - getSmartConfiguration
+      - getMetadata
+      - readPatient
+      - searchPatient
+      - searchObservation
+      - searchCondition
+      - searchEncounter
+      - searchMedicationRequest
+      - searchAllergyIntolerance
+      - searchDocumentReference
+  - file: jefferson-health-bulk-data-export.md
+    name: Run a Jefferson Health group-level bulk data export
+    api: openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml
+    auth: oauth2
+    operations: [getSmartConfiguration, getMetadata, bulkExportGroup]

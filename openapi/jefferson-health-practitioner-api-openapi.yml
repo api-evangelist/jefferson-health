@@ -1,7 +1,9 @@
 openapi: 3.0.3
 info:
-  title: Jefferson Health Plans Provider Directory FHIR Allergy Intolerance Practitioner API
-  description: OpenAPI surface for the Jefferson Health Plans (formerly Health Partners Plans) Provider Directory FHIR API — a public HL7 FHIR Release 4.0.1 endpoint powered by Smile CDR 2025.02.R04 that surfaces JHP's network of in-network practitioners, organizations, locations, healthcare services, and insurance plans for the CMS Interoperability and Patient Access Provider Directory requirement. Aligned with the HL7 Da Vinci Payer Data Exchange Plan-Net implementation guide.
+  title: Jefferson Health Practitioner API
+  description: OpenAPI surface for the Jefferson Health Plans (formerly Health Partners Plans) Provider Directory FHIR API — a public HL7 FHIR Release 4.0.1 endpoint
+    powered by Smile CDR 2025.02.R04 that surfaces JHP's network of in-network practitioners, organizations, locations, healthcare services, and insurance plans for
+    the CMS Interoperability and Patient Access Provider Directory requirement. Aligned with the HL7 Da Vinci Payer Data Exchange Plan-Net implementation guide.
   version: 4.0.1
   contact:
     name: Jefferson Health Plans Interoperability
@@ -9,6 +11,7 @@ info:
   license:
     name: HL7 FHIR License
     url: https://www.hl7.org/fhir/license.html
+  x-source-contract: openapi/_original/jefferson-health-jhp-provider-directory-fhir-api-openapi.yml
 servers:
 - url: https://providerfhirapi.healthpartnersplans.com
   description: Jefferson Health Plans Provider Directory FHIR R4 production endpoint

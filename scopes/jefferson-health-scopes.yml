@@ -1,91 +1,203 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
+generated: '2026-08-15'
+method: probed
+source: >-
+  https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/.well-known/smart-configuration
+  and .../.well-known/openid-configuration (fetched 2026-08-15, HTTP 200), merged
+  with the oauth2 scope map declared in
+  openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml. Supersedes the
+  2026-07-11 derived-only pass.
+docs:
+  - https://fhir.epic.com/Documentation
+  - https://hl7.org/fhir/smart-app-launch/scopes-and-launch-context.html
+  - https://www.jeffersonhealthplans.com/home/about-us/interoperability/authentication-and-data-endpoints/
+description: >-
+  SMART on FHIR scope surface for the Thomas Jefferson University Hospital FHIR
+  R4 endpoint. Note the important discrepancy recorded below: the server's own
+  discovery document advertises only five scopes in scopes_supported, none of
+  them resource scopes. The patient/, user/ and system/ resource scopes are real
+  and required, but they are granted per registered application at Epic rather
+  than enumerated in discovery — so an agent that trusts scopes_supported alone
+  will conclude, wrongly, that no clinical data can be requested.
+
 schemes:
-- name: smartOnFhir
-  source: openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
-  flows:
-  - flow: authorizationCode
-    authorizationUrl: https://fhir.jefferson.edu/FHIRProxy/oauth2/authorize
-    tokenUrl: https://fhir.jefferson.edu/FHIRProxy/oauth2/token
-  description: SMART on FHIR / OAuth 2.0 with PKCE for patient-facing and provider-facing app
-    launches.
+  - name: smartOnFhir
+    server: tjuh-fhir-r4
+    issuer: https://fhir.jefferson.edu/FHIRProxy/oauth2
+    source: well-known/jefferson-health-tjuh-smart-configuration.json
+    flows:
+      - flow: authorizationCode
+        authorizationUrl: https://fhir.jefferson.edu/FHIRProxy/oauth2/authorize
+        tokenUrl: https://fhir.jefferson.edu/FHIRProxy/oauth2/token
+    description: >-
+      SMART App Launch / OAuth 2.0 with mandatory PKCE (S256) for patient-facing
+      standalone launches and provider-facing EHR launches.
+    scope_syntax_supported: [v1, v2]
+    scope_syntax_evidence: >-
+      smart-configuration capabilities include both permission-v1 and
+      permission-v2, so patient/Observation.read and patient/Observation.rs are
+      both accepted.
+
+advertised_scopes_supported:
+  source: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/.well-known/smart-configuration
+  probed: '2026-08-15'
+  http_status: 200
+  scopes:
+    - epic.scanning.dmsusername
+    - fhirUser
+    - launch
+    - openid
+    - profile
+  note: >-
+    This is the complete scopes_supported array the server publishes. It contains
+    no resource scopes at all, and includes one Epic-proprietary scope
+    (epic.scanning.dmsusername) that is not part of SMART App Launch.
+
 scopes:
-- scope: fhirUser
-  description: Identity of the user launching the app
-  flows:
-  - authorizationCode
-  sources:
-  - openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
-- scope: launch
-  description: EHR launch context for provider-launched apps
-  flows:
-  - authorizationCode
-  sources:
-  - openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
-- scope: offline_access
-  description: Refresh token for long-lived access
-  flows:
-  - authorizationCode
-  sources:
-  - openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
-- scope: openid
-  description: OpenID Connect authentication
-  flows:
-  - authorizationCode
-  sources:
-  - openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
-- scope: patient/AllergyIntolerance.read
-  description: Read the launching patient's allergies
-  flows:
-  - authorizationCode
-  sources:
-  - openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
-- scope: patient/Condition.read
-  description: Read the launching patient's conditions
-  flows:
-  - authorizationCode
-  sources:
-  - openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
-- scope: patient/DocumentReference.read
-  description: Read the launching patient's documents
-  flows:
-  - authorizationCode
-  sources:
-  - openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
-- scope: patient/Encounter.read
-  description: Read the launching patient's encounters
-  flows:
-  - authorizationCode
-  sources:
-  - openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
-- scope: patient/MedicationRequest.read
-  description: Read the launching patient's medication requests
-  flows:
-  - authorizationCode
-  sources:
-  - openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
-- scope: patient/Observation.read
-  description: Read the launching patient's observations
-  flows:
-  - authorizationCode
-  sources:
-  - openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
-- scope: patient/Patient.read
-  description: Read the launching patient's demographics
-  flows:
-  - authorizationCode
-  sources:
-  - openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
-- scope: system/Patient.read
-  description: System-level Patient read (Bulk Data)
-  flows:
-  - authorizationCode
-  sources:
-  - openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
-- scope: user/Patient.read
-  description: Read Patient as the launching user
-  flows:
-  - authorizationCode
-  sources:
-  - openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml
+  # --- identity / launch context, confirmed in the live discovery document ---
+  - scope: openid
+    description: OpenID Connect authentication.
+    kind: identity
+    flows: [authorizationCode]
+    advertised: true
+    sources:
+      - well-known/jefferson-health-tjuh-smart-configuration.json
+      - openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml
+  - scope: profile
+    description: OpenID Connect profile claims.
+    kind: identity
+    flows: [authorizationCode]
+    advertised: true
+    sources: [well-known/jefferson-health-tjuh-smart-configuration.json]
+  - scope: fhirUser
+    description: Identity of the user launching the app, as a FHIR resource reference.
+    kind: identity
+    flows: [authorizationCode]
+    advertised: true
+    sources:
+      - well-known/jefferson-health-tjuh-smart-configuration.json
+      - openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml
+  - scope: launch
+    description: EHR launch context for provider-launched apps.
+    kind: launch-context
+    flows: [authorizationCode]
+    advertised: true
+    sources:
+      - well-known/jefferson-health-tjuh-smart-configuration.json
+      - openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml
+  - scope: epic.scanning.dmsusername
+    description: >-
+      Epic-proprietary scope for document-management-system username exchange.
+      Not part of SMART App Launch; advertised by this server.
+    kind: vendor-proprietary
+    flows: [authorizationCode]
+    advertised: true
+    sources: [well-known/jefferson-health-tjuh-smart-configuration.json]
+  - scope: offline_access
+    description: Refresh token for long-lived access.
+    kind: launch-context
+    flows: [authorizationCode]
+    advertised: false
+    advertised_note: >-
+      Not in scopes_supported, but the server declares the permission-offline
+      SMART capability and grant_types_supported includes refresh_token.
+    sources:
+      - well-known/jefferson-health-tjuh-smart-configuration.json
+      - openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml
+
+  # --- resource scopes: real, required, NOT advertised in discovery ---
+  - scope: patient/Patient.read
+    description: Read the launching patient's demographics.
+    kind: patient-resource
+    resource: Patient
+    flows: [authorizationCode]
+    advertised: false
+    sources: [openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml]
+  - scope: patient/Observation.read
+    description: Read the launching patient's observations (labs, vitals).
+    kind: patient-resource
+    resource: Observation
+    flows: [authorizationCode]
+    advertised: false
+    sources: [openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml]
+  - scope: patient/Condition.read
+    description: Read the launching patient's conditions, problems and diagnoses.
+    kind: patient-resource
+    resource: Condition
+    flows: [authorizationCode]
+    advertised: false
+    sources: [openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml]
+  - scope: patient/Encounter.read
+    description: Read the launching patient's encounters.
+    kind: patient-resource
+    resource: Encounter
+    flows: [authorizationCode]
+    advertised: false
+    sources: [openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml]
+  - scope: patient/MedicationRequest.read
+    description: Read the launching patient's medication requests.
+    kind: patient-resource
+    resource: MedicationRequest
+    flows: [authorizationCode]
+    advertised: false
+    sources: [openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml]
+  - scope: patient/AllergyIntolerance.read
+    description: Read the launching patient's allergies and intolerances.
+    kind: patient-resource
+    resource: AllergyIntolerance
+    flows: [authorizationCode]
+    advertised: false
+    sources: [openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml]
+  - scope: patient/DocumentReference.read
+    description: Read the launching patient's clinical documents and notes.
+    kind: patient-resource
+    resource: DocumentReference
+    flows: [authorizationCode]
+    advertised: false
+    sources: [openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml]
+  - scope: user/Patient.read
+    description: Read Patient as the launching user (provider context).
+    kind: user-resource
+    resource: Patient
+    flows: [authorizationCode]
+    advertised: false
+    sources: [openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml]
+  - scope: system/Patient.read
+    description: >-
+      System-level Patient read for backend services, used by the Bulk Data
+      group export.
+    kind: system-resource
+    resource: Patient
+    flows: [clientCredentials, jwtBearer]
+    advertised: false
+    advertised_note: >-
+      Backed by grant_types_supported client_credentials +
+      urn:ietf:params:oauth:grant-type:jwt-bearer and private_key_jwt client
+      authentication in the live discovery document.
+    sources:
+      - well-known/jefferson-health-tjuh-openid-configuration.json
+      - openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml
+
+scope_count: 15
+advertised_scope_count: 5
+
+jhp_provider_directory:
+  server: https://providerfhirapi.healthpartnersplans.com
+  scopes: []
+  note: >-
+    No scopes. The Da Vinci Plan-Net directory is anonymous — verified with an
+    unauthenticated HTTP 200 on GET /Practitioner?_count=2. Its
+    CapabilityStatement advertises SMART oauth-uris pointing at
+    appgallery.healthpartnersplans.com, but those belong to the separate
+    Jefferson Health Plans Patient Access API.
+
+gaps:
+  - >-
+    Neither Jefferson Health nor Jefferson Health Plans publishes a scopes or
+    permissions reference page of its own. Integrators are pointed at Epic's
+    generic documentation and at the per-app scope selection in the Epic on FHIR
+    app registration form, so the authoritative scope list for any given
+    application is visible only inside that application's own registration.
+  - >-
+    The Jefferson Health Plans Patient Access API scope set could not be probed:
+    its SMART configuration endpoint returns an HTML portal shell rather than a
+    discovery document.

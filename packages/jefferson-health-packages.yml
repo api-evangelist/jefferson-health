@@ -1,0 +1,63 @@
+generated: '2026-08-15'
+method: searched
+source: >-
+  Registry searches on registry.npmjs.org, pypi.org, api.github.com and the
+  Jefferson Health / Jefferson Health Plans developer documentation, 2026-08-15.
+description: >-
+  Jefferson Health publishes no first-party client libraries. This is the
+  expected shape for a CMS-mandated provider FHIR surface: integrators use a
+  generic FHIR/SMART client (Epic's own SMART tutorials, HAPI FHIR, fhirclient)
+  rather than a health-system-branded SDK. Recorded as an explicit zero so the
+  absence is data rather than an untried gap.
+
+package_count: 0
+official_sdk_count: 0
+packages: []
+
+registries_checked:
+  - registry: npm
+    endpoint: https://registry.npmjs.org/-/v1/search
+    queries: ['jefferson-health', 'jeffersonhealth', 'jefferson-fhir']
+    result: no first-party package
+    note: >-
+      Matches are unrelated third-party libraries (express-jefferson, fhirclient,
+      @types/fhir). None is published by Jefferson Health.
+  - registry: pypi
+    endpoint: https://pypi.org/pypi/{name}/json
+    queries: ['jefferson-health', 'jeffersonhealth']
+    result: HTTP 404 for both
+  - registry: github
+    endpoint: https://api.github.com/orgs/jefferson-health
+    result: >-
+      HTTP 200. The official organization exists — "Thomas Jefferson Unversity
+      and Jefferson Health" (sic), blog http://www.jefferson.edu, 24 public
+      repositories, created 2015-07-23. Confirmed first-party by the org's own
+      blog field. Its public repositories are forks of general-purpose
+      JavaScript/Ruby tooling (knex, js-xlsx, node-ldapjs, passport-ldapauth)
+      and hiring coding challenges — no API client, no FHIR SDK, no CLI.
+    url: https://github.com/jefferson-health
+  - registry: rubygems
+    result: not searched — no Ruby surface indicated by docs or GitHub org
+  - registry: packagist
+    result: not searched — no PHP surface indicated
+  - registry: crates.io
+    result: not searched — no Rust surface indicated
+  - registry: nuget
+    result: not searched — no .NET surface indicated
+  - registry: maven-central
+    result: not searched — no Java surface indicated
+
+third_party_clients_referenced_by_docs:
+  - name: SMART on FHIR JS client (fhirclient)
+    official: false
+    registry: npm
+    url: https://www.npmjs.com/package/fhirclient
+    note: >-
+      Not Jefferson-published. Listed only because the Epic on FHIR documentation
+      Jefferson points integrators at (https://fhir.epic.com/Documentation)
+      assumes a standard SMART client. Do not read this as a Jefferson SDK.
+
+note: >-
+  No SDKs pointer is emitted in apis.yml, because there is no official client
+  library to point at. Emitting one would credit Jefferson Health with an SDK
+  programme it does not run.

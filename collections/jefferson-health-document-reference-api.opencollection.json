@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Jefferson Health Plans Provider Directory FHIR Allergy Intolerance Document Reference API",
+    "version": "4.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Document Reference",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Document Reference",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://providerfhirapi.healthpartnersplans.com/DocumentReference",
+            "params": [
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query",
+                "description": "Reference to the Patient (id or Patient/{id})."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "LOINC code identifying the document type."
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "US Core DocumentReference category (clinical-note)."
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "Document date."
+              },
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Number of resources to return per page."
+              }
+            ]
+          },
+          "docs": "Search DocumentReference resources for a patient (clinical notes, CCDA documents, discharge summaries)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

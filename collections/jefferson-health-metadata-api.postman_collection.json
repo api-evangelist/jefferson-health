@@ -1,0 +1,174 @@
+{
+  "item": [
+    {
+      "id": "658afead-b13b-433a-baf4-e0a89e60d517",
+      "name": "Metadata",
+      "description": {
+        "content": "FHIR conformance discovery.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1fdfe8e6-b3dc-410f-b07f-b4061e6053f7",
+          "name": "Get FHIR Capability Statement",
+          "request": {
+            "name": "Get FHIR Capability Statement",
+            "description": {
+              "content": "Returns the FHIR CapabilityStatement describing the Provider Directory's supported resources and search parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5a1e26a5-0eb5-47d8-bc5e-2a4e3d583eba",
+              "name": "FHIR CapabilityStatement resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/fhir+json"
+                }
+              ],
+              "body": "{\n  \"resourceType\": \"CapabilityStatement\",\n  \"fhirVersion\": \"4.0.1\",\n  \"software\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "100a2fec-b729-46a8-8ef9-ebbba28ef814",
+          "name": "Get Smart Configuration",
+          "request": {
+            "name": "Get Smart Configuration",
+            "description": {
+              "content": "Returns the SMART App Launch configuration document describing OAuth 2.0 endpoints, scopes, and capabilities.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ".well-known",
+                "smart-configuration"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "182e1532-9532-4f26-9d97-dee104c00a31",
+              "name": "SMART configuration JSON document",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ".well-known",
+                    "smart-configuration"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"authorization_endpoint\": \"https://ddQCVNMje.ddUxnlY4LKUmmeXcj1Zvp\",\n  \"token_endpoint\": \"http://B.xvrfg3wB4Jd.jgJy3m-Zt2TvOcaxefiUB6q2emCoJZiWsERDO9Gj4Y9nh.3OGzBCfsgWda\",\n  \"scopes_supported\": [\n    \"string\",\n    \"string\"\n  ],\n  \"capabilities\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://providerfhirapi.healthpartnersplans.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "87aa0834-2657-4ccf-a480-a6a153a3374d",
+    "name": "Jefferson Health Plans Provider Directory FHIR Allergy Intolerance Metadata API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "OpenAPI surface for the Jefferson Health Plans (formerly Health Partners Plans) Provider Directory FHIR API — a public HL7 FHIR Release 4.0.1 endpoint powered by Smile CDR 2025.02.R04 that surfaces JHP's network of in-network practitioners, organizations, locations, healthcare services, and insurance plans for the CMS Interoperability and Patient Access Provider Directory requirement. Aligned with the HL7 Da Vinci Payer Data Exchange Plan-Net implementation guide.\n\nContact Support:\n Name: Jefferson Health Plans Interoperability",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Jefferson Health Plans Provider Directory FHIR Allergy Intolerance Medication Request API",
+    "version": "4.0.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Medication Request",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Medication Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://providerfhirapi.healthpartnersplans.com/MedicationRequest",
+            "params": [
+              {
+                "name": "patient",
+                "value": "",
+                "type": "query",
+                "description": "Reference to the Patient (id or Patient/{id})."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Medication request status (active, on-hold, completed, stopped, etc.)."
+              },
+              {
+                "name": "intent",
+                "value": "",
+                "type": "query",
+                "description": "Intent (proposal, plan, order, original-order, instance-order)."
+              },
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Number of resources to return per page."
+              }
+            ]
+          },
+          "docs": "Search MedicationRequest resources for a patient (prescriptions, medication orders)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

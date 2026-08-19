@@ -1,0 +1,231 @@
+generated: '2026-08-15'
+method: probed
+source: >-
+  Live FHIR CapabilityStatement + SMART/OIDC discovery documents fetched
+  2026-08-15 from https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/metadata and
+  https://providerfhirapi.healthpartnersplans.com/metadata, cross-checked against
+  the OpenAPI in openapi/_original/ and the Jefferson Health Plans interoperability
+  documentation.
+description: >-
+  Standards conformance for the two callable Jefferson Health FHIR surfaces. Both
+  self-declare their conformance in a machine-readable CapabilityStatement, which
+  is the strongest possible evidence class in this pipeline: the assertions below
+  are read out of the servers' own conformance resources, not inferred from prose.
+
+evidence_artifacts:
+  - conformance/jefferson-health-tjuh-fhir-r4-capabilitystatement.json
+  - conformance/jefferson-health-jhp-provider-directory-capabilitystatement.json
+  - well-known/jefferson-health-tjuh-smart-configuration.json
+  - well-known/jefferson-health-tjuh-openid-configuration.json
+  - well-known/jefferson-health-jhp-openid-configuration.json
+
+servers:
+  - id: tjuh-fhir-r4
+    name: Thomas Jefferson University Hospital FHIR R4
+    base_url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
+    software: Epic
+    software_version: February 2026
+    software_release_date: '2026-05-28'
+    fhir_version: 4.0.1
+    resource_types: 59
+    formats: [xml, json]
+  - id: jhp-provider-directory
+    name: Jefferson Health Plans Provider Directory FHIR
+    base_url: https://providerfhirapi.healthpartnersplans.com
+    software: Smile CDR
+    software_version: 2026.02.R02
+    fhir_version: 4.0.1
+    resource_types: 8
+    anonymous_read: true
+
+standards:
+  - id: hl7-fhir-r4
+    name: HL7 FHIR Release 4 (4.0.1)
+    conforms: true
+    evidence: >-
+      Both CapabilityStatements report fhirVersion 4.0.1
+      (tjuh-fhir-r4, jhp-provider-directory).
+    servers: [tjuh-fhir-r4, jhp-provider-directory]
+
+  - id: us-core-6.1.0
+    name: HL7 US Core STU 6.1.0
+    conforms: true
+    evidence: >-
+      TJUH CapabilityStatement.instantiates includes
+      http://hl7.org/fhir/us/core/CapabilityStatement/us-core-server|6.1.0, and
+      Patient/Observation/Condition/Encounter/MedicationRequest/AllergyIntolerance/
+      DocumentReference/Organization/Practitioner/PractitionerRole all declare
+      us-core-*|6.1.0 supportedProfiles.
+    servers: [tjuh-fhir-r4]
+
+  - id: uscdi
+    name: United States Core Data for Interoperability
+    conforms: true
+    evidence: >-
+      US Core 6.1.0 server conformance is the USCDI-aligned profile set required
+      by the ONC Cures Act certification criteria.
+    servers: [tjuh-fhir-r4]
+
+  - id: hl7-fhir-bulk-data
+    name: HL7 FHIR Bulk Data Access (Flat FHIR) IG
+    conforms: true
+    evidence: >-
+      TJUH CapabilityStatement.instantiates includes
+      http://hl7.org/fhir/uv/bulkdata/CapabilityStatement/bulk-data; the Group
+      resource declares the group-export operation.
+    servers: [tjuh-fhir-r4]
+
+  - id: smart-app-launch
+    name: HL7 SMART App Launch
+    conforms: true
+    evidence: >-
+      /.well-known/smart-configuration returns capabilities launch-ehr,
+      launch-standalone, client-public, client-confidential-symmetric,
+      client-confidential-asymmetric, context-ehr-patient, context-ehr-encounter,
+      context-standalone-patient, permission-offline, permission-patient,
+      permission-user, permission-v1, permission-v2, sso-openid-connect,
+      authorize-post. CapabilityStatement.rest.security.service includes
+      SMART-on-FHIR.
+    servers: [tjuh-fhir-r4]
+    partial:
+      server: jhp-provider-directory
+      note: >-
+        JHP Provider Directory advertises SMART oauth-uris extensions
+        (authorize/token/manage/introspect/revoke) on the appgallery SMART
+        authorization server, but serves an empty {} at
+        /.well-known/smart-configuration.
+
+  - id: oauth2
+    name: OAuth 2.0 (RFC 6749)
+    conforms: true
+    evidence: >-
+      authorization_endpoint + token_endpoint published on both authorization
+      servers; grant_types_supported authorization_code, refresh_token,
+      client_credentials, jwt-bearer, token-exchange (TJUH).
+    servers: [tjuh-fhir-r4, jhp-provider-directory]
+
+  - id: oidc
+    name: OpenID Connect Discovery 1.0
+    conforms: true
+    evidence: >-
+      /.well-known/openid-configuration returns a real discovery document on both
+      https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4 and
+      https://appgallery.healthpartnersplans.com/smartauth-fhir.
+      id_token_signing_alg_values_supported RS256 on both.
+    servers: [tjuh-fhir-r4, jhp-provider-directory]
+
+  - id: oauth2-pkce
+    name: OAuth 2.0 PKCE (RFC 7636)
+    conforms: true
+    evidence: >-
+      code_challenge_methods_supported S256 (TJUH); plain + S256 (JHP).
+    servers: [tjuh-fhir-r4, jhp-provider-directory]
+
+  - id: rfc7523-jwt-bearer
+    name: JWT Profile for OAuth 2.0 Client Authentication (RFC 7523)
+    conforms: true
+    evidence: >-
+      TJUH token_endpoint_auth_methods_supported includes private_key_jwt and
+      grant_types_supported includes urn:ietf:params:oauth:grant-type:jwt-bearer;
+      a jwks_uri is published.
+    servers: [tjuh-fhir-r4]
+
+  - id: rfc8693-token-exchange
+    name: OAuth 2.0 Token Exchange (RFC 8693)
+    conforms: true
+    evidence: >-
+      TJUH grant_types_supported includes
+      urn:ietf:params:oauth:grant-type:token-exchange.
+    servers: [tjuh-fhir-r4]
+
+  - id: rfc7662-introspection
+    name: OAuth 2.0 Token Introspection (RFC 7662)
+    conforms: true
+    evidence: >-
+      JHP publishes introspection_endpoint
+      https://appgallery.healthpartnersplans.com/smartauth-fhir/oauth/token/introspect.
+    servers: [jhp-provider-directory]
+
+  - id: davinci-pdex-plan-net
+    name: HL7 Da Vinci PDEX Plan-Net (Provider Directory) IG
+    conforms: true
+    evidence: >-
+      JHP Provider Directory serves exactly the Plan-Net resource set —
+      InsurancePlan, Location, Organization, OrganizationAffiliation,
+      Practitioner, HealthcareService, PractitionerRole, Endpoint — with
+      Plan-Net search parameters (network, coverage-area, specialty, role,
+      partof, owned-by, administered-by), anonymously as the IG requires.
+    servers: [jhp-provider-directory]
+
+  - id: carin-bb
+    name: HL7 CARIN Consumer Directed Payer Data Exchange (CARIN Blue Button) IG
+    conforms: partial
+    evidence: >-
+      Jefferson Health Plans documents a CARIN-aligned Patient Access API at
+      https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/,
+      but its Swagger UI and SMART configuration sit behind the developer portal;
+      no anonymous CapabilityStatement was retrievable to verify profile-level
+      conformance.
+    servers: []
+
+  - id: cms-9115-f
+    name: CMS Interoperability and Patient Access Final Rule (CMS-9115-F)
+    conforms: true
+    evidence: >-
+      Patient Access API (TJUH FHIR R4 + JHP Patient Access) and Provider
+      Directory API (JHP Plan-Net, anonymous) are both published, which is what
+      the rule requires of a payer/provider of this size.
+    docs: https://www.cms.gov/Regulations-and-Guidance/Guidance/Interoperability/index
+
+  - id: cures-act-onc
+    name: 21st Century Cures Act / ONC Final Rule (standardized API criterion)
+    conforms: true
+    evidence: >-
+      Epic February 2026 server exposing US Core 6.1.0 + SMART App Launch +
+      Bulk Data is the ONC (g)(10) standardized-API certification shape, and
+      the endpoint is listed in Epic's public R4 endpoint directory.
+    docs: https://www.healthit.gov/curesrule/
+
+  - id: hipaa
+    name: HIPAA Privacy and Security Rules
+    conforms: true
+    evidence: >-
+      Jefferson Health publishes a Notice of Privacy Practices and a Corporate
+      Compliance program; PHI-bearing endpoints require patient-authorized
+      SMART on FHIR tokens.
+    docs: https://www.jeffersonhealth.org/privacy-practices
+
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: >-
+      Errors are returned as FHIR OperationOutcome resources
+      (application/fhir+json), not application/problem+json. Observed live on
+      https://providerfhirapi.healthpartnersplans.com/.well-known/security.txt (404).
+
+  - id: rfc9116-security-txt
+    conforms: false
+    evidence: >-
+      No RFC 9116 security.txt on any Jefferson host. www.jeffersonhealth.org
+      answers 200 at /.well-known/security.txt with an Adobe Experience Manager
+      HTML shell — see well-known/jefferson-health-well-known.yml.
+
+  - id: rfc8594-sunset-header
+    conforms: false
+    evidence: >-
+      No Sunset or Deprecation response headers observed on either FHIR base;
+      the DSTU2 endpoint is still served with no machine-readable sunset signal.
+
+  - id: openapi
+    name: OpenAPI 3.0.3
+    conforms: partial
+    evidence: >-
+      Neither Jefferson host publishes an OpenAPI document. The specs in openapi/
+      are API Evangelist descriptions derived from the live CapabilityStatements
+      and the published documentation, not provider-published contracts.
+
+  - id: asyncapi
+    conforms: false
+    evidence: >-
+      No event, streaming or webhook surface. Neither CapabilityStatement
+      declares the FHIR Subscription resource, and no webhook catalog is
+      documented — this provider has no event surface to describe.
