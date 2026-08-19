@@ -43,7 +43,7 @@ maintainers:
   url: https://apievangelist.com
   role: catalog-maintainer
 position: Consumer
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 description: >-
   Jefferson Health is a multi-state nonprofit academic health system based in Philadelphia, Pennsylvania, operating more
   than 30 hospitals and over 700 care sites across eastern Pennsylvania and southern New Jersey as the clinical arm of
