@@ -13,6 +13,24 @@ tags:
   - Healthcare
   - Hospital System
   - MyChart
+  - Authentication
+  - Patient Access
+  - Provider Directory
+  - SMART on FHIR
+  - US Core
+  - USCDI
+tags_raw:
+  - Academic Medical Center
+  - CARIN Blue Button
+  - CMS Interoperability
+  - Cures Act
+  - Da Vinci Plan-Net
+  - Epic
+  - FHIR
+  - HL7
+  - Healthcare
+  - Hospital System
+  - MyChart
   - OAuth 2.0
   - Patient Access
   - Provider Directory
@@ -265,6 +283,8 @@ apis:
   humanURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
   baseURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
   tags:
+  - AllergyIntolerance
+  tags_raw:
   - Allergy Intolerance
   properties:
   - type: OpenAPI
@@ -391,6 +411,8 @@ apis:
   humanURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
   baseURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
   tags:
+  - DocumentReference
+  tags_raw:
   - Document Reference
   properties:
   - type: OpenAPI
@@ -474,7 +496,8 @@ apis:
   description: The technical details of an endpoint that can be used for electronic services.
   humanURL: https://providerfhirapi.healthpartnersplans.com
   baseURL: https://providerfhirapi.healthpartnersplans.com
-  tags:
+  tags: []
+  tags_raw:
   - Endpoint
   properties:
   - type: OpenAPI
@@ -517,6 +540,8 @@ apis:
   humanURL: https://providerfhirapi.healthpartnersplans.com
   baseURL: https://providerfhirapi.healthpartnersplans.com
   tags:
+  - HealthcareService
+  tags_raw:
   - Healthcare Service
   properties:
   - type: OpenAPI
@@ -559,6 +584,8 @@ apis:
   humanURL: https://providerfhirapi.healthpartnersplans.com
   baseURL: https://providerfhirapi.healthpartnersplans.com
   tags:
+  - InsurancePlan
+  tags_raw:
   - Insurance Plan
   properties:
   - type: OpenAPI
@@ -644,6 +671,8 @@ apis:
   humanURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
   baseURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
   tags:
+  - MedicationRequest
+  tags_raw:
   - Medication Request
   properties:
   - type: OpenAPI
@@ -897,6 +926,8 @@ apis:
   humanURL: https://providerfhirapi.healthpartnersplans.com
   baseURL: https://providerfhirapi.healthpartnersplans.com
   tags:
+  - PractitionerRole
+  tags_raw:
   - Practitioner Role
   properties:
   - type: OpenAPI
