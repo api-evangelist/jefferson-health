@@ -1,0 +1,14 @@
+{
+  "repo": "jefferson-health",
+  "feeds": [
+    {
+      "source": "https://www.jeffersonhealthplans.com/home/about-us/interoperability/member-education-faq.html",
+      "feed_url": "https://www.jeffersonhealthplans.com/home/about-us/interoperability/member-education-faq.html",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-08-22T20:20:02Z"
+}
