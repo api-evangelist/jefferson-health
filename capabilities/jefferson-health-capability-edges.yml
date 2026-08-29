@@ -11,67 +11,57 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 6
+edge_count: 5
 edges:
 - tag: Allergy Intolerance
   spec_file: jefferson-health-allergy-intolerance-api-openapi.yml
   capability_id: BC-2900.60
   capability_id_l1: BC-2900
   capability_name: Healthcare Interoperability Operations
-  confidence: 0.78
-  evidence: GET /AllergyIntolerance  searchAllergyIntolerance — 'CMS Interoperability and Patient Access
+  confidence: 0.8
+  evidence: GET /AllergyIntolerance searchAllergyIntolerance; "CMS Interoperability and Patient Access
     (CMS-9115-F) compliant HL7 FHIR Release 4.0.1 API ... Exposes USCDI-aligned clinical resources to
-    third-party patient-access applications under SMART on FHIR / OAuth 2.0'
-  reason: The operation is a read-only FHIR search exposing clinical data to external patient-access apps;
-    the capability realised is operation of FHIR endpoints and patient-initiated data sharing, not the
-    allergy-documentation workflow itself.
-- tag: Condition
-  spec_file: jefferson-health-condition-api-openapi.yml
-  capability_id: BC-2900.60
-  capability_id_l1: BC-2900
-  capability_name: Healthcare Interoperability Operations
-  confidence: 0.78
-  evidence: GET /Condition  searchCondition  Search Condition — 'Exposes USCDI-aligned clinical resources
-    to third-party patient-access applications'
-  reason: Read-only FHIR resource search for external app consumption; realises healthcare interoperability
-    operations rather than clinical problem-list documentation.
-- tag: Document Reference
-  spec_file: jefferson-health-document-reference-api-openapi.yml
-  capability_id: BC-2900.60
-  capability_id_l1: BC-2900
-  capability_name: Healthcare Interoperability Operations
-  confidence: 0.78
-  evidence: GET /DocumentReference  searchDocumentReference — 'CMS Interoperability and Patient Access
-    ... HL7 FHIR Release 4.0.1 API'
-  reason: FHIR DocumentReference search exposing clinical documents to third-party apps — health information
-    exchange/FHIR endpoint operation, not clinical note authoring.
+    third-party patient-access applications"
+  reason: This is a provider-operated FHIR endpoint exposing clinical record data to third-party patient-access
+    apps — i.e. healthcare interoperability operations (FHIR endpoints, patient-initiated data sharing),
+    rather than the act of clinical documentation itself.
 - tag: Bulk Data
   spec_file: jefferson-health-bulk-data-api-openapi.yml
   capability_id: BC-2900.60
   capability_id_l1: BC-2900
   capability_name: Healthcare Interoperability Operations
-  confidence: 0.75
+  confidence: 0.8
   evidence: GET /Group/{id}/$export  bulkExportGroup  Group Level Bulk Export
-  reason: FHIR Bulk Data ($export) for population-level data egress under the CMS interoperability rule
-    — health information exchange / FHIR endpoint operations.
+  reason: FHIR Bulk Data $export operated by the provider for population-level data sharing with authorised
+    third parties — healthcare interoperability operations under the CMS Interoperability rule.
+- tag: Condition
+  spec_file: jefferson-health-condition-api-openapi.yml
+  capability_id: BC-2900.60
+  capability_id_l1: BC-2900
+  capability_name: Healthcare Interoperability Operations
+  confidence: 0.8
+  evidence: GET /Condition searchCondition; "Exposes USCDI-aligned clinical resources to third-party patient-access
+    applications under SMART on FHIR / OAuth 2.0"
+  reason: Read-only FHIR search over problem-list data exposed via the provider's patient-access API;
+    the capability realised is interoperability/health information exchange, not clinical documentation
+    authoring.
+- tag: Document Reference
+  spec_file: jefferson-health-document-reference-api-openapi.yml
+  capability_id: BC-2900.60
+  capability_id_l1: BC-2900
+  capability_name: Healthcare Interoperability Operations
+  confidence: 0.8
+  evidence: GET /DocumentReference searchDocumentReference; "CMS Interoperability and Patient Access (CMS-9115-F)
+    compliant HL7 FHIR Release 4.0.1 API"
+  reason: Exposes clinical documents through the provider's FHIR endpoint to patient-access applications
+    — health information exchange / interoperability operations.
 - tag: Encounter
   spec_file: jefferson-health-encounter-api-openapi.yml
   capability_id: BC-2900.60
   capability_id_l1: BC-2900
   capability_name: Healthcare Interoperability Operations
   confidence: 0.75
-  evidence: GET /Encounter  searchEncounter  Search Encounter — 'Exposes USCDI-aligned clinical resources
-    to third-party patient-access applications under SMART on FHIR / OAuth 2.0'
-  reason: Read-only encounter data exposure through the patient-access FHIR endpoint; the capability is
-    interoperability operations, not admissions or care delivery.
-- tag: Patient
-  spec_file: jefferson-health-patient-api-openapi.yml
-  capability_id: BC-2900.60
-  capability_id_l1: BC-2900
-  capability_name: Healthcare Interoperability Operations
-  confidence: 0.7
-  evidence: GET /Patient/{id} readPatient Read Patient By Id; "CMS Interoperability and Patient Access
-    (CMS-9115-F) compliant HL7 FHIR ... API"
-  reason: Patient demographic read/search exposed to third-party patient-access apps via SMART on FHIR.
-    This is FHIR endpoint / patient-initiated data sharing operation rather than registration or MPI stewardship,
-    since only read operations exist.
+  evidence: GET /Encounter searchEncounter; "Exposes USCDI-aligned clinical resources to third-party patient-access
+    applications"
+  reason: Encounter search on the patient-access FHIR endpoint is data sharing of encounter records, not
+    admissions/registration operations. Mapped to interoperability operations.
