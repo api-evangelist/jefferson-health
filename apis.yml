@@ -298,7 +298,7 @@ apis:
   humanURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
   baseURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
   tags:
-  - AllergyIntolerance
+  - Allergy Intolerance
   tags_raw:
   - Allergy Intolerance
   properties:
@@ -426,7 +426,7 @@ apis:
   humanURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
   baseURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
   tags:
-  - DocumentReference
+  - Document Reference
   tags_raw:
   - Document Reference
   properties:
@@ -555,7 +555,7 @@ apis:
   humanURL: https://providerfhirapi.healthpartnersplans.com
   baseURL: https://providerfhirapi.healthpartnersplans.com
   tags:
-  - HealthcareService
+  - Healthcare Service
   tags_raw:
   - Healthcare Service
   properties:
@@ -599,7 +599,7 @@ apis:
   humanURL: https://providerfhirapi.healthpartnersplans.com
   baseURL: https://providerfhirapi.healthpartnersplans.com
   tags:
-  - InsurancePlan
+  - Insurance Plan
   tags_raw:
   - Insurance Plan
   properties:
@@ -686,7 +686,7 @@ apis:
   humanURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
   baseURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
   tags:
-  - MedicationRequest
+  - Medication Request
   tags_raw:
   - Medication Request
   properties:
@@ -941,7 +941,7 @@ apis:
   humanURL: https://providerfhirapi.healthpartnersplans.com
   baseURL: https://providerfhirapi.healthpartnersplans.com
   tags:
-  - PractitionerRole
+  - Practitioner Role
   tags_raw:
   - Practitioner Role
   properties:
