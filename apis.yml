@@ -231,6 +231,15 @@ apis:
   - CMS Interoperability
   - FHIR
   - Patient Access
+  - Payers
+  - R4
+  - SMART on FHIR
+  - Smile CDR
+  tags_raw:
+  - CARIN Blue Button
+  - CMS Interoperability
+  - FHIR
+  - Patient Access
   - Payer
   - R4
   - SMART on FHIR
@@ -856,6 +865,8 @@ apis:
   humanURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
   baseURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
   tags:
+  - Patients
+  tags_raw:
   - Patient
   properties:
   - type: OpenAPI
