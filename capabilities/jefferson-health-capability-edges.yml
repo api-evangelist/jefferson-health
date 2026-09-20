@@ -11,7 +11,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 5
+edge_count: 6
 edges:
 - tag: Allergy Intolerance
   spec_file: jefferson-health-allergy-intolerance-api-openapi.yml
@@ -65,3 +65,15 @@ edges:
     applications"
   reason: Encounter search on the patient-access FHIR endpoint is data sharing of encounter records, not
     admissions/registration operations. Mapped to interoperability operations.
+- tag: Patient
+  spec_file: jefferson-health-patient-api-openapi.yml
+  capability_id: BC-2900.60
+  capability_id_l1: BC-2900
+  capability_name: Healthcare Interoperability Operations
+  confidence: 0.7
+  evidence: GET /Patient/{id} readPatient Read Patient By Id; "CMS Interoperability and Patient Access
+    (CMS-9115-F) compliant HL7 FHIR ... API"
+  reason: Patient demographic read/search exposed to third-party patient-access apps via SMART on FHIR.
+    This is FHIR endpoint / patient-initiated data sharing operation rather than registration or MPI stewardship,
+    since only read operations exist.
+  recovered_from: healthcare-vertical-edges.json
