@@ -1,10 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Jefferson Health Medication Request API
-  description: OpenAPI surface for the Thomas Jefferson University Hospital FHIR R4 endpoint, Jefferson Health's CMS Interoperability and Patient Access (CMS-9115-F)
-    compliant HL7 FHIR Release 4.0.1 API powered by Epic's August 2025 release. Exposes USCDI-aligned clinical resources to third-party patient-access applications
-    under SMART on FHIR / OAuth 2.0. Only a subset of the 80+ supported FHIR resource types is documented here — refer to the live CapabilityStatement for the full
-    surface.
+  title: Thomas Jefferson University Hospital FHIR R4 Medication…
+  description: OpenAPI surface for the Thomas Jefferson University Hospital FHIR R4 endpoint, Jefferson Health's CMS Interoperability and Patient Access (CMS-9115-F) compliant HL7 FHIR Release 4.0.1 API powered by Epic's August 2025 release. Exposes USCDI-aligned clinical resources to third-party patient-access applications under SMART on FHIR / OAuth 2.0. Only a subset of the 80+ supported FHIR resource types is documented here — refer to the live CapabilityStatement for the full surface.
   version: 4.0.1
   contact:
     name: Epic on FHIR
@@ -12,10 +9,22 @@ info:
   license:
     name: HL7 FHIR License
     url: https://www.hl7.org/fhir/license.html
-  x-source-contract: openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml
 servers:
 - url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
   description: Thomas Jefferson University Hospital FHIR R4 production endpoint
+security:
+- smartOnFhir:
+  - patient/Patient.read
+  - patient/Observation.read
+  - patient/Condition.read
+  - patient/Encounter.read
+  - patient/MedicationRequest.read
+  - patient/AllergyIntolerance.read
+  - patient/DocumentReference.read
+  - launch
+  - openid
+  - fhirUser
+  - offline_access
 tags:
 - name: Medication Request
   description: An order or request for both supply of the medication and the instructions for administration.
@@ -48,6 +57,22 @@ paths:
               schema:
                 $ref: '#/components/schemas/Bundle'
 components:
+  parameters:
+    PatientReference:
+      name: patient
+      in: query
+      required: true
+      description: Reference to the Patient (id or Patient/{id}).
+      schema:
+        type: string
+    Count:
+      name: _count
+      in: query
+      description: Number of resources to return per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 1000
   schemas:
     Bundle:
       type: object
@@ -67,22 +92,28 @@ components:
           type: array
           items:
             type: object
-  parameters:
-    PatientReference:
-      name: patient
-      in: query
-      required: true
-      description: Reference to the Patient (id or Patient/{id}).
-      schema:
-        type: string
-    Count:
-      name: _count
-      in: query
-      description: Number of resources to return per page.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 1000
+  securitySchemes:
+    smartOnFhir:
+      type: oauth2
+      description: SMART on FHIR / OAuth 2.0 with PKCE for patient-facing and provider-facing app launches.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://fhir.jefferson.edu/FHIRProxy/oauth2/authorize
+          tokenUrl: https://fhir.jefferson.edu/FHIRProxy/oauth2/token
+          scopes:
+            launch: EHR launch context for provider-launched apps
+            openid: OpenID Connect authentication
+            fhirUser: Identity of the user launching the app
+            offline_access: Refresh token for long-lived access
+            patient/Patient.read: Read the launching patient's demographics
+            patient/Observation.read: Read the launching patient's observations
+            patient/Condition.read: Read the launching patient's conditions
+            patient/Encounter.read: Read the launching patient's encounters
+            patient/MedicationRequest.read: Read the launching patient's medication requests
+            patient/AllergyIntolerance.read: Read the launching patient's allergies
+            patient/DocumentReference.read: Read the launching patient's documents
+            user/Patient.read: Read Patient as the launching user
+            system/Patient.read: System-level Patient read (Bulk Data)
 externalDocs:
-  description: HL7 Da Vinci PDEX Plan-Net Implementation Guide
-  url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
+  description: HL7 FHIR R4 Specification
+  url: https://hl7.org/fhir/R4/
