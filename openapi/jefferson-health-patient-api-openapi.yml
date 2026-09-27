@@ -124,17 +124,6 @@ components:
         birthDate:
           type: string
           format: date
-    OperationOutcome:
-      type: object
-      properties:
-        resourceType:
-          type: string
-          enum:
-          - OperationOutcome
-        issue:
-          type: array
-          items:
-            type: object
     Bundle:
       type: object
       description: HL7 FHIR Bundle resource (searchset).
@@ -153,6 +142,24 @@ components:
           type: array
           items:
             type: object
+    OperationOutcome:
+      type: object
+      properties:
+        resourceType:
+          type: string
+          enum:
+          - OperationOutcome
+        issue:
+          type: array
+          items:
+            type: object
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/fhir+json:
+          schema:
+            $ref: '#/components/schemas/OperationOutcome'
   parameters:
     ResourceId:
       name: id
@@ -169,13 +176,6 @@ components:
         type: integer
         minimum: 1
         maximum: 1000
-  responses:
-    NotFound:
-      description: Resource not found.
-      content:
-        application/fhir+json:
-          schema:
-            $ref: '#/components/schemas/OperationOutcome'
   securitySchemes:
     smartOnFhir:
       type: oauth2
