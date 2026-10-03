@@ -101,6 +101,17 @@ paths:
                 $ref: '#/components/schemas/Bundle'
 components:
   schemas:
+    OperationOutcome:
+      type: object
+      properties:
+        resourceType:
+          type: string
+          enum:
+          - OperationOutcome
+        issue:
+          type: array
+          items:
+            type: object
     Patient:
       type: object
       description: HL7 FHIR Patient resource (US Core profile).
@@ -139,17 +150,6 @@ components:
         total:
           type: integer
         entry:
-          type: array
-          items:
-            type: object
-    OperationOutcome:
-      type: object
-      properties:
-        resourceType:
-          type: string
-          enum:
-          - OperationOutcome
-        issue:
           type: array
           items:
             type: object

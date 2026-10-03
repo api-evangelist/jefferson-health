@@ -64,6 +64,23 @@ paths:
                 $ref: '#/components/schemas/Bundle'
 components:
   schemas:
+    Practitioner:
+      type: object
+      properties:
+        resourceType:
+          type: string
+          enum:
+          - Practitioner
+        id:
+          type: string
+        identifier:
+          type: array
+          items:
+            type: object
+        name:
+          type: array
+          items:
+            type: object
     Bundle:
       type: object
       description: HL7 FHIR Bundle resource (searchset).
@@ -79,23 +96,6 @@ components:
         total:
           type: integer
         entry:
-          type: array
-          items:
-            type: object
-    Practitioner:
-      type: object
-      properties:
-        resourceType:
-          type: string
-          enum:
-          - Practitioner
-        id:
-          type: string
-        identifier:
-          type: array
-          items:
-            type: object
-        name:
           type: array
           items:
             type: object
