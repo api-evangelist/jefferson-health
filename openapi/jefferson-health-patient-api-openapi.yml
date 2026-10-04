@@ -112,6 +112,24 @@ components:
           type: array
           items:
             type: object
+    Bundle:
+      type: object
+      description: HL7 FHIR Bundle resource (searchset).
+      properties:
+        resourceType:
+          type: string
+          enum:
+          - Bundle
+        type:
+          type: string
+          enum:
+          - searchset
+        total:
+          type: integer
+        entry:
+          type: array
+          items:
+            type: object
     Patient:
       type: object
       description: HL7 FHIR Patient resource (US Core profile).
@@ -135,24 +153,6 @@ components:
         birthDate:
           type: string
           format: date
-    Bundle:
-      type: object
-      description: HL7 FHIR Bundle resource (searchset).
-      properties:
-        resourceType:
-          type: string
-          enum:
-          - Bundle
-        type:
-          type: string
-          enum:
-          - searchset
-        total:
-          type: integer
-        entry:
-          type: array
-          items:
-            type: object
   responses:
     NotFound:
       description: Resource not found.
