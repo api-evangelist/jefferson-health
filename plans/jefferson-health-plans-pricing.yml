@@ -102,3 +102,34 @@ plans:
   references:
   - https://www.jeffersonhealth.org/pay-my-bill/charge-description
   - https://www.jeffersonhealth.org/pay-my-bill/price-estimator
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  units: []
+  plans:
+  - name: Thomas Jefferson University Hospital Patient Access FHIR (Free)
+    access: other
+    model: free
+    model_how: derived
+    units: []
+    periods: []
+  - name: Jefferson Health Plans Patient Access FHIR (Free)
+    access: other
+    model: free
+    model_how: derived
+    units: []
+    periods: []
+  - name: Jefferson Health Plans Provider Directory FHIR (Public)
+    access: other
+    model: free
+    model_how: derived
+    units: []
+    periods: []
+  - name: Clinical Care (Out of Scope for Developer Pricing)
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
