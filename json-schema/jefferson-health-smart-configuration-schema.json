@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/jefferson-health/main/json-schema/jefferson-health-smart-configuration-schema.json",
+  "title": "SmartConfiguration",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/jefferson-health-metadata-api-openapi.yml#/components/schemas/SmartConfiguration",
+  "type": "object",
+  "properties": {
+    "authorization_endpoint": {
+      "type": "string",
+      "format": "uri"
+    },
+    "token_endpoint": {
+      "type": "string",
+      "format": "uri"
+    },
+    "scopes_supported": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

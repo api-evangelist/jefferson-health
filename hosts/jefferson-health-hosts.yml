@@ -1,0 +1,144 @@
+generated: '2026-10-12'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 12
+  own: 2
+  other_domain: 9
+  platform: 1
+  roles:
+  - docs
+  - other
+  - portal
+  - source
+  - website
+hosts:
+- host: appgallery.healthpartnersplans.com
+  found_by:
+  - pointer
+  types:
+  - DeveloperPortal
+  serves: []
+  registrable_domain: healthpartnersplans.com
+  role: portal
+  relation: other-domain
+- host: fhir.jefferson.edu
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - api
+  - docs
+  registrable_domain: jefferson.edu
+  role: other
+  relation: other-domain
+- host: github.com
+  found_by:
+  - pointer
+  types:
+  - GitHubOrganization
+  serves: []
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: my.jeffersonhealth.org
+  found_by:
+  - pointer
+  - apis[]
+  types:
+  - PatientPortal
+  serves:
+  - api
+  - docs
+  registrable_domain: jeffersonhealth.org
+  role: other
+  relation: own
+- host: mychart.jefferson.edu
+  found_by:
+  - pointer
+  types:
+  - PatientPortal
+  serves: []
+  registrable_domain: jefferson.edu
+  role: other
+  relation: other-domain
+- host: providerfhirapi.healthpartnersplans.com
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - api
+  - docs
+  registrable_domain: healthpartnersplans.com
+  role: other
+  relation: other-domain
+- host: smilercdr.healthpartnersplans.com
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - api
+  - docs
+  registrable_domain: healthpartnersplans.com
+  role: other
+  relation: other-domain
+- host: www.cms.gov
+  found_by:
+  - pointer
+  types:
+  - Compliance
+  serves: []
+  registrable_domain: cms.gov
+  role: other
+  relation: other-domain
+- host: www.healthit.gov
+  found_by:
+  - pointer
+  types:
+  - Compliance
+  serves: []
+  registrable_domain: healthit.gov
+  role: other
+  relation: other-domain
+- host: www.jefferson.edu
+  found_by:
+  - pointer
+  types:
+  - University
+  serves: []
+  registrable_domain: jefferson.edu
+  role: other
+  relation: other-domain
+- host: www.jeffersonhealth.org
+  found_by:
+  - pointer
+  types:
+  - Website
+  - MyChartCentral
+  - Locations
+  - PriceTransparency
+  - PriceEstimator
+  - PrivacyPolicy
+  - TermsOfService
+  - Blog
+  - News
+  - Compliance
+  serves: []
+  registrable_domain: jeffersonhealth.org
+  role: website
+  relation: own
+- host: www.jeffersonhealthplans.com
+  found_by:
+  - pointer
+  types:
+  - HealthPlans
+  - Documentation
+  - APIReference
+  - GettingStarted
+  - SignUp
+  - HelpCenter
+  serves: []
+  registrable_domain: jeffersonhealthplans.com
+  role: docs
+  relation: other-domain

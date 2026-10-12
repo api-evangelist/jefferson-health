@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/jefferson-health/main/json-schema/jefferson-health-bundle-schema.json",
+  "title": "Bundle",
+  "description": "HL7 FHIR Bundle resource (searchset).",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/jefferson-health-allergy-intolerance-api-openapi.yml#/components/schemas/Bundle",
+  "type": "object",
+  "properties": {
+    "resourceType": {
+      "type": "string",
+      "enum": [
+        "Bundle"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "searchset"
+      ]
+    },
+    "total": {
+      "type": "integer"
+    },
+    "entry": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  }
+}

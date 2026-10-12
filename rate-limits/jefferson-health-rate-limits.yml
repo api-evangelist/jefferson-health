@@ -1,61 +1,45 @@
+name: Jefferson Health API Rate Limits
 apiCommonsRateLimits: '0.1'
 generated: '2026-08-15'
-method: probed
-source: >-
-  Live response-header inspection 2026-08-15 on
-  https://providerfhirapi.healthpartnersplans.com/Practitioner?_count=2 (200) and
-  https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/metadata (200), plus a search
-  of https://fhir.epic.com/Documentation and
-  https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/
-  for published limits.
+method: none
+source: Live response-header inspection 2026-08-15 on https://providerfhirapi.healthpartnersplans.com/Practitioner?_count=2
+  (200) and https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/metadata (200), plus a search of https://fhir.epic.com/Documentation
+  and https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/ for published limits.
 limit_count: 0
 documented: false
 response_headers_observed: []
 retry_after_observed: false
 exhaustion_status_code: unknown
-probe_note: >-
-  No X-RateLimit-*, RateLimit-* or Retry-After header was present on any observed
-  200 from either FHIR endpoint. Jefferson Health publishes no quantitative rate
-  limits and emits no runtime rate-limit signal, so a client cannot tell how much
-  budget it has left or when a throttle is approaching — it only finds out when a
-  request fails. This is an honest zero, confirmed by probe rather than assumed.
-  The qualitative policies recorded below are real (throttling exists at the Epic
+probe_note: No X-RateLimit-*, RateLimit-* or Retry-After header was present on any observed 200 from either FHIR endpoint.
+  Jefferson Health publishes no quantitative rate limits and emits no runtime rate-limit signal, so a client cannot tell how
+  much budget it has left or when a throttle is approaching — it only finds out when a request fails. This is an honest zero,
+  confirmed by probe rather than assumed. The qualitative policies recorded below are real (throttling exists at the Epic
   interconnect and Smile CDR edges) but carry no published numbers.
 info:
   title: Jefferson Health API Rate Limits
-  description: >-
-    Rate-limit and quota disclosures for Jefferson Health's published FHIR
-    APIs. Jefferson Health does not publish per-endpoint quantitative
-    rate-limit numbers (requests-per-minute, requests-per-day) on its
-    public CMS-9115-F APIs. Limits are enforced at the network edge of
-    Epic (for the hospital FHIR endpoint) and Smile CDR / Jefferson Health
-    Plans infrastructure (for the payer endpoints), governed by app
-    registration agreements rather than a public throttle table.
+  description: Rate-limit and quota disclosures for Jefferson Health's published FHIR APIs. Jefferson Health does not publish
+    per-endpoint quantitative rate-limit numbers (requests-per-minute, requests-per-day) on its public CMS-9115-F APIs. Limits
+    are enforced at the network edge of Epic (for the hospital FHIR endpoint) and Smile CDR / Jefferson Health Plans infrastructure
+    (for the payer endpoints), governed by app registration agreements rather than a public throttle table.
   created: '2026-05-23'
   modified: '2026-05-23'
 provider:
   name: Jefferson Health
   url: https://www.jeffersonhealth.org/
-
 apis:
 - id: tjuh-fhir-r4-api
   name: Thomas Jefferson University Hospital FHIR R4 API
   baseURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
   policies:
   - type: per-app-throttle
-    description: >-
-      Per-application throttling enforced by Epic's interconnect proxy.
-      Concrete limits are not publicly documented and are set during
-      Jefferson app onboarding under the Epic on FHIR developer program.
+    description: Per-application throttling enforced by Epic's interconnect proxy. Concrete limits are not publicly documented
+      and are set during Jefferson app onboarding under the Epic on FHIR developer program.
     documented: false
     source: https://fhir.epic.com/Documentation
   - type: bulk-data-export
-    description: >-
-      HL7 FHIR Bulk Data Group $export jobs are queued and rate-controlled
-      separately from synchronous reads; concurrency is typically capped per
-      registered system.
+    description: HL7 FHIR Bulk Data Group $export jobs are queued and rate-controlled separately from synchronous reads; concurrency
+      is typically capped per registered system.
     documented: false
-
 - id: jhp-patient-access-fhir-api
   name: Jefferson Health Plans Patient Access FHIR API
   baseURL: https://smilercdr.healthpartnersplans.com/
@@ -64,18 +48,15 @@ apis:
     description: Rate limits enforced by Smile CDR at the JHP edge; not publicly published.
     documented: false
     source: https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/
-
 - id: jhp-provider-directory-fhir-api
   name: Jefferson Health Plans Provider Directory FHIR API
   baseURL: https://providerfhirapi.healthpartnersplans.com
   policies:
   - type: anonymous-edge-throttle
-    description: >-
-      Public unauthenticated endpoint; per-IP throttling and bot-mitigation
-      apply at the network edge (CDN / WAF) but specific limits are not
-      published.
+    description: Public unauthenticated endpoint; per-IP throttling and bot-mitigation apply at the network edge (CDN / WAF)
+      but specific limits are not published.
     documented: false
-
 notes:
 - CMS-9115-F does not require publication of quantitative rate limits, only that the API be available to authorized patients.
 - Production-scale integrations should contact Jefferson Health / Jefferson Health Plans for negotiated quota agreements.
+limits: []

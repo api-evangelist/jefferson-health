@@ -1,24 +1,20 @@
 ---
-name: Run a Jefferson Health group-level bulk data export
-description: >-
-  Kick off and poll an asynchronous HL7 FHIR Bulk Data Access (Flat FHIR)
-  group-level export against the Thomas Jefferson University Hospital FHIR R4
-  endpoint, then download the resulting NDJSON files. Used for population-level
-  extracts by authorized backend services, not by patient-facing apps.
+name: jefferson-health-bulk-data-export
+description: Kick off and poll an asynchronous HL7 FHIR Bulk Data Access (Flat FHIR) group-level export against the Thomas
+  Jefferson University Hospital FHIR R4 endpoint, then download the resulting NDJSON files. Used for population-level extracts
+  by authorized backend services, not by patient-facing apps.
 api: openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml
 base_url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
 auth: oauth2
 operations:
-  - getSmartConfiguration
-  - getMetadata
-  - bulkExportGroup
+- getSmartConfiguration
+- getMetadata
+- bulkExportGroup
 generated: '2026-08-15'
 method: generated
-source: >-
-  Grounded in the bulkExportGroup operationId in openapi/_original/ and the live
-  CapabilityStatement, which declares
-  instantiates http://hl7.org/fhir/uv/bulkdata/CapabilityStatement/bulk-data and
-  the group-export operation on the Group resource.
+source: Grounded in the bulkExportGroup operationId in openapi/_original/ and the live CapabilityStatement, which declares
+  instantiates http://hl7.org/fhir/uv/bulkdata/CapabilityStatement/bulk-data and the group-export operation on the Group resource.
+title: Run a Jefferson Health group-level bulk data export
 ---
 
 # Run a Jefferson Health group-level bulk data export

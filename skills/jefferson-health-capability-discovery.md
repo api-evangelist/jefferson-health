@@ -1,21 +1,19 @@
 ---
-name: Discover what a Jefferson Health FHIR endpoint can actually do
-description: >-
-  Read a Jefferson Health FHIR server's own CapabilityStatement and SMART/OIDC
-  discovery documents before calling anything else, so an agent binds to what the
-  server really serves rather than to a stale description of it. Both discovery
+name: jefferson-health-capability-discovery
+description: Read a Jefferson Health FHIR server's own CapabilityStatement and SMART/OIDC discovery documents before calling
+  anything else, so an agent binds to what the server really serves rather than to a stale description of it. Both discovery
   paths are anonymous and return 200.
 api: openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml
 base_url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
 auth: none
 operations:
-  - getMetadata
-  - getSmartConfiguration
+- getMetadata
+- getSmartConfiguration
 generated: '2026-08-15'
 method: generated
-source: >-
-  Grounded in the getMetadata / getSmartConfiguration operationIds in
-  openapi/_original/ and the documents saved in conformance/ and well-known/.
+source: Grounded in the getMetadata / getSmartConfiguration operationIds in openapi/_original/ and the documents saved in
+  conformance/ and well-known/.
+title: Discover what a Jefferson Health FHIR endpoint can actually do
 ---
 
 # Discover what a Jefferson Health FHIR endpoint can actually do

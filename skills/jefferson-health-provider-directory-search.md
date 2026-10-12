@@ -1,30 +1,26 @@
 ---
-name: Search the Jefferson Health Plans provider directory
-description: >-
-  Find a practitioner, organization, location, service or insurance plan in the
-  Jefferson Health Plans Da Vinci Plan-Net directory. This is the only Jefferson
-  Health API surface that is callable with no credentials, which makes it the
+name: jefferson-health-provider-directory-search
+description: Find a practitioner, organization, location, service or insurance plan in the Jefferson Health Plans Da Vinci
+  Plan-Net directory. This is the only Jefferson Health API surface that is callable with no credentials, which makes it the
   right starting point for any agent working with Jefferson data.
 api: openapi/_original/jefferson-health-jhp-provider-directory-fhir-api-openapi.yml
 base_url: https://providerfhirapi.healthpartnersplans.com
 auth: none
 operations:
-  - getMetadata
-  - searchPractitioner
-  - readPractitioner
-  - searchPractitionerRole
-  - searchOrganization
-  - readOrganization
-  - searchLocation
-  - searchHealthcareService
-  - searchInsurancePlan
-  - searchEndpoint
+- getMetadata
+- searchPractitioner
+- readPractitioner
+- searchPractitionerRole
+- searchOrganization
+- readOrganization
+- searchLocation
+- searchHealthcareService
+- searchInsurancePlan
+- searchEndpoint
 generated: '2026-08-15'
 method: generated
-source: >-
-  Grounded in the operationIds in openapi/_original/ and the live
-  CapabilityStatement in
-  conformance/jefferson-health-jhp-provider-directory-capabilitystatement.json.
+source: Grounded in the operationIds in openapi/_original/ and the live CapabilityStatement in conformance/jefferson-health-jhp-provider-directory-capabilitystatement.json.
+title: Search the Jefferson Health Plans provider directory
 ---
 
 # Search the Jefferson Health Plans provider directory

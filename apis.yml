@@ -2,41 +2,41 @@ aid: jefferson-health
 url: https://raw.githubusercontent.com/api-evangelist/jefferson-health/refs/heads/main/apis.yml
 name: Jefferson Health
 tags:
-  - Academic Medical Center
-  - CARIN Blue Button
-  - CMS Interoperability
-  - Cures Act
-  - Da Vinci Plan-Net
-  - Epic
-  - FHIR
-  - HL7
-  - Healthcare
-  - Hospital System
-  - MyChart
-  - Authentication
-  - Patient Access
-  - Provider Directory
-  - SMART on FHIR
-  - US Core
-  - USCDI
+- Academic Medical Center
+- CARIN Blue Button
+- CMS Interoperability
+- Cures Act
+- Da Vinci Plan-Net
+- Epic
+- FHIR
+- HL7
+- Healthcare
+- Hospital System
+- MyChart
+- Authentication
+- Patient Access
+- Provider Directory
+- SMART on FHIR
+- US Core
+- USCDI
 tags_raw:
-  - Academic Medical Center
-  - CARIN Blue Button
-  - CMS Interoperability
-  - Cures Act
-  - Da Vinci Plan-Net
-  - Epic
-  - FHIR
-  - HL7
-  - Healthcare
-  - Hospital System
-  - MyChart
-  - OAuth 2.0
-  - Patient Access
-  - Provider Directory
-  - SMART on FHIR
-  - US Core
-  - USCDI
+- Academic Medical Center
+- CARIN Blue Button
+- CMS Interoperability
+- Cures Act
+- Da Vinci Plan-Net
+- Epic
+- FHIR
+- HL7
+- Healthcare
+- Hospital System
+- MyChart
+- OAuth 2.0
+- Patient Access
+- Provider Directory
+- SMART on FHIR
+- US Core
+- USCDI
 type: Index
 deliveryModel:
   model: saas
@@ -74,135 +74,141 @@ maintainers:
   role: catalog-maintainer
 position: Consuming
 specificationVersion: '0.23'
-description: >-
-  Jefferson Health is a multi-state nonprofit academic health system based in Philadelphia, Pennsylvania, operating more
-  than 30 hospitals and over 700 care sites across eastern Pennsylvania and southern New Jersey as the clinical arm of
-  the broader Jefferson enterprise that also includes Thomas Jefferson University and Jefferson Health Plans (formerly
-  Health Partners Plans). Its patient-facing electronic health record runs on Epic and is branded as MyJeffersonHealth /
-  MyChart, with a CMS-mandated HL7 FHIR R4 API published at fhir.jefferson.edu/FHIRProxy/api/FHIR/R4 that exposes
-  USCDI-aligned clinical resources to third-party patient-access applications via SMART on FHIR and OAuth 2.0. Jefferson
-  Health Plans separately exposes CARIN-aligned Patient Access and Da Vinci Plan-Net Provider Directory FHIR APIs
-  powered by Smile CDR for its insurance members and the public.
+description: Jefferson Health is a multi-state nonprofit academic health system based in Philadelphia, Pennsylvania, operating more than 30 hospitals
+  and over 700 care sites across eastern Pennsylvania and southern New Jersey as the clinical arm of the broader Jefferson enterprise that also
+  includes Thomas Jefferson University and Jefferson Health Plans (formerly Health Partners Plans). Its patient-facing electronic health record
+  runs on Epic and is branded as MyJeffersonHealth / MyChart, with a CMS-mandated HL7 FHIR R4 API published at fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
+  that exposes USCDI-aligned clinical resources to third-party patient-access applications via SMART on FHIR and OAuth 2.0. Jefferson Health Plans
+  separately exposes CARIN-aligned Patient Access and Da Vinci Plan-Net Provider Directory FHIR APIs powered by Smile CDR for its insurance members
+  and the public.
 common:
-  - type: CapabilityMap
-    url: capabilities/jefferson-health-capability-edges.yml
-    name: Jefferson Health Business Capability Map
-  - type: AgenticAccess
-    url: agentic-access/jefferson-health-agentic-access.yml
-  - type: DomainSecurity
-    url: security/jefferson-health-domain-security.yml
-  - type: Authentication
-    url: authentication/jefferson-health-authentication.yml
-  - type: OAuthScopes
-    url: scopes/jefferson-health-scopes.yml
-  - type: Website
-    url: https://www.jeffersonhealth.org/
-  - type: PatientPortal
-    url: https://my.jeffersonhealth.org/
-  - type: PatientPortal
-    url: https://mychart.jefferson.edu/
-  - type: MyChartCentral
-    url: https://www.jeffersonhealth.org/your-health/my-jefferson-health/mychart-central
-  - type: Locations
-    url: https://www.jeffersonhealth.org/locations
-  - type: PriceTransparency
-    url: https://www.jeffersonhealth.org/pay-my-bill/charge-description
-  - type: PriceEstimator
-    url: https://www.jeffersonhealth.org/pay-my-bill/price-estimator
-  - type: PrivacyPolicy
-    url: https://www.jeffersonhealth.org/privacy-practices
-  - type: TermsOfService
-    url: https://www.jeffersonhealth.org/privacy-practices/website-terms-of-use
-  - type: TermsOfService
-    name: Jefferson Health website terms and conditions
-    url: https://www.jeffersonhealth.org/terms-and-conditions
-  - type: University
-    url: https://www.jefferson.edu/
-  - type: HealthPlans
-    url: https://www.jeffersonhealthplans.com/
-  - type: Compliance
-    name: CMS Interoperability and Patient Access Final Rule (CMS-9115-F)
-    url: https://www.cms.gov/Regulations-and-Guidance/Guidance/Interoperability/index
-  - type: Compliance
-    name: 21st Century Cures Act ONC Final Rule
-    url: https://www.healthit.gov/curesrule/
-  - type: JSONLD
-    url: json-ld/jefferson-health-context.jsonld
-  - type: Vocabulary
-    url: vocabulary/jefferson-health-vocabulary.yml
-  - type: JSONSchema
-    url: json-schema/jefferson-health-patient-schema.json
-  - type: JSONSchema
-    url: json-schema/jefferson-health-observation-schema.json
-  - type: JSONSchema
-    url: json-schema/jefferson-health-practitioner-schema.json
-  - type: JSONStructure
-    url: json-structure/jefferson-health-fhir-encounter-structure.json
-  - type: Plans
-    url: plans/jefferson-health-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/jefferson-health-rate-limits.yml
-  - type: FinOps
-    url: finops/jefferson-health-finops.yml
-  - type: LLMsTxt
-    name: Jefferson Health llms.txt (provider-published)
-    url: llms/jefferson-health-llms.txt
-  - type: WellKnown
-    url: well-known/jefferson-health-well-known.yml
-  - type: Conformance
-    url: conformance/jefferson-health-conformance.yml
-  - type: CapabilityStatement
-    name: Thomas Jefferson University Hospital FHIR R4 CapabilityStatement (harvested)
-    url: conformance/jefferson-health-tjuh-fhir-r4-capabilitystatement.json
-  - type: CapabilityStatement
-    name: Jefferson Health Plans Provider Directory CapabilityStatement (harvested)
-    url: conformance/jefferson-health-jhp-provider-directory-capabilitystatement.json
-  - type: ErrorCatalog
-    url: errors/jefferson-health-problem-types.yml
-  - type: Lifecycle
-    url: lifecycle/jefferson-health-lifecycle.yml
-  - type: Conventions
-    url: conventions/jefferson-health-conventions.yml
-  - type: DataModel
-    url: data-model/jefferson-health-data-model.yml
-  - type: Packages
-    url: packages/jefferson-health-packages.yml
-  - type: Overlay
-    name: Overlay for the Thomas Jefferson University Hospital FHIR R4 API
-    url: overlays/jefferson-health-tjuh-fhir-r4-overlay.yaml
-  - type: Overlay
-    name: Overlay for the Jefferson Health Plans Provider Directory FHIR API
-    url: overlays/jefferson-health-jhp-provider-directory-overlay.yaml
-  - type: AgentSkill
-    url: skills/_index.yml
-  - type: GitHubOrganization
-    url: https://github.com/jefferson-health
-  - type: DeveloperPortal
-    name: Jefferson Health Plans SMART on FHIR App Developer Portal
-    url: https://appgallery.healthpartnersplans.com/app-gallery/portal/
-  - type: Documentation
-    name: Jefferson Health Plans Interoperability
-    url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/
-  - type: APIReference
-    name: Jefferson Health Plans Developer Resources
-    url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/developer-resources/
-  - type: GettingStarted
-    name: Register for API Access
-    url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/register-for-api-access.html
-  - type: SignUp
-    name: Register for the Interoperability Portal
-    url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/register-for-the-interoperability-portal.html
-  - type: HelpCenter
-    name: Interoperability member education FAQ
-    url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/member-education-faq.html
-  - type: Blog
-    name: Living Well
-    url: https://www.jeffersonhealth.org/your-health/living-well
-  - type: News
-    url: https://www.jeffersonhealth.org/about-us/news
-  - type: Compliance
-    name: Jefferson Health Corporate Compliance
-    url: https://www.jeffersonhealth.org/about-us/corporate-compliance
+- type: Spectral
+  url: rules/jefferson-health-tjuh-fhir-r4-rules.yml
+- type: Spectral
+  url: rules/jefferson-health-rules.yml
+- type: Spectral
+  url: rules/jefferson-health-jsonschema-spectral-rules.yml
+- type: Spectral
+  url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
+- type: Deprecation
+  url: lifecycle/jefferson-health-lifecycle.yml
+- type: Hosts
+  url: hosts/jefferson-health-hosts.yml
+- type: CapabilityMap
+  url: capabilities/jefferson-health-capability-edges.yml
+  name: Jefferson Health Business Capability Map
+- type: AgenticAccess
+  url: agentic-access/jefferson-health-agentic-access.yml
+- type: DomainSecurity
+  url: security/jefferson-health-domain-security.yml
+- type: Authentication
+  url: authentication/jefferson-health-authentication.yml
+- type: OAuthScopes
+  url: scopes/jefferson-health-scopes.yml
+- type: Website
+  url: https://www.jeffersonhealth.org/
+- type: PatientPortal
+  url: https://my.jeffersonhealth.org/
+- type: PatientPortal
+  url: https://mychart.jefferson.edu/
+- type: MyChartCentral
+  url: https://www.jeffersonhealth.org/your-health/my-jefferson-health/mychart-central
+- type: Locations
+  url: https://www.jeffersonhealth.org/locations
+- type: PriceTransparency
+  url: https://www.jeffersonhealth.org/pay-my-bill/charge-description
+- type: PriceEstimator
+  url: https://www.jeffersonhealth.org/pay-my-bill/price-estimator
+- type: PrivacyPolicy
+  url: https://www.jeffersonhealth.org/privacy-practices
+- type: TermsOfService
+  url: https://www.jeffersonhealth.org/privacy-practices/website-terms-of-use
+- type: TermsOfService
+  name: Jefferson Health website terms and conditions
+  url: https://www.jeffersonhealth.org/terms-and-conditions
+- type: University
+  url: https://www.jefferson.edu/
+- type: HealthPlans
+  url: https://www.jeffersonhealthplans.com/
+- type: Compliance
+  name: CMS Interoperability and Patient Access Final Rule (CMS-9115-F)
+  url: https://www.cms.gov/Regulations-and-Guidance/Guidance/Interoperability/index
+- type: Compliance
+  name: 21st Century Cures Act ONC Final Rule
+  url: https://www.healthit.gov/curesrule/
+- type: JSONLD
+  url: json-ld/jefferson-health-context.jsonld
+- type: Vocabulary
+  url: vocabulary/jefferson-health-vocabulary.yml
+- type: JSONSchema
+  url: json-schema/jefferson-health-patient-schema.json
+- type: JSONSchema
+  url: json-schema/jefferson-health-observation-schema.json
+- type: JSONSchema
+  url: json-schema/jefferson-health-practitioner-schema.json
+- type: JSONStructure
+  url: json-structure/jefferson-health-fhir-encounter-structure.json
+- type: Plans
+  url: plans/jefferson-health-plans-pricing.yml
+- type: FinOps
+  url: finops/jefferson-health-finops.yml
+- type: LLMsTxt
+  name: Jefferson Health llms.txt (provider-published)
+  url: llms/jefferson-health-llms.txt
+- type: WellKnown
+  url: well-known/jefferson-health-well-known.yml
+- type: Conformance
+  url: conformance/jefferson-health-conformance.yml
+- type: CapabilityStatement
+  name: Thomas Jefferson University Hospital FHIR R4 CapabilityStatement (harvested)
+  url: conformance/jefferson-health-tjuh-fhir-r4-capabilitystatement.json
+- type: CapabilityStatement
+  name: Jefferson Health Plans Provider Directory CapabilityStatement (harvested)
+  url: conformance/jefferson-health-jhp-provider-directory-capabilitystatement.json
+- type: ErrorCatalog
+  url: errors/jefferson-health-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/jefferson-health-lifecycle.yml
+- type: Conventions
+  url: conventions/jefferson-health-conventions.yml
+- type: DataModel
+  url: data-model/jefferson-health-data-model.yml
+- type: Overlay
+  name: Overlay for the Thomas Jefferson University Hospital FHIR R4 API
+  url: overlays/jefferson-health-tjuh-fhir-r4-overlay.yaml
+- type: Overlay
+  name: Overlay for the Jefferson Health Plans Provider Directory FHIR API
+  url: overlays/jefferson-health-jhp-provider-directory-overlay.yaml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: GitHubOrganization
+  url: https://github.com/jefferson-health
+- type: DeveloperPortal
+  name: Jefferson Health Plans SMART on FHIR App Developer Portal
+  url: https://appgallery.healthpartnersplans.com/app-gallery/portal/
+- type: Documentation
+  name: Jefferson Health Plans Interoperability
+  url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/
+- type: APIReference
+  name: Jefferson Health Plans Developer Resources
+  url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/developer-resources/
+- type: GettingStarted
+  name: Register for API Access
+  url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/register-for-api-access.html
+- type: SignUp
+  name: Register for the Interoperability Portal
+  url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/register-for-the-interoperability-portal.html
+- type: HelpCenter
+  name: Interoperability member education FAQ
+  url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/member-education-faq.html
+- type: Blog
+  name: Living Well
+  url: https://www.jeffersonhealth.org/your-health/living-well
+- type: News
+  url: https://www.jeffersonhealth.org/about-us/news
+- type: Compliance
+  name: Jefferson Health Corporate Compliance
+  url: https://www.jeffersonhealth.org/about-us/corporate-compliance
 apis:
 - aid: jefferson-health:tjuh-fhir-dstu2-api
   name: Thomas Jefferson University Hospital FHIR DSTU2 API
@@ -214,11 +220,9 @@ apis:
   - SMART on FHIR
   humanURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/DSTU2/
   baseURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/DSTU2
-  description: >-
-    The legacy Thomas Jefferson University Hospital DSTU2 FHIR endpoint listed in Epic's public R4 endpoint
-    registry under the organization "Jefferson Health". It remains available for backward compatibility
-    with older SMART on FHIR apps written against the FHIR DSTU2 baseline that pre-dates the CMS Interoperability
-    and Patient Access mandate; new integrations should target the R4 endpoint instead.
+  description: The legacy Thomas Jefferson University Hospital DSTU2 FHIR endpoint listed in Epic's public R4 endpoint registry under the organization
+    "Jefferson Health". It remains available for backward compatibility with older SMART on FHIR apps written against the FHIR DSTU2 baseline
+    that pre-dates the CMS Interoperability and Patient Access mandate; new integrations should target the R4 endpoint instead.
   properties:
   - type: Documentation
     url: https://fhir.epic.com/Specifications
@@ -246,21 +250,17 @@ apis:
   - Smile CDR
   humanURL: https://smilercdr.healthpartnersplans.com/fhir-request-apps/swagger-ui/
   baseURL: https://smilercdr.healthpartnersplans.com/
-  description: >-
-    The Jefferson Health Plans (formerly Health Partners Plans) Patient Access FHIR API exposes adjudicated
-    claims, encounter data from providers, formulary data, and certain clinical data to JHP members via
-    third-party apps under the CMS Interoperability and Patient Access Final Rule (CMS-9115-F). The repository
-    conforms to HL7 FHIR Release 4.0.1, is powered by Smile CDR, and uses OAuth 2.0 / OpenID Connect for
-    member authentication and authorization, with developer registration handled through the JHP SMART
-    on FHIR App Developer Portal.
+  description: The Jefferson Health Plans (formerly Health Partners Plans) Patient Access FHIR API exposes adjudicated claims, encounter data
+    from providers, formulary data, and certain clinical data to JHP members via third-party apps under the CMS Interoperability and Patient Access
+    Final Rule (CMS-9115-F). The repository conforms to HL7 FHIR Release 4.0.1, is powered by Smile CDR, and uses OAuth 2.0 / OpenID Connect for
+    member authentication and authorization, with developer registration handled through the JHP SMART on FHIR App Developer Portal.
   properties:
   - type: Documentation
     url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/
   - type: DeveloperResources
     url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/developer-resources/
   - type: AuthenticationEndpoints
-    url: >-
-      https://www.jeffersonhealthplans.com/home/about-us/interoperability/authentication-and-data-endpoints/
+    url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/authentication-and-data-endpoints/
   - type: AppRegistration
     url: https://appgallery.healthpartnersplans.com/app-gallery/portal/#/login
   - type: APIReference
@@ -274,8 +274,7 @@ apis:
     name: CMS-9115-F Interoperability and Patient Access Final Rule
     url: https://www.cms.gov/Regulations-and-Guidance/Guidance/Interoperability/index
   - type: TermsOfService
-    url: >-
-      https://www.jeffersonhealthplans.com/home/about-us/interoperability/terms-of-service.html
+    url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/terms-of-service.html
 - aid: jefferson-health:myjeffersonhealth-mychart
   name: MyJeffersonHealth MyChart Patient Portal
   tags:
@@ -284,12 +283,10 @@ apis:
   - Patient Portal
   humanURL: https://my.jeffersonhealth.org/
   baseURL: https://my.jeffersonhealth.org/
-  description: >-
-    MyJeffersonHealth is the patient-facing Epic MyChart deployment used by Jefferson Health patients
-    to view test results, message providers, request prescription renewals, schedule appointments, pay
-    bills, and grant third-party patient-access apps consent to retrieve their data through Jefferson's
-    underlying FHIR R4 API. It also participates in Epic's MyChart Central, allowing single-login access
-    across participating health systems.
+  description: MyJeffersonHealth is the patient-facing Epic MyChart deployment used by Jefferson Health patients to view test results, message
+    providers, request prescription renewals, schedule appointments, pay bills, and grant third-party patient-access apps consent to retrieve
+    their data through Jefferson's underlying FHIR R4 API. It also participates in Epic's MyChart Central, allowing single-login access across
+    participating health systems.
   properties:
   - type: PatientPortal
     url: https://my.jeffersonhealth.org/mychart/Authentication/Login
@@ -345,6 +342,8 @@ apis:
     url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
   - type: SpectralRuleset
     url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
+  - type: JSONSchema
+    url: json-schema/jefferson-health-bundle-schema.json
 - aid: jefferson-health:jefferson-health-bulk-data-api
   name: Jefferson Health Bulk Data API
   description: HL7 FHIR Bulk Data Access Group-level export.
@@ -429,6 +428,8 @@ apis:
     url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
   - type: SpectralRuleset
     url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
+  - type: JSONSchema
+    url: json-schema/jefferson-health-bundle-schema.json
 - aid: jefferson-health:jefferson-health-document-reference-api
   name: Jefferson Health Document Reference API
   description: A reference to a document, often a CCDA or clinical note.
@@ -473,6 +474,8 @@ apis:
     url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
   - type: SpectralRuleset
     url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
+  - type: JSONSchema
+    url: json-schema/jefferson-health-bundle-schema.json
 - aid: jefferson-health:jefferson-health-encounter-api
   name: Jefferson Health Encounter API
   description: An interaction between a patient and healthcare provider(s).
@@ -515,6 +518,8 @@ apis:
     url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
   - type: SpectralRuleset
     url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
+  - type: JSONSchema
+    url: json-schema/jefferson-health-bundle-schema.json
 - aid: jefferson-health:jefferson-health-endpoint-api
   name: Jefferson Health Endpoint API
   description: The technical details of an endpoint that can be used for electronic services.
@@ -558,6 +563,8 @@ apis:
     url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
   - type: SpectralRuleset
     url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
+  - type: JSONSchema
+    url: json-schema/jefferson-health-bundle-schema.json
 - aid: jefferson-health:jefferson-health-healthcare-service-api
   name: Jefferson Health Healthcare Service API
   description: The details of a healthcare service available at a location.
@@ -602,6 +609,8 @@ apis:
     url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
   - type: SpectralRuleset
     url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
+  - type: JSONSchema
+    url: json-schema/jefferson-health-bundle-schema.json
 - aid: jefferson-health:jefferson-health-insurance-plan-api
   name: Jefferson Health Insurance Plan API
   description: Details of a Health Insurance product/plan provided by an organization.
@@ -646,6 +655,8 @@ apis:
     url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
   - type: SpectralRuleset
     url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
+  - type: JSONSchema
+    url: json-schema/jefferson-health-bundle-schema.json
 - aid: jefferson-health:jefferson-health-location-api
   name: Jefferson Health Location API
   description: Details and position information for a physical place.
@@ -688,10 +699,11 @@ apis:
     url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
   - type: SpectralRuleset
     url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
+  - type: JSONSchema
+    url: json-schema/jefferson-health-bundle-schema.json
 - aid: jefferson-health:jefferson-health-medication-request-api
   name: Jefferson Health Medication Request API
-  description: >-
-    An order or request for both supply of the medication and the instructions for administration.
+  description: An order or request for both supply of the medication and the instructions for administration.
   humanURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
   baseURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
   tags:
@@ -733,6 +745,8 @@ apis:
     url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
   - type: SpectralRuleset
     url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
+  - type: JSONSchema
+    url: json-schema/jefferson-health-bundle-schema.json
 - aid: jefferson-health:jefferson-health-metadata-api
   name: Jefferson Health Metadata API
   description: FHIR conformance discovery.
@@ -775,6 +789,10 @@ apis:
     url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
   - type: SpectralRuleset
     url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
+  - type: JSONSchema
+    url: json-schema/jefferson-health-capability-statement-schema.json
+  - type: JSONSchema
+    url: json-schema/jefferson-health-smart-configuration-schema.json
 - aid: jefferson-health:jefferson-health-observation-api
   name: Jefferson Health Observation API
   description: Measurements and simple assertions made about a patient.
@@ -817,6 +835,8 @@ apis:
     url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
   - type: SpectralRuleset
     url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
+  - type: JSONSchema
+    url: json-schema/jefferson-health-bundle-schema.json
 - aid: jefferson-health:jefferson-health-organization-api
   name: Jefferson Health Organization API
   description: A formally or informally recognized grouping of people or organizations.
@@ -859,6 +879,8 @@ apis:
     url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
   - type: SpectralRuleset
     url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
+  - type: JSONSchema
+    url: json-schema/jefferson-health-bundle-schema.json
 - aid: jefferson-health:jefferson-health-patient-api
   name: Jefferson Health Patient API
   description: Demographics and other administrative information about an individual receiving care.
@@ -903,6 +925,10 @@ apis:
     url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
   - type: SpectralRuleset
     url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
+  - type: JSONSchema
+    url: json-schema/jefferson-health-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/jefferson-health-bundle-schema.json
 - aid: jefferson-health:jefferson-health-practitioner-api
   name: Jefferson Health Practitioner API
   description: A person who is directly or indirectly involved in the provisioning of healthcare.
@@ -945,10 +971,13 @@ apis:
     url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
   - type: SpectralRuleset
     url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
+  - type: JSONSchema
+    url: json-schema/jefferson-health-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/jefferson-health-practitioner-schema.json
 - aid: jefferson-health:jefferson-health-practitioner-role-api
   name: Jefferson Health Practitioner Role API
-  description: >-
-    A specific set of roles a practitioner may perform at an organization for a period of time.
+  description: A specific set of roles a practitioner may perform at an organization for a period of time.
   humanURL: https://providerfhirapi.healthpartnersplans.com
   baseURL: https://providerfhirapi.healthpartnersplans.com
   tags:
@@ -990,8 +1019,10 @@ apis:
     url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
   - type: SpectralRuleset
     url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
+  - type: JSONSchema
+    url: json-schema/jefferson-health-bundle-schema.json
 x-enrichment:
-  date: '2026-08-15'
+  date: '2026-10-12'
   status: enriched
-  artifacts_added: 21
-  pass: local-v1
+  artifacts_added: 0
+  pass: local-v5

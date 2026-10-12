@@ -1,31 +1,27 @@
 ---
-name: Retrieve a patient's Jefferson Health record with SMART on FHIR
-description: >-
-  Authorize against the Thomas Jefferson University Hospital Epic FHIR R4
-  endpoint using SMART App Launch, then read the authorized patient's
-  demographics, labs, problems, encounters, medications, allergies and clinical
-  documents. Requires a patient-authorized OAuth 2.0 token — there is no
-  anonymous access to any clinical resource.
+name: jefferson-health-patient-record-retrieval
+description: Authorize against the Thomas Jefferson University Hospital Epic FHIR R4 endpoint using SMART App Launch, then
+  read the authorized patient's demographics, labs, problems, encounters, medications, allergies and clinical documents. Requires
+  a patient-authorized OAuth 2.0 token — there is no anonymous access to any clinical resource.
 api: openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml
 base_url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
 auth: oauth2
 operations:
-  - getSmartConfiguration
-  - getMetadata
-  - readPatient
-  - searchPatient
-  - searchObservation
-  - searchCondition
-  - searchEncounter
-  - searchMedicationRequest
-  - searchAllergyIntolerance
-  - searchDocumentReference
+- getSmartConfiguration
+- getMetadata
+- readPatient
+- searchPatient
+- searchObservation
+- searchCondition
+- searchEncounter
+- searchMedicationRequest
+- searchAllergyIntolerance
+- searchDocumentReference
 generated: '2026-08-15'
 method: generated
-source: >-
-  Grounded in the operationIds in openapi/_original/, the live SMART
-  configuration in well-known/jefferson-health-tjuh-smart-configuration.json and
-  the live CapabilityStatement in conformance/.
+source: Grounded in the operationIds in openapi/_original/, the live SMART configuration in well-known/jefferson-health-tjuh-smart-configuration.json
+  and the live CapabilityStatement in conformance/.
+title: Retrieve a patient's Jefferson Health record with SMART on FHIR
 ---
 
 # Retrieve a patient's Jefferson Health record with SMART on FHIR
