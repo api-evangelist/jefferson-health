@@ -1,120 +1,154 @@
 openapi: 3.2.0
 info:
-  title: Jefferson Health Plans Provider Directory FHIR Practitioner…
-  description: OpenAPI surface for the Jefferson Health Plans (formerly Health Partners Plans) Provider Directory FHIR API — a public HL7 FHIR Release 4.0.1 endpoint powered by Smile CDR 2025.02.R04 that surfaces JHP's network of in-network practitioners, organizations, locations, healthcare services, and insurance plans for the CMS Interoperability and Patient Access Provider Directory requirement. Aligned with the HL7 Da Vinci Payer Data Exchange Plan-Net implementation guide.
-  version: 4.0.1
-  contact:
-    name: Jefferson Health Plans Interoperability
-    url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/
-  license:
-    name: HL7 FHIR License
-    url: https://www.hl7.org/fhir/license.html
+  title: Smile CDR Practitioner API
+  contact: {}
+  version: 2026.02.R02
+  description: The Practitioner FHIR resource type
 servers:
-- url: https://providerfhirapi.healthpartnersplans.com
-  description: Jefferson Health Plans Provider Directory FHIR R4 production endpoint
+- url: https://providerfhirapi.healthpartnersplans.com/
+  description: Smile CDR
 tags:
 - name: Practitioner
-  description: A person who is directly or indirectly involved in the provisioning of healthcare.
+  description: The Practitioner FHIR resource type
 paths:
   /Practitioner/{id}:
     get:
       tags:
       - Practitioner
-      summary: Read Practitioner By Id
-      operationId: readPractitioner
+      summary: 'read-instance: Read Practitioner instance'
       parameters:
-      - $ref: '#/components/parameters/ResourceId'
+      - name: id
+        in: path
+        description: The resource ID
+        required: true
+        style: simple
+        schema:
+          minimum: 1
+          type: string
+        example: '123'
       responses:
         '200':
-          description: Practitioner resource
+          description: Success
           content:
             application/fhir+json:
               schema:
-                $ref: '#/components/schemas/Practitioner'
+                $ref: '#/components/schemas/FHIR-JSON-RESOURCE'
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/FHIR-XML-RESOURCE'
+      operationId: getPractitionerById
+      x-operation-id-source: derived
   /Practitioner:
     get:
       tags:
       - Practitioner
-      summary: Search Practitioner
-      description: Search Practitioner resources by name, family, given, or resource id.
-      operationId: searchPractitioner
+      summary: 'search-type: Search for Practitioner instances'
+      description: This is a search type
       parameters:
+      - name: _lastUpdated
+        in: query
+        description: Only return resources which were last updated as specified by the given range
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: string
+            format: date
       - name: name
         in: query
-        description: Practitioner name.
+        description: A server defined search that may match any of the string fields in the HumanName, including family, give, prefix, suffix, suffix, and/or text
+        required: false
         schema:
           type: string
       - name: family
         in: query
-        description: Family name.
+        description: Select Practitioners with the specified family name
+        required: false
         schema:
           type: string
       - name: given
         in: query
-        description: Given name.
+        description: Select Practitioners with the specified given name
+        required: false
         schema:
           type: string
-      - $ref: '#/components/parameters/Count'
+      - name: _id
+        in: query
+        description: "**Logical id of this artifact**  \n**NOTE**: This US Core SearchParameter definition extends the usage context of the\n[Conformance expectation extension](http://hl7.org/fhir/R4/extension-capabilitystatement-expectation.html)\n - multipleAnd\n - multipleOr\n - comparator\n - modifier\n - chain"
+        required: false
+        schema:
+          type: string
       responses:
         '200':
-          description: Bundle of Practitioner resources
+          description: Success
           content:
             application/fhir+json:
               schema:
-                $ref: '#/components/schemas/Bundle'
+                $ref: '#/components/schemas/FHIR-JSON-RESOURCE'
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/FHIR-XML-RESOURCE'
+      operationId: getPractitioner
+      x-operation-id-source: derived
+  /Practitioner/_search:
+    get:
+      tags:
+      - Practitioner
+      summary: 'search-type: Search for Practitioner instances'
+      description: This is a search type
+      parameters:
+      - name: _lastUpdated
+        in: query
+        description: Only return resources which were last updated as specified by the given range
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: string
+            format: date
+      - name: name
+        in: query
+        description: A server defined search that may match any of the string fields in the HumanName, including family, give, prefix, suffix, suffix, and/or text
+        required: false
+        schema:
+          type: string
+      - name: family
+        in: query
+        description: Select Practitioners with the specified family name
+        required: false
+        schema:
+          type: string
+      - name: given
+        in: query
+        description: Select Practitioners with the specified given name
+        required: false
+        schema:
+          type: string
+      - name: _id
+        in: query
+        description: "**Logical id of this artifact**  \n**NOTE**: This US Core SearchParameter definition extends the usage context of the\n[Conformance expectation extension](http://hl7.org/fhir/R4/extension-capabilitystatement-expectation.html)\n - multipleAnd\n - multipleOr\n - comparator\n - modifier\n - chain"
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/FHIR-JSON-RESOURCE'
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/FHIR-XML-RESOURCE'
+      operationId: getPractitionerSearch
+      x-operation-id-source: derived
 components:
-  parameters:
-    Count:
-      name: _count
-      in: query
-      description: Number of resources to return per page.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 1000
-    ResourceId:
-      name: id
-      in: path
-      required: true
-      description: FHIR logical id of the resource.
-      schema:
-        type: string
   schemas:
-    Bundle:
+    FHIR-XML-RESOURCE:
       type: object
-      description: HL7 FHIR Bundle resource (searchset).
-      properties:
-        resourceType:
-          type: string
-          enum:
-          - Bundle
-        type:
-          type: string
-          enum:
-          - searchset
-        total:
-          type: integer
-        entry:
-          type: array
-          items:
-            type: object
-    Practitioner:
+      description: A FHIR resource
+    FHIR-JSON-RESOURCE:
       type: object
-      properties:
-        resourceType:
-          type: string
-          enum:
-          - Practitioner
-        id:
-          type: string
-        identifier:
-          type: array
-          items:
-            type: object
-        name:
-          type: array
-          items:
-            type: object
-externalDocs:
-  description: HL7 Da Vinci PDEX Plan-Net Implementation Guide
-  url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
+      description: A FHIR resource

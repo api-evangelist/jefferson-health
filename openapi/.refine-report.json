@@ -1,53 +1,26 @@
 {
   "provider": "jefferson-health",
   "sources": [
-    "_original/jefferson-health-jhp-provider-directory-fhir-api-openapi.yml",
-    "_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml"
+    "_original/jefferson-health-openapi.yml"
   ],
   "outputs": [
     "jefferson-health-endpoint-api-openapi.yml",
-    "jefferson-health-healthcare-service-api-openapi.yml",
-    "jefferson-health-insurance-plan-api-openapi.yml",
+    "jefferson-health-healthcareservice-api-openapi.yml",
+    "jefferson-health-insuranceplan-api-openapi.yml",
     "jefferson-health-location-api-openapi.yml",
-    "jefferson-health-metadata-api-openapi.yml",
     "jefferson-health-organization-api-openapi.yml",
+    "jefferson-health-organizationaffiliation-api-openapi.yml",
     "jefferson-health-practitioner-api-openapi.yml",
-    "jefferson-health-practitioner-role-api-openapi.yml",
-    "jefferson-health-allergy-intolerance-api-openapi.yml",
-    "jefferson-health-bulk-data-api-openapi.yml",
-    "jefferson-health-condition-api-openapi.yml",
-    "jefferson-health-document-reference-api-openapi.yml",
-    "jefferson-health-encounter-api-openapi.yml",
-    "jefferson-health-medication-request-api-openapi.yml",
-    "jefferson-health-observation-api-openapi.yml",
-    "jefferson-health-patient-api-openapi.yml"
+    "jefferson-health-practitionerrole-api-openapi.yml",
+    "jefferson-health-system-level-operations-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
-    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
-    "jefferson-health-jhp-provider-directory-fhir-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "jefferson-health-tjuh-fhir-r4-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "tag 'Metadata' spans 2 source specs (jefferson-health-jhp-provider-directory-fhir-api-openapi.yml, jefferson-health-tjuh-fhir-r4-api-openapi.yml): per-path servers applied",
-    "apis.yml register: already-registered"
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "jefferson-health-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "apis.yml register: written (+5 apis, 12 total)"
   ],
-  "skipped": [
-    "jefferson-health-allergy-intolerance-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "jefferson-health-bulk-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "jefferson-health-condition-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "jefferson-health-document-reference-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "jefferson-health-encounter-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "jefferson-health-endpoint-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "jefferson-health-healthcare-service-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "jefferson-health-insurance-plan-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "jefferson-health-location-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "jefferson-health-medication-request-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "jefferson-health-metadata-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "jefferson-health-observation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "jefferson-health-organization-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "jefferson-health-patient-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "jefferson-health-practitioner-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "jefferson-health-practitioner-role-api-openapi.yml: previously refined output, superseded by openapi/_original/"
-  ]
+  "skipped": []
 }

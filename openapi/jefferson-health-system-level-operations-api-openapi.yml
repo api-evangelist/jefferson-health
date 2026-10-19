@@ -1,0 +1,40 @@
+openapi: 3.2.0
+info:
+  title: Smile CDR System Level Operations API
+  contact: {}
+  version: 2026.02.R02
+  description: Server-level operations
+servers:
+- url: https://providerfhirapi.healthpartnersplans.com/
+  description: Smile CDR
+tags:
+- name: System Level Operations
+  description: Server-level operations
+paths:
+  /metadata:
+    get:
+      tags:
+      - System Level Operations
+      summary: 'server-capabilities: Fetch the server FHIR CapabilityStatement'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/FHIR-JSON-RESOURCE'
+              example: "{\n  \"resourceType\": \"CapabilityStatement\"\n}"
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/FHIR-XML-RESOURCE'
+              example: <CapabilityStatement xmlns="http://hl7.org/fhir"/>
+      operationId: getMetadata
+      x-operation-id-source: derived
+components:
+  schemas:
+    FHIR-XML-RESOURCE:
+      type: object
+      description: A FHIR resource
+    FHIR-JSON-RESOURCE:
+      type: object
+      description: A FHIR resource

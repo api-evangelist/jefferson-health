@@ -1,86 +1,175 @@
 openapi: 3.2.0
 info:
-  title: Jefferson Health Plans Provider Directory FHIR Insurance…
-  description: OpenAPI surface for the Jefferson Health Plans (formerly Health Partners Plans) Provider Directory FHIR API — a public HL7 FHIR Release 4.0.1 endpoint powered by Smile CDR 2025.02.R04 that surfaces JHP's network of in-network practitioners, organizations, locations, healthcare services, and insurance plans for the CMS Interoperability and Patient Access Provider Directory requirement. Aligned with the HL7 Da Vinci Payer Data Exchange Plan-Net implementation guide.
-  version: 4.0.1
-  contact:
-    name: Jefferson Health Plans Interoperability
-    url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/
-  license:
-    name: HL7 FHIR License
-    url: https://www.hl7.org/fhir/license.html
+  title: Smile CDR Insurance Plan API
+  contact: {}
+  version: 2026.02.R02
+  description: The InsurancePlan FHIR resource type
 servers:
-- url: https://providerfhirapi.healthpartnersplans.com
-  description: Jefferson Health Plans Provider Directory FHIR R4 production endpoint
+- url: https://providerfhirapi.healthpartnersplans.com/
+  description: Smile CDR
 tags:
 - name: Insurance Plan
-  description: Details of a Health Insurance product/plan provided by an organization.
+  description: The InsurancePlan FHIR resource type
 paths:
   /InsurancePlan:
     get:
       tags:
       - Insurance Plan
-      summary: Search Insurance Plan
-      description: Search InsurancePlan resources by plan type, coverage area, identifier, administered-by organization, or name.
-      operationId: searchInsurancePlan
+      summary: 'search-type: Search for InsurancePlan instances'
+      description: This is a search type
       parameters:
+      - name: _lastUpdated
+        in: query
+        description: Accesses the last updated date of an InsurancePlan
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: string
+            format: date
       - name: type
         in: query
-        schema:
-          type: string
-      - name: coverage-area
-        in: query
-        schema:
-          type: string
-      - name: identifier
-        in: query
+        description: A code for the type of organization
+        required: false
         schema:
           type: string
       - name: administered-by
         in: query
+        description: Product administrator
+        required: false
+        schema:
+          type: string
+      - name: plan-type
+        in: query
+        description: Select plans of the specified type
+        required: false
+        schema:
+          type: string
+      - name: coverage-area
+        in: query
+        description: Select products that are offered in the specified location
+        required: false
+        schema:
+          type: string
+      - name: identifier
+        in: query
+        description: Any identifier for the organization (not the accreditation issuer's identifier)
+        required: false
+        schema:
+          type: string
+      - name: owned-by
+        in: query
+        description: An organization of which this organization forms a part
+        required: false
         schema:
           type: string
       - name: name
         in: query
+        description: Select products with the specified name
+        required: false
         schema:
           type: string
-      - $ref: '#/components/parameters/Count'
+      - name: _id
+        in: query
+        description: The ID of the resource
+        required: false
+        schema:
+          type: string
       responses:
         '200':
-          description: Bundle of InsurancePlan resources
+          description: Success
           content:
             application/fhir+json:
               schema:
-                $ref: '#/components/schemas/Bundle'
+                $ref: '#/components/schemas/FHIR-JSON-RESOURCE'
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/FHIR-XML-RESOURCE'
+      operationId: getInsurancePlan
+      x-operation-id-source: derived
+  /InsurancePlan/_search:
+    get:
+      tags:
+      - Insurance Plan
+      summary: 'search-type: Search for InsurancePlan instances'
+      description: This is a search type
+      parameters:
+      - name: _lastUpdated
+        in: query
+        description: Accesses the last updated date of an InsurancePlan
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: string
+            format: date
+      - name: type
+        in: query
+        description: A code for the type of organization
+        required: false
+        schema:
+          type: string
+      - name: administered-by
+        in: query
+        description: Product administrator
+        required: false
+        schema:
+          type: string
+      - name: plan-type
+        in: query
+        description: Select plans of the specified type
+        required: false
+        schema:
+          type: string
+      - name: coverage-area
+        in: query
+        description: Select products that are offered in the specified location
+        required: false
+        schema:
+          type: string
+      - name: identifier
+        in: query
+        description: Any identifier for the organization (not the accreditation issuer's identifier)
+        required: false
+        schema:
+          type: string
+      - name: owned-by
+        in: query
+        description: An organization of which this organization forms a part
+        required: false
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: Select products with the specified name
+        required: false
+        schema:
+          type: string
+      - name: _id
+        in: query
+        description: The ID of the resource
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/FHIR-JSON-RESOURCE'
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/FHIR-XML-RESOURCE'
+      operationId: getInsurancePlanSearch
+      x-operation-id-source: derived
 components:
-  parameters:
-    Count:
-      name: _count
-      in: query
-      description: Number of resources to return per page.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 1000
   schemas:
-    Bundle:
+    FHIR-XML-RESOURCE:
       type: object
-      description: HL7 FHIR Bundle resource (searchset).
-      properties:
-        resourceType:
-          type: string
-          enum:
-          - Bundle
-        type:
-          type: string
-          enum:
-          - searchset
-        total:
-          type: integer
-        entry:
-          type: array
-          items:
-            type: object
-externalDocs:
-  description: HL7 Da Vinci PDEX Plan-Net Implementation Guide
-  url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
+      description: A FHIR resource
+    FHIR-JSON-RESOURCE:
+      type: object
+      description: A FHIR resource

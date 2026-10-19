@@ -1,70 +1,103 @@
 openapi: 3.2.0
 info:
-  title: Jefferson Health Plans Provider Directory FHIR Endpoint API
-  description: OpenAPI surface for the Jefferson Health Plans (formerly Health Partners Plans) Provider Directory FHIR API — a public HL7 FHIR Release 4.0.1 endpoint powered by Smile CDR 2025.02.R04 that surfaces JHP's network of in-network practitioners, organizations, locations, healthcare services, and insurance plans for the CMS Interoperability and Patient Access Provider Directory requirement. Aligned with the HL7 Da Vinci Payer Data Exchange Plan-Net implementation guide.
-  version: 4.0.1
-  contact:
-    name: Jefferson Health Plans Interoperability
-    url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/
-  license:
-    name: HL7 FHIR License
-    url: https://www.hl7.org/fhir/license.html
+  title: Smile CDR Endpoint API
+  contact: {}
+  version: 2026.02.R02
+  description: The Endpoint FHIR resource type
 servers:
-- url: https://providerfhirapi.healthpartnersplans.com
-  description: Jefferson Health Plans Provider Directory FHIR R4 production endpoint
+- url: https://providerfhirapi.healthpartnersplans.com/
+  description: Smile CDR
 tags:
 - name: Endpoint
-  description: The technical details of an endpoint that can be used for electronic services.
+  description: The Endpoint FHIR resource type
 paths:
   /Endpoint:
     get:
       tags:
       - Endpoint
-      summary: Search Endpoint
-      description: Search Endpoint resources by managing organization or resource id.
-      operationId: searchEndpoint
+      summary: 'search-type: Search for Endpoint instances'
+      description: This is a search type
       parameters:
+      - name: _lastUpdated
+        in: query
+        description: Only return resources which were last updated as specified by the given range
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: string
+            format: date
       - name: organization
         in: query
+        description: The organization that is managing the endpoint
+        required: false
         schema:
           type: string
-      - $ref: '#/components/parameters/Count'
+      - name: _id
+        in: query
+        description: The ID of the resource
+        required: false
+        schema:
+          type: string
       responses:
         '200':
-          description: Bundle of Endpoint resources
+          description: Success
           content:
             application/fhir+json:
               schema:
-                $ref: '#/components/schemas/Bundle'
+                $ref: '#/components/schemas/FHIR-JSON-RESOURCE'
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/FHIR-XML-RESOURCE'
+      operationId: getEndpoint
+      x-operation-id-source: derived
+  /Endpoint/_search:
+    get:
+      tags:
+      - Endpoint
+      summary: 'search-type: Search for Endpoint instances'
+      description: This is a search type
+      parameters:
+      - name: _lastUpdated
+        in: query
+        description: Only return resources which were last updated as specified by the given range
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: string
+            format: date
+      - name: organization
+        in: query
+        description: The organization that is managing the endpoint
+        required: false
+        schema:
+          type: string
+      - name: _id
+        in: query
+        description: The ID of the resource
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/FHIR-JSON-RESOURCE'
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/FHIR-XML-RESOURCE'
+      operationId: getEndpointSearch
+      x-operation-id-source: derived
 components:
-  parameters:
-    Count:
-      name: _count
-      in: query
-      description: Number of resources to return per page.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 1000
   schemas:
-    Bundle:
+    FHIR-XML-RESOURCE:
       type: object
-      description: HL7 FHIR Bundle resource (searchset).
-      properties:
-        resourceType:
-          type: string
-          enum:
-          - Bundle
-        type:
-          type: string
-          enum:
-          - searchset
-        total:
-          type: integer
-        entry:
-          type: array
-          items:
-            type: object
-externalDocs:
-  description: HL7 Da Vinci PDEX Plan-Net Implementation Guide
-  url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
+      description: A FHIR resource
+    FHIR-JSON-RESOURCE:
+      type: object
+      description: A FHIR resource

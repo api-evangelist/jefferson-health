@@ -220,9 +220,11 @@ apis:
   - SMART on FHIR
   humanURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/DSTU2/
   baseURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/DSTU2
-  description: The legacy Thomas Jefferson University Hospital DSTU2 FHIR endpoint listed in Epic's public R4 endpoint registry under the organization
-    "Jefferson Health". It remains available for backward compatibility with older SMART on FHIR apps written against the FHIR DSTU2 baseline
-    that pre-dates the CMS Interoperability and Patient Access mandate; new integrations should target the R4 endpoint instead.
+  description: >-
+    The legacy Thomas Jefferson University Hospital DSTU2 FHIR endpoint listed in Epic's public R4 endpoint
+    registry under the organization "Jefferson Health". It remains available for backward compatibility
+    with older SMART on FHIR apps written against the FHIR DSTU2 baseline that pre-dates the CMS Interoperability
+    and Patient Access mandate; new integrations should target the R4 endpoint instead.
   properties:
   - type: Documentation
     url: https://fhir.epic.com/Specifications
@@ -250,17 +252,21 @@ apis:
   - Smile CDR
   humanURL: https://smilercdr.healthpartnersplans.com/fhir-request-apps/swagger-ui/
   baseURL: https://smilercdr.healthpartnersplans.com/
-  description: The Jefferson Health Plans (formerly Health Partners Plans) Patient Access FHIR API exposes adjudicated claims, encounter data
-    from providers, formulary data, and certain clinical data to JHP members via third-party apps under the CMS Interoperability and Patient Access
-    Final Rule (CMS-9115-F). The repository conforms to HL7 FHIR Release 4.0.1, is powered by Smile CDR, and uses OAuth 2.0 / OpenID Connect for
-    member authentication and authorization, with developer registration handled through the JHP SMART on FHIR App Developer Portal.
+  description: >-
+    The Jefferson Health Plans (formerly Health Partners Plans) Patient Access FHIR API exposes adjudicated
+    claims, encounter data from providers, formulary data, and certain clinical data to JHP members via
+    third-party apps under the CMS Interoperability and Patient Access Final Rule (CMS-9115-F). The repository
+    conforms to HL7 FHIR Release 4.0.1, is powered by Smile CDR, and uses OAuth 2.0 / OpenID Connect for
+    member authentication and authorization, with developer registration handled through the JHP SMART
+    on FHIR App Developer Portal.
   properties:
   - type: Documentation
     url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/
   - type: DeveloperResources
     url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/developer-resources/
   - type: AuthenticationEndpoints
-    url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/authentication-and-data-endpoints/
+    url: >-
+      https://www.jeffersonhealthplans.com/home/about-us/interoperability/authentication-and-data-endpoints/
   - type: AppRegistration
     url: https://appgallery.healthpartnersplans.com/app-gallery/portal/#/login
   - type: APIReference
@@ -274,7 +280,8 @@ apis:
     name: CMS-9115-F Interoperability and Patient Access Final Rule
     url: https://www.cms.gov/Regulations-and-Guidance/Guidance/Interoperability/index
   - type: TermsOfService
-    url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/terms-of-service.html
+    url: >-
+      https://www.jeffersonhealthplans.com/home/about-us/interoperability/terms-of-service.html
 - aid: jefferson-health:myjeffersonhealth-mychart
   name: MyJeffersonHealth MyChart Patient Portal
   tags:
@@ -283,10 +290,12 @@ apis:
   - Patient Portal
   humanURL: https://my.jeffersonhealth.org/
   baseURL: https://my.jeffersonhealth.org/
-  description: MyJeffersonHealth is the patient-facing Epic MyChart deployment used by Jefferson Health patients to view test results, message
-    providers, request prescription renewals, schedule appointments, pay bills, and grant third-party patient-access apps consent to retrieve
-    their data through Jefferson's underlying FHIR R4 API. It also participates in Epic's MyChart Central, allowing single-login access across
-    participating health systems.
+  description: >-
+    MyJeffersonHealth is the patient-facing Epic MyChart deployment used by Jefferson Health patients
+    to view test results, message providers, request prescription renewals, schedule appointments, pay
+    bills, and grant third-party patient-access apps consent to retrieve their data through Jefferson's
+    underlying FHIR R4 API. It also participates in Epic's MyChart Central, allowing single-login access
+    across participating health systems.
   properties:
   - type: PatientPortal
     url: https://my.jeffersonhealth.org/mychart/Authentication/Login
@@ -298,228 +307,6 @@ apis:
     url: https://mychart.jefferson.edu/mychart/Authentication/Login
   - type: Overview
     url: https://www.jeffersonhealth.org/your-health/my-jefferson-health
-- aid: jefferson-health:jefferson-health-allergy-intolerance-api
-  name: Jefferson Health Allergy Intolerance API
-  description: Risk of harmful or undesirable physiological response to a substance.
-  humanURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
-  baseURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
-  tags:
-  - AllergyIntolerance
-  tags_raw:
-  - Allergy Intolerance
-  properties:
-  - type: OpenAPI
-    url: openapi/jefferson-health-allergy-intolerance-api-openapi.yml
-  - type: CapabilityStatement
-    url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/metadata
-  - type: SmartConfiguration
-    url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/.well-known/smart-configuration
-  - type: Authorization
-    url: https://fhir.jefferson.edu/FHIRProxy/oauth2/authorize
-  - type: Token
-    url: https://fhir.jefferson.edu/FHIRProxy/oauth2/token
-  - type: Documentation
-    url: https://fhir.epic.com/Documentation
-  - type: AppRegistration
-    url: https://fhir.epic.com/Developer/Apps
-  - type: DeveloperPortal
-    url: https://fhir.epic.com/
-  - type: EndpointDirectory
-    url: https://open.epic.com/Endpoints/R4
-  - type: ImplementationGuide
-    url: https://hl7.org/fhir/us/core/STU6.1/
-  - type: ImplementationGuide
-    url: https://hl7.org/fhir/smart-app-launch/
-  - type: ImplementationGuide
-    url: https://hl7.org/fhir/uv/bulkdata/
-  - type: SpectralRuleset
-    url: rules/jefferson-health-tjuh-fhir-r4-rules.yml
-  - type: CapabilityStatement
-    url: https://providerfhirapi.healthpartnersplans.com/metadata
-  - type: Documentation
-    url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/
-  - type: ImplementationGuide
-    url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
-  - type: SpectralRuleset
-    url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
-  - type: JSONSchema
-    url: json-schema/jefferson-health-bundle-schema.json
-- aid: jefferson-health:jefferson-health-bulk-data-api
-  name: Jefferson Health Bulk Data API
-  description: HL7 FHIR Bulk Data Access Group-level export.
-  humanURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
-  baseURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
-  tags:
-  - Bulk Data
-  properties:
-  - type: OpenAPI
-    url: openapi/jefferson-health-bulk-data-api-openapi.yml
-  - type: CapabilityStatement
-    url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/metadata
-  - type: SmartConfiguration
-    url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/.well-known/smart-configuration
-  - type: Authorization
-    url: https://fhir.jefferson.edu/FHIRProxy/oauth2/authorize
-  - type: Token
-    url: https://fhir.jefferson.edu/FHIRProxy/oauth2/token
-  - type: Documentation
-    url: https://fhir.epic.com/Documentation
-  - type: AppRegistration
-    url: https://fhir.epic.com/Developer/Apps
-  - type: DeveloperPortal
-    url: https://fhir.epic.com/
-  - type: EndpointDirectory
-    url: https://open.epic.com/Endpoints/R4
-  - type: ImplementationGuide
-    url: https://hl7.org/fhir/us/core/STU6.1/
-  - type: ImplementationGuide
-    url: https://hl7.org/fhir/smart-app-launch/
-  - type: ImplementationGuide
-    url: https://hl7.org/fhir/uv/bulkdata/
-  - type: SpectralRuleset
-    url: rules/jefferson-health-tjuh-fhir-r4-rules.yml
-  - type: CapabilityStatement
-    url: https://providerfhirapi.healthpartnersplans.com/metadata
-  - type: Documentation
-    url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/
-  - type: ImplementationGuide
-    url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
-  - type: SpectralRuleset
-    url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
-- aid: jefferson-health:jefferson-health-condition-api
-  name: Jefferson Health Condition API
-  description: Detailed information about conditions, problems, or diagnoses.
-  humanURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
-  baseURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
-  tags:
-  - Condition
-  properties:
-  - type: OpenAPI
-    url: openapi/jefferson-health-condition-api-openapi.yml
-  - type: CapabilityStatement
-    url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/metadata
-  - type: SmartConfiguration
-    url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/.well-known/smart-configuration
-  - type: Authorization
-    url: https://fhir.jefferson.edu/FHIRProxy/oauth2/authorize
-  - type: Token
-    url: https://fhir.jefferson.edu/FHIRProxy/oauth2/token
-  - type: Documentation
-    url: https://fhir.epic.com/Documentation
-  - type: AppRegistration
-    url: https://fhir.epic.com/Developer/Apps
-  - type: DeveloperPortal
-    url: https://fhir.epic.com/
-  - type: EndpointDirectory
-    url: https://open.epic.com/Endpoints/R4
-  - type: ImplementationGuide
-    url: https://hl7.org/fhir/us/core/STU6.1/
-  - type: ImplementationGuide
-    url: https://hl7.org/fhir/smart-app-launch/
-  - type: ImplementationGuide
-    url: https://hl7.org/fhir/uv/bulkdata/
-  - type: SpectralRuleset
-    url: rules/jefferson-health-tjuh-fhir-r4-rules.yml
-  - type: CapabilityStatement
-    url: https://providerfhirapi.healthpartnersplans.com/metadata
-  - type: Documentation
-    url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/
-  - type: ImplementationGuide
-    url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
-  - type: SpectralRuleset
-    url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
-  - type: JSONSchema
-    url: json-schema/jefferson-health-bundle-schema.json
-- aid: jefferson-health:jefferson-health-document-reference-api
-  name: Jefferson Health Document Reference API
-  description: A reference to a document, often a CCDA or clinical note.
-  humanURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
-  baseURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
-  tags:
-  - DocumentReference
-  tags_raw:
-  - Document Reference
-  properties:
-  - type: OpenAPI
-    url: openapi/jefferson-health-document-reference-api-openapi.yml
-  - type: CapabilityStatement
-    url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/metadata
-  - type: SmartConfiguration
-    url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/.well-known/smart-configuration
-  - type: Authorization
-    url: https://fhir.jefferson.edu/FHIRProxy/oauth2/authorize
-  - type: Token
-    url: https://fhir.jefferson.edu/FHIRProxy/oauth2/token
-  - type: Documentation
-    url: https://fhir.epic.com/Documentation
-  - type: AppRegistration
-    url: https://fhir.epic.com/Developer/Apps
-  - type: DeveloperPortal
-    url: https://fhir.epic.com/
-  - type: EndpointDirectory
-    url: https://open.epic.com/Endpoints/R4
-  - type: ImplementationGuide
-    url: https://hl7.org/fhir/us/core/STU6.1/
-  - type: ImplementationGuide
-    url: https://hl7.org/fhir/smart-app-launch/
-  - type: ImplementationGuide
-    url: https://hl7.org/fhir/uv/bulkdata/
-  - type: SpectralRuleset
-    url: rules/jefferson-health-tjuh-fhir-r4-rules.yml
-  - type: CapabilityStatement
-    url: https://providerfhirapi.healthpartnersplans.com/metadata
-  - type: Documentation
-    url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/
-  - type: ImplementationGuide
-    url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
-  - type: SpectralRuleset
-    url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
-  - type: JSONSchema
-    url: json-schema/jefferson-health-bundle-schema.json
-- aid: jefferson-health:jefferson-health-encounter-api
-  name: Jefferson Health Encounter API
-  description: An interaction between a patient and healthcare provider(s).
-  humanURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
-  baseURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
-  tags:
-  - Encounter
-  properties:
-  - type: OpenAPI
-    url: openapi/jefferson-health-encounter-api-openapi.yml
-  - type: CapabilityStatement
-    url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/metadata
-  - type: SmartConfiguration
-    url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/.well-known/smart-configuration
-  - type: Authorization
-    url: https://fhir.jefferson.edu/FHIRProxy/oauth2/authorize
-  - type: Token
-    url: https://fhir.jefferson.edu/FHIRProxy/oauth2/token
-  - type: Documentation
-    url: https://fhir.epic.com/Documentation
-  - type: AppRegistration
-    url: https://fhir.epic.com/Developer/Apps
-  - type: DeveloperPortal
-    url: https://fhir.epic.com/
-  - type: EndpointDirectory
-    url: https://open.epic.com/Endpoints/R4
-  - type: ImplementationGuide
-    url: https://hl7.org/fhir/us/core/STU6.1/
-  - type: ImplementationGuide
-    url: https://hl7.org/fhir/smart-app-launch/
-  - type: ImplementationGuide
-    url: https://hl7.org/fhir/uv/bulkdata/
-  - type: SpectralRuleset
-    url: rules/jefferson-health-tjuh-fhir-r4-rules.yml
-  - type: CapabilityStatement
-    url: https://providerfhirapi.healthpartnersplans.com/metadata
-  - type: Documentation
-    url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/
-  - type: ImplementationGuide
-    url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
-  - type: SpectralRuleset
-    url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
-  - type: JSONSchema
-    url: json-schema/jefferson-health-bundle-schema.json
 - aid: jefferson-health:jefferson-health-endpoint-api
   name: Jefferson Health Endpoint API
   description: The technical details of an endpoint that can be used for electronic services.
@@ -531,98 +318,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/jefferson-health-endpoint-api-openapi.yml
-  - type: CapabilityStatement
-    url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/metadata
-  - type: SmartConfiguration
-    url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/.well-known/smart-configuration
-  - type: Authorization
-    url: https://fhir.jefferson.edu/FHIRProxy/oauth2/authorize
-  - type: Token
-    url: https://fhir.jefferson.edu/FHIRProxy/oauth2/token
-  - type: Documentation
-    url: https://fhir.epic.com/Documentation
-  - type: AppRegistration
-    url: https://fhir.epic.com/Developer/Apps
-  - type: DeveloperPortal
-    url: https://fhir.epic.com/
-  - type: EndpointDirectory
-    url: https://open.epic.com/Endpoints/R4
-  - type: ImplementationGuide
-    url: https://hl7.org/fhir/us/core/STU6.1/
-  - type: ImplementationGuide
-    url: https://hl7.org/fhir/smart-app-launch/
-  - type: ImplementationGuide
-    url: https://hl7.org/fhir/uv/bulkdata/
-  - type: SpectralRuleset
-    url: rules/jefferson-health-tjuh-fhir-r4-rules.yml
-  - type: CapabilityStatement
-    url: https://providerfhirapi.healthpartnersplans.com/metadata
-  - type: Documentation
-    url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/
-  - type: ImplementationGuide
-    url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
-  - type: SpectralRuleset
-    url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
-  - type: JSONSchema
-    url: json-schema/jefferson-health-bundle-schema.json
-- aid: jefferson-health:jefferson-health-healthcare-service-api
-  name: Jefferson Health Healthcare Service API
-  description: The details of a healthcare service available at a location.
-  humanURL: https://providerfhirapi.healthpartnersplans.com
-  baseURL: https://providerfhirapi.healthpartnersplans.com
-  tags:
-  - HealthcareService
-  tags_raw:
-  - Healthcare Service
-  properties:
-  - type: OpenAPI
-    url: openapi/jefferson-health-healthcare-service-api-openapi.yml
-  - type: CapabilityStatement
-    url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/metadata
-  - type: SmartConfiguration
-    url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/.well-known/smart-configuration
-  - type: Authorization
-    url: https://fhir.jefferson.edu/FHIRProxy/oauth2/authorize
-  - type: Token
-    url: https://fhir.jefferson.edu/FHIRProxy/oauth2/token
-  - type: Documentation
-    url: https://fhir.epic.com/Documentation
-  - type: AppRegistration
-    url: https://fhir.epic.com/Developer/Apps
-  - type: DeveloperPortal
-    url: https://fhir.epic.com/
-  - type: EndpointDirectory
-    url: https://open.epic.com/Endpoints/R4
-  - type: ImplementationGuide
-    url: https://hl7.org/fhir/us/core/STU6.1/
-  - type: ImplementationGuide
-    url: https://hl7.org/fhir/smart-app-launch/
-  - type: ImplementationGuide
-    url: https://hl7.org/fhir/uv/bulkdata/
-  - type: SpectralRuleset
-    url: rules/jefferson-health-tjuh-fhir-r4-rules.yml
-  - type: CapabilityStatement
-    url: https://providerfhirapi.healthpartnersplans.com/metadata
-  - type: Documentation
-    url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/
-  - type: ImplementationGuide
-    url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
-  - type: SpectralRuleset
-    url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
-  - type: JSONSchema
-    url: json-schema/jefferson-health-bundle-schema.json
-- aid: jefferson-health:jefferson-health-insurance-plan-api
-  name: Jefferson Health Insurance Plan API
-  description: Details of a Health Insurance product/plan provided by an organization.
-  humanURL: https://providerfhirapi.healthpartnersplans.com
-  baseURL: https://providerfhirapi.healthpartnersplans.com
-  tags:
-  - InsurancePlan
-  tags_raw:
-  - Insurance Plan
-  properties:
-  - type: OpenAPI
-    url: openapi/jefferson-health-insurance-plan-api-openapi.yml
   - type: CapabilityStatement
     url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/metadata
   - type: SmartConfiguration
@@ -701,142 +396,6 @@ apis:
     url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
   - type: JSONSchema
     url: json-schema/jefferson-health-bundle-schema.json
-- aid: jefferson-health:jefferson-health-medication-request-api
-  name: Jefferson Health Medication Request API
-  description: An order or request for both supply of the medication and the instructions for administration.
-  humanURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
-  baseURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
-  tags:
-  - MedicationRequest
-  tags_raw:
-  - Medication Request
-  properties:
-  - type: OpenAPI
-    url: openapi/jefferson-health-medication-request-api-openapi.yml
-  - type: CapabilityStatement
-    url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/metadata
-  - type: SmartConfiguration
-    url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/.well-known/smart-configuration
-  - type: Authorization
-    url: https://fhir.jefferson.edu/FHIRProxy/oauth2/authorize
-  - type: Token
-    url: https://fhir.jefferson.edu/FHIRProxy/oauth2/token
-  - type: Documentation
-    url: https://fhir.epic.com/Documentation
-  - type: AppRegistration
-    url: https://fhir.epic.com/Developer/Apps
-  - type: DeveloperPortal
-    url: https://fhir.epic.com/
-  - type: EndpointDirectory
-    url: https://open.epic.com/Endpoints/R4
-  - type: ImplementationGuide
-    url: https://hl7.org/fhir/us/core/STU6.1/
-  - type: ImplementationGuide
-    url: https://hl7.org/fhir/smart-app-launch/
-  - type: ImplementationGuide
-    url: https://hl7.org/fhir/uv/bulkdata/
-  - type: SpectralRuleset
-    url: rules/jefferson-health-tjuh-fhir-r4-rules.yml
-  - type: CapabilityStatement
-    url: https://providerfhirapi.healthpartnersplans.com/metadata
-  - type: Documentation
-    url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/
-  - type: ImplementationGuide
-    url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
-  - type: SpectralRuleset
-    url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
-  - type: JSONSchema
-    url: json-schema/jefferson-health-bundle-schema.json
-- aid: jefferson-health:jefferson-health-metadata-api
-  name: Jefferson Health Metadata API
-  description: FHIR conformance discovery.
-  humanURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
-  baseURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
-  tags:
-  - Metadata
-  properties:
-  - type: OpenAPI
-    url: openapi/jefferson-health-metadata-api-openapi.yml
-  - type: CapabilityStatement
-    url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/metadata
-  - type: SmartConfiguration
-    url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/.well-known/smart-configuration
-  - type: Authorization
-    url: https://fhir.jefferson.edu/FHIRProxy/oauth2/authorize
-  - type: Token
-    url: https://fhir.jefferson.edu/FHIRProxy/oauth2/token
-  - type: Documentation
-    url: https://fhir.epic.com/Documentation
-  - type: AppRegistration
-    url: https://fhir.epic.com/Developer/Apps
-  - type: DeveloperPortal
-    url: https://fhir.epic.com/
-  - type: EndpointDirectory
-    url: https://open.epic.com/Endpoints/R4
-  - type: ImplementationGuide
-    url: https://hl7.org/fhir/us/core/STU6.1/
-  - type: ImplementationGuide
-    url: https://hl7.org/fhir/smart-app-launch/
-  - type: ImplementationGuide
-    url: https://hl7.org/fhir/uv/bulkdata/
-  - type: SpectralRuleset
-    url: rules/jefferson-health-tjuh-fhir-r4-rules.yml
-  - type: CapabilityStatement
-    url: https://providerfhirapi.healthpartnersplans.com/metadata
-  - type: Documentation
-    url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/
-  - type: ImplementationGuide
-    url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
-  - type: SpectralRuleset
-    url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
-  - type: JSONSchema
-    url: json-schema/jefferson-health-capability-statement-schema.json
-  - type: JSONSchema
-    url: json-schema/jefferson-health-smart-configuration-schema.json
-- aid: jefferson-health:jefferson-health-observation-api
-  name: Jefferson Health Observation API
-  description: Measurements and simple assertions made about a patient.
-  humanURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
-  baseURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
-  tags:
-  - Observation
-  properties:
-  - type: OpenAPI
-    url: openapi/jefferson-health-observation-api-openapi.yml
-  - type: CapabilityStatement
-    url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/metadata
-  - type: SmartConfiguration
-    url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/.well-known/smart-configuration
-  - type: Authorization
-    url: https://fhir.jefferson.edu/FHIRProxy/oauth2/authorize
-  - type: Token
-    url: https://fhir.jefferson.edu/FHIRProxy/oauth2/token
-  - type: Documentation
-    url: https://fhir.epic.com/Documentation
-  - type: AppRegistration
-    url: https://fhir.epic.com/Developer/Apps
-  - type: DeveloperPortal
-    url: https://fhir.epic.com/
-  - type: EndpointDirectory
-    url: https://open.epic.com/Endpoints/R4
-  - type: ImplementationGuide
-    url: https://hl7.org/fhir/us/core/STU6.1/
-  - type: ImplementationGuide
-    url: https://hl7.org/fhir/smart-app-launch/
-  - type: ImplementationGuide
-    url: https://hl7.org/fhir/uv/bulkdata/
-  - type: SpectralRuleset
-    url: rules/jefferson-health-tjuh-fhir-r4-rules.yml
-  - type: CapabilityStatement
-    url: https://providerfhirapi.healthpartnersplans.com/metadata
-  - type: Documentation
-    url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/
-  - type: ImplementationGuide
-    url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
-  - type: SpectralRuleset
-    url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
-  - type: JSONSchema
-    url: json-schema/jefferson-health-bundle-schema.json
 - aid: jefferson-health:jefferson-health-organization-api
   name: Jefferson Health Organization API
   description: A formally or informally recognized grouping of people or organizations.
@@ -879,54 +438,6 @@ apis:
     url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
   - type: SpectralRuleset
     url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
-  - type: JSONSchema
-    url: json-schema/jefferson-health-bundle-schema.json
-- aid: jefferson-health:jefferson-health-patient-api
-  name: Jefferson Health Patient API
-  description: Demographics and other administrative information about an individual receiving care.
-  humanURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
-  baseURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4
-  tags:
-  - Patients
-  tags_raw:
-  - Patient
-  properties:
-  - type: OpenAPI
-    url: openapi/jefferson-health-patient-api-openapi.yml
-  - type: CapabilityStatement
-    url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/metadata
-  - type: SmartConfiguration
-    url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/.well-known/smart-configuration
-  - type: Authorization
-    url: https://fhir.jefferson.edu/FHIRProxy/oauth2/authorize
-  - type: Token
-    url: https://fhir.jefferson.edu/FHIRProxy/oauth2/token
-  - type: Documentation
-    url: https://fhir.epic.com/Documentation
-  - type: AppRegistration
-    url: https://fhir.epic.com/Developer/Apps
-  - type: DeveloperPortal
-    url: https://fhir.epic.com/
-  - type: EndpointDirectory
-    url: https://open.epic.com/Endpoints/R4
-  - type: ImplementationGuide
-    url: https://hl7.org/fhir/us/core/STU6.1/
-  - type: ImplementationGuide
-    url: https://hl7.org/fhir/smart-app-launch/
-  - type: ImplementationGuide
-    url: https://hl7.org/fhir/uv/bulkdata/
-  - type: SpectralRuleset
-    url: rules/jefferson-health-tjuh-fhir-r4-rules.yml
-  - type: CapabilityStatement
-    url: https://providerfhirapi.healthpartnersplans.com/metadata
-  - type: Documentation
-    url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/
-  - type: ImplementationGuide
-    url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
-  - type: SpectralRuleset
-    url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
-  - type: JSONSchema
-    url: json-schema/jefferson-health-patient-schema.json
   - type: JSONSchema
     url: json-schema/jefferson-health-bundle-schema.json
 - aid: jefferson-health:jefferson-health-practitioner-api
@@ -975,14 +486,212 @@ apis:
     url: json-schema/jefferson-health-bundle-schema.json
   - type: JSONSchema
     url: json-schema/jefferson-health-practitioner-schema.json
+- aid: jefferson-health:jefferson-health-organizationaffiliation-api
+  name: Jefferson Health Organization Affiliation API
+  description: The OrganizationAffiliation FHIR resource type
+  humanURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/DSTU2/
+  baseURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/DSTU2
+  tags:
+  - OrganizationAffiliation
+  properties:
+  - type: OpenAPI
+    url: openapi/jefferson-health-organizationaffiliation-api-openapi.yml
+  - type: CapabilityStatement
+    url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/metadata
+  - type: SmartConfiguration
+    url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/.well-known/smart-configuration
+  - type: Authorization
+    url: https://fhir.jefferson.edu/FHIRProxy/oauth2/authorize
+  - type: Token
+    url: https://fhir.jefferson.edu/FHIRProxy/oauth2/token
+  - type: Documentation
+    url: https://fhir.epic.com/Documentation
+  - type: AppRegistration
+    url: https://fhir.epic.com/Developer/Apps
+  - type: DeveloperPortal
+    url: https://fhir.epic.com/
+  - type: EndpointDirectory
+    url: https://open.epic.com/Endpoints/R4
+  - type: ImplementationGuide
+    url: https://hl7.org/fhir/us/core/STU6.1/
+  - type: ImplementationGuide
+    url: https://hl7.org/fhir/smart-app-launch/
+  - type: ImplementationGuide
+    url: https://hl7.org/fhir/uv/bulkdata/
+  - type: SpectralRuleset
+    url: rules/jefferson-health-tjuh-fhir-r4-rules.yml
+  - type: CapabilityStatement
+    url: https://providerfhirapi.healthpartnersplans.com/metadata
+  - type: Documentation
+    url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/
+  - type: ImplementationGuide
+    url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
+  - type: SpectralRuleset
+    url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
+  - type: JSONSchema
+    url: json-schema/jefferson-health-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/jefferson-health-capability-statement-schema.json
+  - type: JSONSchema
+    url: json-schema/jefferson-health-smart-configuration-schema.json
+  - type: JSONSchema
+    url: json-schema/jefferson-health-patient-schema.json
+- aid: jefferson-health:jefferson-health-system-level-operations-api
+  name: Jefferson Health System Level Operations API
+  description: Server-level operations
+  humanURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/DSTU2/
+  baseURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/DSTU2
+  tags:
+  - System Level Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/jefferson-health-system-level-operations-api-openapi.yml
+  - type: CapabilityStatement
+    url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/metadata
+  - type: SmartConfiguration
+    url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/.well-known/smart-configuration
+  - type: Authorization
+    url: https://fhir.jefferson.edu/FHIRProxy/oauth2/authorize
+  - type: Token
+    url: https://fhir.jefferson.edu/FHIRProxy/oauth2/token
+  - type: Documentation
+    url: https://fhir.epic.com/Documentation
+  - type: AppRegistration
+    url: https://fhir.epic.com/Developer/Apps
+  - type: DeveloperPortal
+    url: https://fhir.epic.com/
+  - type: EndpointDirectory
+    url: https://open.epic.com/Endpoints/R4
+  - type: ImplementationGuide
+    url: https://hl7.org/fhir/us/core/STU6.1/
+  - type: ImplementationGuide
+    url: https://hl7.org/fhir/smart-app-launch/
+  - type: ImplementationGuide
+    url: https://hl7.org/fhir/uv/bulkdata/
+  - type: SpectralRuleset
+    url: rules/jefferson-health-tjuh-fhir-r4-rules.yml
+  - type: CapabilityStatement
+    url: https://providerfhirapi.healthpartnersplans.com/metadata
+  - type: Documentation
+    url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/
+  - type: ImplementationGuide
+    url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
+  - type: SpectralRuleset
+    url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
+  - type: JSONSchema
+    url: json-schema/jefferson-health-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/jefferson-health-capability-statement-schema.json
+  - type: JSONSchema
+    url: json-schema/jefferson-health-smart-configuration-schema.json
+  - type: JSONSchema
+    url: json-schema/jefferson-health-patient-schema.json
+- aid: jefferson-health:jefferson-health-healthcare-service-api
+  name: Jefferson Health Healthcare Service API
+  description: The HealthcareService FHIR resource type
+  humanURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/DSTU2/
+  baseURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/DSTU2
+  tags:
+  - Healthcare Service
+  properties:
+  - type: OpenAPI
+    url: openapi/jefferson-health-healthcare-service-api-openapi.yml
+  - type: CapabilityStatement
+    url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/metadata
+  - type: SmartConfiguration
+    url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/.well-known/smart-configuration
+  - type: Authorization
+    url: https://fhir.jefferson.edu/FHIRProxy/oauth2/authorize
+  - type: Token
+    url: https://fhir.jefferson.edu/FHIRProxy/oauth2/token
+  - type: Documentation
+    url: https://fhir.epic.com/Documentation
+  - type: AppRegistration
+    url: https://fhir.epic.com/Developer/Apps
+  - type: DeveloperPortal
+    url: https://fhir.epic.com/
+  - type: EndpointDirectory
+    url: https://open.epic.com/Endpoints/R4
+  - type: ImplementationGuide
+    url: https://hl7.org/fhir/us/core/STU6.1/
+  - type: ImplementationGuide
+    url: https://hl7.org/fhir/smart-app-launch/
+  - type: ImplementationGuide
+    url: https://hl7.org/fhir/uv/bulkdata/
+  - type: SpectralRuleset
+    url: rules/jefferson-health-tjuh-fhir-r4-rules.yml
+  - type: CapabilityStatement
+    url: https://providerfhirapi.healthpartnersplans.com/metadata
+  - type: Documentation
+    url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/
+  - type: ImplementationGuide
+    url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
+  - type: SpectralRuleset
+    url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
+  - type: JSONSchema
+    url: json-schema/jefferson-health-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/jefferson-health-capability-statement-schema.json
+  - type: JSONSchema
+    url: json-schema/jefferson-health-smart-configuration-schema.json
+  - type: JSONSchema
+    url: json-schema/jefferson-health-patient-schema.json
+- aid: jefferson-health:jefferson-health-insurance-plan-api
+  name: Jefferson Health Insurance Plan API
+  description: The InsurancePlan FHIR resource type
+  humanURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/DSTU2/
+  baseURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/DSTU2
+  tags:
+  - Insurance Plan
+  properties:
+  - type: OpenAPI
+    url: openapi/jefferson-health-insurance-plan-api-openapi.yml
+  - type: CapabilityStatement
+    url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/metadata
+  - type: SmartConfiguration
+    url: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/.well-known/smart-configuration
+  - type: Authorization
+    url: https://fhir.jefferson.edu/FHIRProxy/oauth2/authorize
+  - type: Token
+    url: https://fhir.jefferson.edu/FHIRProxy/oauth2/token
+  - type: Documentation
+    url: https://fhir.epic.com/Documentation
+  - type: AppRegistration
+    url: https://fhir.epic.com/Developer/Apps
+  - type: DeveloperPortal
+    url: https://fhir.epic.com/
+  - type: EndpointDirectory
+    url: https://open.epic.com/Endpoints/R4
+  - type: ImplementationGuide
+    url: https://hl7.org/fhir/us/core/STU6.1/
+  - type: ImplementationGuide
+    url: https://hl7.org/fhir/smart-app-launch/
+  - type: ImplementationGuide
+    url: https://hl7.org/fhir/uv/bulkdata/
+  - type: SpectralRuleset
+    url: rules/jefferson-health-tjuh-fhir-r4-rules.yml
+  - type: CapabilityStatement
+    url: https://providerfhirapi.healthpartnersplans.com/metadata
+  - type: Documentation
+    url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/
+  - type: ImplementationGuide
+    url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
+  - type: SpectralRuleset
+    url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
+  - type: JSONSchema
+    url: json-schema/jefferson-health-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/jefferson-health-capability-statement-schema.json
+  - type: JSONSchema
+    url: json-schema/jefferson-health-smart-configuration-schema.json
+  - type: JSONSchema
+    url: json-schema/jefferson-health-patient-schema.json
 - aid: jefferson-health:jefferson-health-practitioner-role-api
   name: Jefferson Health Practitioner Role API
-  description: A specific set of roles a practitioner may perform at an organization for a period of time.
-  humanURL: https://providerfhirapi.healthpartnersplans.com
-  baseURL: https://providerfhirapi.healthpartnersplans.com
+  description: The PractitionerRole FHIR resource type
+  humanURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/DSTU2/
+  baseURL: https://fhir.jefferson.edu/FHIRProxy/api/FHIR/DSTU2
   tags:
-  - PractitionerRole
-  tags_raw:
   - Practitioner Role
   properties:
   - type: OpenAPI
@@ -1021,6 +730,12 @@ apis:
     url: rules/jefferson-health-jhp-provider-directory-fhir-rules.yml
   - type: JSONSchema
     url: json-schema/jefferson-health-bundle-schema.json
+  - type: JSONSchema
+    url: json-schema/jefferson-health-capability-statement-schema.json
+  - type: JSONSchema
+    url: json-schema/jefferson-health-smart-configuration-schema.json
+  - type: JSONSchema
+    url: json-schema/jefferson-health-patient-schema.json
 x-enrichment:
   date: '2026-10-12'
   status: enriched

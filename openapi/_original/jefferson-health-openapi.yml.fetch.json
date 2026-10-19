@@ -1,0 +1,12 @@
+{
+ "url": "https://providerfhirapi.healthpartnersplans.com/api-docs",
+ "final": "https://providerfhirapi.healthpartnersplans.com/api-docs",
+ "status": 200,
+ "content_type": "text/yaml;charset=utf-8",
+ "bytes": 37863,
+ "sha256": "7ba81bfbfe5542672746d04848b8c0870ab13977261b9a48579c4cd10826466a",
+ "fetched_at": "2026-10-19",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "re-archived: the provider's current document replaced a stale archive (roadmap#793); the old files are in openapi/_superseded/2026-10-19-stale"
+}

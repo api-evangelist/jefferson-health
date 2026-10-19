@@ -1,108 +1,190 @@
 openapi: 3.2.0
 info:
-  title: Jefferson Health Plans Provider Directory FHIR Organization…
-  description: OpenAPI surface for the Jefferson Health Plans (formerly Health Partners Plans) Provider Directory FHIR API — a public HL7 FHIR Release 4.0.1 endpoint powered by Smile CDR 2025.02.R04 that surfaces JHP's network of in-network practitioners, organizations, locations, healthcare services, and insurance plans for the CMS Interoperability and Patient Access Provider Directory requirement. Aligned with the HL7 Da Vinci Payer Data Exchange Plan-Net implementation guide.
-  version: 4.0.1
-  contact:
-    name: Jefferson Health Plans Interoperability
-    url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/
-  license:
-    name: HL7 FHIR License
-    url: https://www.hl7.org/fhir/license.html
+  title: Smile CDR Organization API
+  contact: {}
+  version: 2026.02.R02
+  description: The Organization FHIR resource type
 servers:
-- url: https://providerfhirapi.healthpartnersplans.com
-  description: Jefferson Health Plans Provider Directory FHIR R4 production endpoint
+- url: https://providerfhirapi.healthpartnersplans.com/
+  description: Smile CDR
 tags:
 - name: Organization
-  description: A formally or informally recognized grouping of people or organizations.
+  description: The Organization FHIR resource type
 paths:
   /Organization/{id}:
     get:
       tags:
       - Organization
-      summary: Read Organization By Id
-      operationId: readOrganization
+      summary: 'read-instance: Read Organization instance'
       parameters:
-      - $ref: '#/components/parameters/ResourceId'
+      - name: id
+        in: path
+        description: The resource ID
+        required: true
+        style: simple
+        schema:
+          minimum: 1
+          type: string
+        example: '123'
       responses:
         '200':
-          description: Organization resource
+          description: Success
           content:
             application/fhir+json:
               schema:
-                type: object
+                $ref: '#/components/schemas/FHIR-JSON-RESOURCE'
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/FHIR-XML-RESOURCE'
+      operationId: getOrganizationById
+      x-operation-id-source: derived
   /Organization:
     get:
       tags:
       - Organization
-      summary: Search Organization
-      description: Search Organization resources by type, endpoint, coverage area, name, address, or id.
-      operationId: searchOrganization
+      summary: 'search-type: Search for Organization instances'
+      description: This is a search type
       parameters:
+      - name: _lastUpdated
+        in: query
+        description: Only return resources which were last updated as specified by the given range
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: string
+            format: date
       - name: type
         in: query
+        description: A code for the type of organization
+        required: false
         schema:
           type: string
       - name: endpoint
         in: query
+        description: Technical endpoints providing access to services operated for the organization
+        required: false
         schema:
           type: string
       - name: coverage-area
         in: query
+        description: "Select health insurance provider networks available in a region described by the specified location. This search parameter is for the NDH Network Profile \nResource only."
+        required: false
         schema:
           type: string
-      - name: name
+      - name: partof
         in: query
+        description: An organization of which this organization forms a part
+        required: false
         schema:
           type: string
       - name: address
         in: query
+        description: A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text
+        required: false
         schema:
           type: string
-      - $ref: '#/components/parameters/Count'
+      - name: name
+        in: query
+        description: A portion of the organization's name or alias
+        required: false
+        schema:
+          type: string
+      - name: _id
+        in: query
+        description: The ID of the resource
+        required: false
+        schema:
+          type: string
       responses:
         '200':
-          description: Bundle of Organization resources
+          description: Success
           content:
             application/fhir+json:
               schema:
-                $ref: '#/components/schemas/Bundle'
+                $ref: '#/components/schemas/FHIR-JSON-RESOURCE'
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/FHIR-XML-RESOURCE'
+      operationId: getOrganization
+      x-operation-id-source: derived
+  /Organization/_search:
+    get:
+      tags:
+      - Organization
+      summary: 'search-type: Search for Organization instances'
+      description: This is a search type
+      parameters:
+      - name: _lastUpdated
+        in: query
+        description: Only return resources which were last updated as specified by the given range
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: string
+            format: date
+      - name: type
+        in: query
+        description: A code for the type of organization
+        required: false
+        schema:
+          type: string
+      - name: endpoint
+        in: query
+        description: Technical endpoints providing access to services operated for the organization
+        required: false
+        schema:
+          type: string
+      - name: coverage-area
+        in: query
+        description: "Select health insurance provider networks available in a region described by the specified location. This search parameter is for the NDH Network Profile \nResource only."
+        required: false
+        schema:
+          type: string
+      - name: partof
+        in: query
+        description: An organization of which this organization forms a part
+        required: false
+        schema:
+          type: string
+      - name: address
+        in: query
+        description: A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text
+        required: false
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: A portion of the organization's name or alias
+        required: false
+        schema:
+          type: string
+      - name: _id
+        in: query
+        description: The ID of the resource
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/FHIR-JSON-RESOURCE'
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/FHIR-XML-RESOURCE'
+      operationId: getOrganizationSearch
+      x-operation-id-source: derived
 components:
-  parameters:
-    Count:
-      name: _count
-      in: query
-      description: Number of resources to return per page.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 1000
-    ResourceId:
-      name: id
-      in: path
-      required: true
-      description: FHIR logical id of the resource.
-      schema:
-        type: string
   schemas:
-    Bundle:
+    FHIR-XML-RESOURCE:
       type: object
-      description: HL7 FHIR Bundle resource (searchset).
-      properties:
-        resourceType:
-          type: string
-          enum:
-          - Bundle
-        type:
-          type: string
-          enum:
-          - searchset
-        total:
-          type: integer
-        entry:
-          type: array
-          items:
-            type: object
-externalDocs:
-  description: HL7 Da Vinci PDEX Plan-Net Implementation Guide
-  url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
+      description: A FHIR resource
+    FHIR-JSON-RESOURCE:
+      type: object
+      description: A FHIR resource

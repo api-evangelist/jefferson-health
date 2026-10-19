@@ -1,98 +1,187 @@
 openapi: 3.2.0
 info:
-  title: Jefferson Health Plans Provider Directory FHIR Practitioner…
-  description: OpenAPI surface for the Jefferson Health Plans (formerly Health Partners Plans) Provider Directory FHIR API — a public HL7 FHIR Release 4.0.1 endpoint powered by Smile CDR 2025.02.R04 that surfaces JHP's network of in-network practitioners, organizations, locations, healthcare services, and insurance plans for the CMS Interoperability and Patient Access Provider Directory requirement. Aligned with the HL7 Da Vinci Payer Data Exchange Plan-Net implementation guide.
-  version: 4.0.1
-  contact:
-    name: Jefferson Health Plans Interoperability
-    url: https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/
-  license:
-    name: HL7 FHIR License
-    url: https://www.hl7.org/fhir/license.html
+  title: Smile CDR Practitioner Role API
+  contact: {}
+  version: 2026.02.R02
+  description: The PractitionerRole FHIR resource type
 servers:
-- url: https://providerfhirapi.healthpartnersplans.com
-  description: Jefferson Health Plans Provider Directory FHIR R4 production endpoint
+- url: https://providerfhirapi.healthpartnersplans.com/
+  description: Smile CDR
 tags:
 - name: Practitioner Role
-  description: A specific set of roles a practitioner may perform at an organization for a period of time.
+  description: The PractitionerRole FHIR resource type
 paths:
   /PractitionerRole:
     get:
       tags:
       - Practitioner Role
-      summary: Search Practitioner Role
-      description: Search PractitionerRole resources by specialty, role, network, organization, practitioner, service, location, or endpoint.
-      operationId: searchPractitionerRole
+      summary: 'search-type: Search for PractitionerRole instances'
+      description: This is a search type
       parameters:
       - name: specialty
         in: query
+        description: The practitioner has this specialty at an organization
+        required: false
         schema:
           type: string
       - name: role
         in: query
+        description: The practitioner can perform this role at for the organization
+        required: false
         schema:
           type: string
+      - name: _lastUpdated
+        in: query
+        description: Only return resources which were last updated as specified by the given range
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: string
+            format: date
       - name: network
         in: query
-        schema:
-          type: string
-      - name: organization
-        in: query
-        schema:
-          type: string
-      - name: practitioner
-        in: query
-        schema:
-          type: string
-      - name: service
-        in: query
-        schema:
-          type: string
-      - name: location
-        in: query
+        description: Select roles where the practitioner is a member of the specified health insurance provider network
+        required: false
         schema:
           type: string
       - name: endpoint
         in: query
+        description: Technical endpoints providing access to services operated for the practitioner with this role
+        required: false
         schema:
           type: string
-      - $ref: '#/components/parameters/Count'
+      - name: practitioner
+        in: query
+        description: Practitioner that is able to provide the defined services for the organization
+        required: false
+        schema:
+          type: string
+      - name: service
+        in: query
+        description: The list of healthcare services that this worker provides for this role's Organization/Location(s)
+        required: false
+        schema:
+          type: string
+      - name: organization
+        in: query
+        description: The identity of the organization the practitioner represents / acts on behalf of
+        required: false
+        schema:
+          type: string
+      - name: location
+        in: query
+        description: One of the locations at which this practitioner provides care
+        required: false
+        schema:
+          type: string
+      - name: _id
+        in: query
+        description: The ID of the resource
+        required: false
+        schema:
+          type: string
       responses:
         '200':
-          description: Bundle of PractitionerRole resources
+          description: Success
           content:
             application/fhir+json:
               schema:
-                $ref: '#/components/schemas/Bundle'
+                $ref: '#/components/schemas/FHIR-JSON-RESOURCE'
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/FHIR-XML-RESOURCE'
+      operationId: getPractitionerRole
+      x-operation-id-source: derived
+  /PractitionerRole/_search:
+    get:
+      tags:
+      - Practitioner Role
+      summary: 'search-type: Search for PractitionerRole instances'
+      description: This is a search type
+      parameters:
+      - name: specialty
+        in: query
+        description: The practitioner has this specialty at an organization
+        required: false
+        schema:
+          type: string
+      - name: role
+        in: query
+        description: The practitioner can perform this role at for the organization
+        required: false
+        schema:
+          type: string
+      - name: _lastUpdated
+        in: query
+        description: Only return resources which were last updated as specified by the given range
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: string
+            format: date
+      - name: network
+        in: query
+        description: Select roles where the practitioner is a member of the specified health insurance provider network
+        required: false
+        schema:
+          type: string
+      - name: endpoint
+        in: query
+        description: Technical endpoints providing access to services operated for the practitioner with this role
+        required: false
+        schema:
+          type: string
+      - name: practitioner
+        in: query
+        description: Practitioner that is able to provide the defined services for the organization
+        required: false
+        schema:
+          type: string
+      - name: service
+        in: query
+        description: The list of healthcare services that this worker provides for this role's Organization/Location(s)
+        required: false
+        schema:
+          type: string
+      - name: organization
+        in: query
+        description: The identity of the organization the practitioner represents / acts on behalf of
+        required: false
+        schema:
+          type: string
+      - name: location
+        in: query
+        description: One of the locations at which this practitioner provides care
+        required: false
+        schema:
+          type: string
+      - name: _id
+        in: query
+        description: The ID of the resource
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/FHIR-JSON-RESOURCE'
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/FHIR-XML-RESOURCE'
+      operationId: getPractitionerRoleSearch
+      x-operation-id-source: derived
 components:
-  parameters:
-    Count:
-      name: _count
-      in: query
-      description: Number of resources to return per page.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 1000
   schemas:
-    Bundle:
+    FHIR-XML-RESOURCE:
       type: object
-      description: HL7 FHIR Bundle resource (searchset).
-      properties:
-        resourceType:
-          type: string
-          enum:
-          - Bundle
-        type:
-          type: string
-          enum:
-          - searchset
-        total:
-          type: integer
-        entry:
-          type: array
-          items:
-            type: object
-externalDocs:
-  description: HL7 Da Vinci PDEX Plan-Net Implementation Guide
-  url: https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/
+      description: A FHIR resource
+    FHIR-JSON-RESOURCE:
+      type: object
+      description: A FHIR resource
