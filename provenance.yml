@@ -13,35 +13,35 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   collections/jefferson-health-allergy-intolerance-api.opencollection.json:
-    method: derived
-    evidence: openapi/jefferson-health-allergy-intolerance-api
+    method: unknown
+    evidence: no authorship recorded
   collections/jefferson-health-allergy-intolerance-api.postman_collection.json:
-    method: derived
-    evidence: openapi/jefferson-health-allergy-intolerance-api
+    method: unknown
+    evidence: no authorship recorded
   collections/jefferson-health-bulk-data-api.opencollection.json:
-    method: derived
-    evidence: openapi/jefferson-health-bulk-data-api
+    method: unknown
+    evidence: no authorship recorded
   collections/jefferson-health-bulk-data-api.postman_collection.json:
-    method: derived
-    evidence: openapi/jefferson-health-bulk-data-api
+    method: unknown
+    evidence: no authorship recorded
   collections/jefferson-health-condition-api.opencollection.json:
-    method: derived
-    evidence: openapi/jefferson-health-condition-api
+    method: unknown
+    evidence: no authorship recorded
   collections/jefferson-health-condition-api.postman_collection.json:
-    method: derived
-    evidence: openapi/jefferson-health-condition-api
+    method: unknown
+    evidence: no authorship recorded
   collections/jefferson-health-document-reference-api.opencollection.json:
-    method: derived
-    evidence: openapi/jefferson-health-document-reference-api
+    method: unknown
+    evidence: no authorship recorded
   collections/jefferson-health-document-reference-api.postman_collection.json:
-    method: derived
-    evidence: openapi/jefferson-health-document-reference-api
+    method: unknown
+    evidence: no authorship recorded
   collections/jefferson-health-encounter-api.opencollection.json:
-    method: derived
-    evidence: openapi/jefferson-health-encounter-api
+    method: unknown
+    evidence: no authorship recorded
   collections/jefferson-health-encounter-api.postman_collection.json:
-    method: derived
-    evidence: openapi/jefferson-health-encounter-api
+    method: unknown
+    evidence: no authorship recorded
   collections/jefferson-health-endpoint-api.opencollection.json:
     method: derived
     evidence: openapi/jefferson-health-endpoint-api
@@ -73,23 +73,23 @@ artifacts:
     method: derived
     evidence: openapi/jefferson-health-location-api
   collections/jefferson-health-medication-request-api.opencollection.json:
-    method: derived
-    evidence: openapi/jefferson-health-medication-request-api
+    method: unknown
+    evidence: no authorship recorded
   collections/jefferson-health-medication-request-api.postman_collection.json:
-    method: derived
-    evidence: openapi/jefferson-health-medication-request-api
+    method: unknown
+    evidence: no authorship recorded
   collections/jefferson-health-metadata-api.opencollection.json:
-    method: derived
-    evidence: openapi/jefferson-health-metadata-api
+    method: unknown
+    evidence: no authorship recorded
   collections/jefferson-health-metadata-api.postman_collection.json:
-    method: derived
-    evidence: openapi/jefferson-health-metadata-api
+    method: unknown
+    evidence: no authorship recorded
   collections/jefferson-health-observation-api.opencollection.json:
-    method: derived
-    evidence: openapi/jefferson-health-observation-api
+    method: unknown
+    evidence: no authorship recorded
   collections/jefferson-health-observation-api.postman_collection.json:
-    method: derived
-    evidence: openapi/jefferson-health-observation-api
+    method: unknown
+    evidence: no authorship recorded
   collections/jefferson-health-organization-api.opencollection.json:
     method: derived
     evidence: openapi/jefferson-health-organization-api
@@ -97,11 +97,11 @@ artifacts:
     method: derived
     evidence: openapi/jefferson-health-organization-api
   collections/jefferson-health-patient-api.opencollection.json:
-    method: derived
-    evidence: openapi/jefferson-health-patient-api
+    method: unknown
+    evidence: no authorship recorded
   collections/jefferson-health-patient-api.postman_collection.json:
-    method: derived
-    evidence: openapi/jefferson-health-patient-api
+    method: unknown
+    evidence: no authorship recorded
   collections/jefferson-health-practitioner-api.opencollection.json:
     method: derived
     evidence: openapi/jefferson-health-practitioner-api
@@ -154,12 +154,27 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   finops/jefferson-health-finops.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: generated
+    evidence: declared in the artifact
   front-door-ai/2026-09-17.yml:
     method: unknown
     evidence: no authorship recorded
+  hosts/jefferson-health-hosts.yml:
+    method: derived
+    evidence: declared in the artifact
+  integrations/_index.yml:
+    method: generated
+    evidence: carries an API Evangelist house phrase
+  integrations/jefferson-health-integration-edges.yml:
+    method: unknown
+    evidence: no authorship recorded
   json-ld/jefferson-health-context.jsonld:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/jefferson-health-bundle-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/jefferson-health-capability-statement-schema.json:
     method: unknown
     evidence: no authorship recorded
   json-schema/jefferson-health-observation-schema.json:
@@ -171,130 +186,13 @@ artifacts:
   json-schema/jefferson-health-practitioner-schema.json:
     method: unknown
     evidence: no authorship recorded
+  json-schema/jefferson-health-smart-configuration-schema.json:
+    method: unknown
+    evidence: no authorship recorded
   json-structure/jefferson-health-fhir-encounter-structure.json:
     method: unknown
     evidence: no authorship recorded
-  kin/checks-2026-09-24T161608.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T125852.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T133943.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T143147.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T154045.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-26T215308.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T094438.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T103455.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T123021.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T132314.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T140727.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-28T221322.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T213958.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T230545.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T203505.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T220315.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-31T223420.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T063623.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T210448.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T222808.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T224043.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T161828.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T174231.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T062714.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T212454.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T224856.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T055819.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T072335.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T144739.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T195450.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T211839.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T011047.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T224210.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T200636.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T213054.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T214843.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T232836.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T204815.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T222408.yml:
+  kin/checks-2026-10-11T110117.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-09-12T062655.yml:
@@ -378,38 +276,37 @@ artifacts:
   kin/score-2026-09-24T161608.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-25T210408.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-25T232841.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T000835.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T024842.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-11T110117.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
   lifecycle/jefferson-health-lifecycle.yml:
     method: unknown
     evidence: no authorship recorded
+  llms/jefferson-health-llms-provenance.yml:
+    method: searched
+    evidence: 'derive-llms-provenance.py: harvested'
   llms/jefferson-health-llms.txt:
     method: searched
     evidence: 'derive-llms-provenance.py: harvested'
   mcp/jefferson-health-mcp.yml:
     method: derived
     evidence: declared in the artifact
-  openapi/_original/jefferson-health-jhp-provider-directory-fhir-api-openapi.yml:
+  openapi/_original/jefferson-health-openapi.yml:
     method: harvested
-    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
-      to the provider's source is unverified
-  openapi/_original/jefferson-health-tjuh-fhir-r4-api-openapi.yml:
-    method: harvested
-    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
-      to the provider's source is unverified
-  openapi/jefferson-health-allergy-intolerance-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/jefferson-health-bulk-data-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/jefferson-health-condition-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/jefferson-health-document-reference-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/jefferson-health-encounter-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+    evidence: byte-identical to https://providerfhirapi.healthpartnersplans.com/api-docs (sha256 7ba81bfbfe55,
+      fetched 2026-10-19)
   openapi/jefferson-health-endpoint-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
@@ -422,19 +319,10 @@ artifacts:
   openapi/jefferson-health-location-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/jefferson-health-medication-request-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/jefferson-health-metadata-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/jefferson-health-observation-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/jefferson-health-organization-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/jefferson-health-patient-api-openapi.yml:
+  openapi/jefferson-health-organizationaffiliation-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/jefferson-health-practitioner-api-openapi.yml:
@@ -443,15 +331,18 @@ artifacts:
   openapi/jefferson-health-practitioner-role-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/jefferson-health-system-level-operations-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   overlays/jefferson-health-jhp-provider-directory-overlay.yaml:
-    method: generated
-    evidence: declared in the artifact
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
   overlays/jefferson-health-tjuh-fhir-r4-overlay.yaml:
-    method: generated
-    evidence: declared in the artifact
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
   packages/jefferson-health-packages.yml:
-    method: searched
-    evidence: declared in the artifact
+    method: unknown
+    evidence: no authorship recorded
   plans/jefferson-health-plans-pricing.yml:
     method: searched
     evidence: declared in the artifact
@@ -462,6 +353,9 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   rules/jefferson-health-jsonschema-spectral-rules.yml:
+    method: generated
+    evidence: declared in the artifact
+  rules/jefferson-health-rules.yml:
     method: generated
     evidence: declared in the artifact
   rules/jefferson-health-tjuh-fhir-r4-rules.yml:
@@ -488,9 +382,12 @@ artifacts:
   skills/jefferson-health-provider-directory-search.md:
     method: generated
     evidence: declared in the artifact
-  vocabulary/jefferson-health-vocabulary.yml:
+  vendors/jefferson-health-vendors.yml:
     method: unknown
     evidence: no authorship recorded
+  vocabulary/jefferson-health-vocabulary.yml:
+    method: generated
+    evidence: declared in the artifact
   well-known/jefferson-health-jhp-openid-configuration.json:
     method: unknown
     evidence: no authorship recorded
