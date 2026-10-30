@@ -1,4 +1,4 @@
-# Jefferson Health (jefferson-health)
+# Jefferson Health
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,212 +66,225 @@
 
 Jefferson Health is a multi-state nonprofit academic health system based in Philadelphia, Pennsylvania, operating more than 30 hospitals and over 700 care sites across eastern Pennsylvania and southern New Jersey as the clinical arm of the broader Jefferson enterprise that also includes Thomas Jefferson University and Jefferson Health Plans (formerly Health Partners Plans). Its patient-facing electronic health record runs on Epic and is branded as MyJeffersonHealth / MyChart, with a CMS-mandated HL7 FHIR R4 API published at fhir.jefferson.edu/FHIRProxy/api/FHIR/R4 that exposes USCDI-aligned clinical resources to third-party patient-access applications via SMART on FHIR and OAuth 2.0. Jefferson Health Plans separately exposes CARIN-aligned Patient Access and Da Vinci Plan-Net Provider Directory FHIR APIs powered by Smile CDR for its insurance members and the public.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/jefferson-health/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/jefferson-health/refs/heads/main/apis.yml)
+**Areas:** Academic Medical Center · CARIN Blue Button · CMS Interoperability · Cures Act · Da Vinci Plan-Net · Epic · FHIR · HL7 · Healthcare · Hospital System · MyChart · Authentication
 
-## Scope
+## Jefferson Health on APIs.io
 
-- **Type:** Index
-- **Position:** Consumer
-- **Access:** 3rd-Party
+Everything profiled for Jefferson Health is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/jefferson-health/](https://apis.io/providers/jefferson-health/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (19)
 
-- Academic Medical Center
-- CARIN Blue Button
-- CMS Interoperability
-- Cures Act
-- Da Vinci Plan-Net
-- Epic
-- FHIR
-- HL7
-- Healthcare
-- Hospital System
-- MyChart
-- OAuth 2.0
-- Patient Access
-- Provider Directory
-- SMART on FHIR
-- US Core
-- USCDI
+- [Thomas Jefferson University Hospital FHIR DSTU2 API](https://apis.io/apis/jefferson-health/tjuh-fhir-dstu2-api/) — The legacy Thomas Jefferson University Hospital DSTU2 FHIR endpoint listed in Epic's public R4 endpoint registry under the organization "Jefferson Health".…
+- [Jefferson Health Plans Patient Access FHIR API](https://apis.io/apis/jefferson-health/jhp-patient-access-fhir-api/) — The Jefferson Health Plans (formerly Health Partners Plans) Patient Access FHIR API exposes adjudicated claims, encounter data from providers, formulary…
+- [MyJeffersonHealth MyChart Patient Portal](https://apis.io/apis/jefferson-health/myjeffersonhealth-mychart/) — MyJeffersonHealth is the patient-facing Epic MyChart deployment used by Jefferson Health patients to view test results, message providers, request…
+- [Jefferson Health Allergy Intolerance API](https://apis.io/apis/jefferson-health/jefferson-health-allergy-intolerance-api/) — Risk of harmful or undesirable physiological response to a substance.
+- [Jefferson Health Bulk Data API](https://apis.io/apis/jefferson-health/jefferson-health-bulk-data-api/) — HL7 FHIR Bulk Data Access Group-level export.
+- [Jefferson Health Condition API](https://apis.io/apis/jefferson-health/jefferson-health-condition-api/) — Detailed information about conditions, problems, or diagnoses.
+- [Jefferson Health Document Reference API](https://apis.io/apis/jefferson-health/jefferson-health-document-reference-api/) — A reference to a document, often a CCDA or clinical note.
+- [Jefferson Health Encounter API](https://apis.io/apis/jefferson-health/jefferson-health-encounter-api/) — An interaction between a patient and healthcare provider(s).
+- [Jefferson Health Endpoint API](https://apis.io/apis/jefferson-health/jefferson-health-endpoint-api/) — The technical details of an endpoint that can be used for electronic services.
+- [Jefferson Health Healthcare Service API](https://apis.io/apis/jefferson-health/jefferson-health-healthcare-service-api/) — The details of a healthcare service available at a location.
+- [Jefferson Health Insurance Plan API](https://apis.io/apis/jefferson-health/jefferson-health-insurance-plan-api/) — Details of a Health Insurance product/plan provided by an organization.
+- [Jefferson Health Location API](https://apis.io/apis/jefferson-health/jefferson-health-location-api/) — Details and position information for a physical place.
+- [Jefferson Health Medication Request API](https://apis.io/apis/jefferson-health/jefferson-health-medication-request-api/) — An order or request for both supply of the medication and the instructions for administration.
+- [Jefferson Health Metadata API](https://apis.io/apis/jefferson-health/jefferson-health-metadata-api/) — FHIR conformance discovery.
+- [Jefferson Health Observation API](https://apis.io/apis/jefferson-health/jefferson-health-observation-api/) — Measurements and simple assertions made about a patient.
+- [Jefferson Health Organization API](https://apis.io/apis/jefferson-health/jefferson-health-organization-api/) — A formally or informally recognized grouping of people or organizations.
+- [Jefferson Health Patient API](https://apis.io/apis/jefferson-health/jefferson-health-patient-api/) — Demographics and other administrative information about an individual receiving care.
+- [Jefferson Health Practitioner API](https://apis.io/apis/jefferson-health/jefferson-health-practitioner-api/) — A person who is directly or indirectly involved in the provisioning of healthcare.
+- [Jefferson Health Practitioner Role API](https://apis.io/apis/jefferson-health/jefferson-health-practitioner-role-api/) — A specific set of roles a practitioner may perform at an organization for a period of time.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-05-23
-- **Modified:** 2026-05-23
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### MCP servers (1)
 
-### Thomas Jefferson University Hospital FHIR R4 API
+Model Context Protocol servers that expose the API to agents.
 
-The Thomas Jefferson University Hospital FHIR R4 API is Jefferson Health's CMS Interoperability and Patient Access (CMS-9115-F) compliant HL7 FHIR Release 4.0.1 endpoint powered by Epic's August 2025 release. It exposes 80+ USCDI-aligned resource types — including Patient, Observation, Condition, Encounter, MedicationRequest, AllergyIntolerance, DiagnosticReport, DocumentReference, and Procedure — to third-party patient-access applications using SMART on FHIR and OAuth 2.0 with standalone-patient and EHR launch contexts, supports US Core 6.1.0 profiles, returns XML or JSON, and offers Bulk FHIR Group export for population-level access.
+- [jefferson-health-mcp.yml](https://apis.io/servers/jefferson-health/jefferson-health-mcp-yml/)
 
-- **Human URL:** [https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4](https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4)
-- **Base URL:** `https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4`
+#### Agentic access (1)
 
-#### Tags
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- CMS Interoperability
-- Cures Act
-- Epic
-- FHIR
-- HL7
-- Patient Access
-- R4
-- SMART on FHIR
-- US Core
-- USCDI
+- [Jefferson Health Agentic Access](https://apis.io/agentic-access/jefferson-health/jefferson-health-agentic-access/)
 
-#### Properties
+#### JSON Schema (6)
 
-- [Capability Statement](https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/metadata)
-- [Smart Configuration](https://fhir.jefferson.edu/FHIRProxy/api/FHIR/R4/.well-known/smart-configuration)
-- [Authorization](https://fhir.jefferson.edu/FHIRProxy/oauth2/authorize)
-- [Token](https://fhir.jefferson.edu/FHIRProxy/oauth2/token)
-- [Documentation](https://fhir.epic.com/Documentation)
-- [App Registration](https://fhir.epic.com/Developer/Apps)
-- [Developer Portal](https://fhir.epic.com/)
-- [Endpoint Directory](https://open.epic.com/Endpoints/R4)
-- [Implementation Guide](https://hl7.org/fhir/us/core/STU6.1/)
-- [Implementation Guide](https://hl7.org/fhir/smart-app-launch/)
-- [Implementation Guide](https://hl7.org/fhir/uv/bulkdata/)
-- [OpenAPI](openapi/jefferson-health-tjuh-fhir-r4-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/jefferson-health-tjuh-fhir-r4-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/jefferson-health-tjuh-fhir-r4-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Spectral Ruleset](rules/jefferson-health-tjuh-fhir-r4-rules.yml)
+The data models the API reads and writes.
 
-### Thomas Jefferson University Hospital FHIR DSTU2 API
+- [Bundle](https://apis.io/schemas/jefferson-health/jefferson-health-bundle/)
+- [CapabilityStatement](https://apis.io/schemas/jefferson-health/jefferson-health-capability-statement/)
+- [Jefferson Health FHIR R4 Observation (US Core Subset)](https://apis.io/schemas/jefferson-health/jefferson-health-observation/)
+- [Jefferson Health FHIR R4 Patient (US Core Subset)](https://apis.io/schemas/jefferson-health/jefferson-health-patient/)
+- [Jefferson Health Plans Plan-Net Practitioner](https://apis.io/schemas/jefferson-health/jefferson-health-practitioner/)
+- [SmartConfiguration](https://apis.io/schemas/jefferson-health/jefferson-health-smart-configuration/)
 
-The legacy Thomas Jefferson University Hospital DSTU2 FHIR endpoint listed in Epic's public R4 endpoint registry under the organization "Jefferson Health". It remains available for backward compatibility with older SMART on FHIR apps written against the FHIR DSTU2 baseline that pre-dates the CMS Interoperability and Patient Access mandate; new integrations should target the R4 endpoint instead.
+#### JSON Structure (1)
 
-- **Human URL:** [https://fhir.jefferson.edu/FHIRProxy/api/FHIR/DSTU2/](https://fhir.jefferson.edu/FHIRProxy/api/FHIR/DSTU2/)
-- **Base URL:** `https://fhir.jefferson.edu/FHIRProxy/api/FHIR/DSTU2`
+Data models expressed in JSON Structure.
 
-#### Tags
+- [Jefferson Health Fhir Encounter Structure](https://apis.io/json-structure/jefferson-health/jefferson-health-fhir-encounter-structure/)
 
-- DSTU2
-- Epic
-- FHIR
-- Legacy
-- SMART on FHIR
+#### JSON-LD (1)
 
-#### Properties
+Linked-data contexts for the provider's vocabulary.
 
-- [Documentation](https://fhir.epic.com/Specifications)
-- [Endpoint Directory](https://open.epic.com/MyApps/EndpointsJson)
-- [Postman Collection](collections/jefferson-health-jhp-provider-directory-fhir-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/jefferson-health-jhp-provider-directory-fhir-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/jefferson-health-tjuh-fhir-r4-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/jefferson-health-tjuh-fhir-r4-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Jefferson Health Context](https://apis.io/jsonld/jefferson-health/jefferson-health-context/)
 
-### Jefferson Health Plans Patient Access FHIR API
+#### Vocabulary (1)
 
-The Jefferson Health Plans (formerly Health Partners Plans) Patient Access FHIR API exposes adjudicated claims, encounter data from providers, formulary data, and certain clinical data to JHP members via third-party apps under the CMS Interoperability and Patient Access Final Rule (CMS-9115-F). The repository conforms to HL7 FHIR Release 4.0.1, is powered by Smile CDR, and uses OAuth 2.0 / OpenID Connect for member authentication and authorization, with developer registration handled through the JHP SMART on FHIR App Developer Portal.
+The provider's domain terms, defined.
 
-- **Human URL:** [https://smilercdr.healthpartnersplans.com/fhir-request-apps/swagger-ui/](https://smilercdr.healthpartnersplans.com/fhir-request-apps/swagger-ui/)
-- **Base URL:** `https://smilercdr.healthpartnersplans.com/`
+- [Jefferson Health Vocabulary](https://apis.io/vocabularies/jefferson-health/jefferson-health-vocabulary/)
 
-#### Tags
+#### Examples (5)
 
-- CARIN Blue Button
-- CMS Interoperability
-- FHIR
-- Patient Access
-- Payer
-- R4
-- SMART on FHIR
-- Smile CDR
+Example requests and responses.
 
-#### Properties
+- [Jhp Provider Directory Organization Search Example](https://apis.io/examples/jefferson-health/jhp-provider-directory-organization-search-example/)
+- [Jhp Provider Directory Practitioner Search Example](https://apis.io/examples/jefferson-health/jhp-provider-directory-practitioner-search-example/)
+- [Tjuh Fhir R4 Observation Search Example](https://apis.io/examples/jefferson-health/tjuh-fhir-r4-observation-search-example/)
+- [Tjuh Fhir R4 Patient Search Example](https://apis.io/examples/jefferson-health/tjuh-fhir-r4-patient-search-example/)
+- [Tjuh Fhir R4 Smart Configuration Example](https://apis.io/examples/jefferson-health/tjuh-fhir-r4-smart-configuration-example/)
 
-- [Documentation](https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/)
-- [Developer Resources](https://www.jeffersonhealthplans.com/home/about-us/interoperability/developer-resources/)
-- [Authentication Endpoints](https://www.jeffersonhealthplans.com/home/about-us/interoperability/authentication-and-data-endpoints/)
-- [App Registration](https://appgallery.healthpartnersplans.com/app-gallery/portal/#/login)
-- [API Reference](https://smilercdr.healthpartnersplans.com/fhir-request-apps/swagger-ui/)
-- [Smart Configuration](https://smilercdr.healthpartnersplans.com/smartauth/well-known/openid-configuration)
-- [Implementation Guide](https://build.fhir.org/ig/HL7/carin-bb/)
-- [Compliance](https://www.cms.gov/Regulations-and-Guidance/Guidance/Interoperability/index)
-- [Terms of Service](https://www.jeffersonhealthplans.com/home/about-us/interoperability/terms-of-service.html)
-- [Postman Collection](collections/jefferson-health-jhp-provider-directory-fhir-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/jefferson-health-jhp-provider-directory-fhir-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/jefferson-health-tjuh-fhir-r4-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/jefferson-health-tjuh-fhir-r4-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Collections (18)
 
-### Jefferson Health Plans Provider Directory FHIR API
+Postman and Open Collection request collections.
 
-The Jefferson Health Plans Provider Directory FHIR API is a public, unauthenticated HL7 FHIR R4 endpoint powered by Smile CDR 2025.02.R04 that surfaces JHP's network of in-network practitioners, organizations, locations, healthcare services, and insurance plans for the CMS Interoperability and Patient Access Provider Directory requirement. Supported resources are Practitioner, PractitionerRole, Organization, Location, HealthcareService, InsurancePlan, and Endpoint, all aligned with the HL7 Da Vinci Payer Data Exchange Plan-Net implementation guide.
+- [Jefferson Health Plans Provider Directory FHIR Allergy Intolerance API](https://apis.io/collections/jefferson-health/open-jefferson-health-allergy-intolerance-api/)
+- [Jefferson Health Plans Provider Directory FHIR Allergy Intolerance Bulk Data API](https://apis.io/collections/jefferson-health/open-jefferson-health-bulk-data-api/)
+- [Jefferson Health Plans Provider Directory FHIR Allergy Intolerance Condition API](https://apis.io/collections/jefferson-health/open-jefferson-health-condition-api/)
+- [Jefferson Health Plans Provider Directory FHIR Allergy Intolerance Document Reference API](https://apis.io/collections/jefferson-health/open-jefferson-health-document-reference-api/)
+- [Jefferson Health Plans Provider Directory FHIR Allergy Intolerance Encounter API](https://apis.io/collections/jefferson-health/open-jefferson-health-encounter-api/)
+- [Jefferson Health Plans Provider Directory FHIR Allergy Intolerance Endpoint API](https://apis.io/collections/jefferson-health/open-jefferson-health-endpoint-api/)
+- [Jefferson Health Plans Provider Directory FHIR Allergy Intolerance Healthcare Service API](https://apis.io/collections/jefferson-health/open-jefferson-health-healthcare-service-api/)
+- [Jefferson Health Plans Provider Directory FHIR Allergy Intolerance Insurance Plan API](https://apis.io/collections/jefferson-health/open-jefferson-health-insurance-plan-api/)
+- [Jefferson Health Plans Provider Directory FHIR API](https://apis.io/collections/jefferson-health/open-jefferson-health-jhp-provider-directory-fhir-api/)
+- [Jefferson Health Plans Provider Directory FHIR Allergy Intolerance Location API](https://apis.io/collections/jefferson-health/open-jefferson-health-location-api/)
+- [Jefferson Health Plans Provider Directory FHIR Allergy Intolerance Medication Request API](https://apis.io/collections/jefferson-health/open-jefferson-health-medication-request-api/)
+- [Jefferson Health Plans Provider Directory FHIR Allergy Intolerance Metadata API](https://apis.io/collections/jefferson-health/open-jefferson-health-metadata-api/)
+- [Jefferson Health Plans Provider Directory FHIR Allergy Intolerance Observation API](https://apis.io/collections/jefferson-health/open-jefferson-health-observation-api/)
+- [Jefferson Health Plans Provider Directory FHIR Allergy Intolerance Organization API](https://apis.io/collections/jefferson-health/open-jefferson-health-organization-api/)
+- [Jefferson Health Plans Provider Directory FHIR Allergy Intolerance Patient API](https://apis.io/collections/jefferson-health/open-jefferson-health-patient-api/)
+- [Jefferson Health Plans Provider Directory FHIR Allergy Intolerance Practitioner API](https://apis.io/collections/jefferson-health/open-jefferson-health-practitioner-api/)
+- [Jefferson Health Plans Provider Directory FHIR Allergy Intolerance Practitioner Role API](https://apis.io/collections/jefferson-health/open-jefferson-health-practitioner-role-api/)
+- [Thomas Jefferson University Hospital FHIR R4 API](https://apis.io/collections/jefferson-health/open-jefferson-health-tjuh-fhir-r4-api/)
 
-- **Human URL:** [https://providerfhirapi.healthpartnersplans.com/](https://providerfhirapi.healthpartnersplans.com/)
-- **Base URL:** `https://providerfhirapi.healthpartnersplans.com`
+#### Overlays (2)
 
-#### Tags
+OpenAPI overlays, including conversational phrasing for each operation.
 
-- CMS Interoperability
-- Da Vinci Plan-Net
-- FHIR
-- Payer
-- Plan-Net
-- Provider Directory
-- Public
-- R4
-- Smile CDR
+- [Jefferson Health Jhp Provider Directory Overlay](https://apis.io/overlays/jefferson-health/jefferson-health-jhp-provider-directory-overlay/)
+- [Jefferson Health Tjuh Fhir R4 Overlay](https://apis.io/overlays/jefferson-health/jefferson-health-tjuh-fhir-r4-overlay/)
 
-#### Properties
+#### Governance rules (4)
 
-- [Capability Statement](https://providerfhirapi.healthpartnersplans.com/metadata)
-- [Documentation](https://www.jeffersonhealthplans.com/home/about-us/interoperability/api-tools/)
-- [Implementation Guide](https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/)
-- [OpenAPI](openapi/jefferson-health-jhp-provider-directory-fhir-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/jefferson-health-jhp-provider-directory-fhir-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/jefferson-health-jhp-provider-directory-fhir-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Spectral Ruleset](rules/jefferson-health-jhp-provider-directory-fhir-rules.yml)
+Spectral rulesets for the provider's contracts.
 
-### MyJeffersonHealth MyChart Patient Portal
+- [Jefferson Health — jhp provider directory fhir rules](https://apis.io/rules/jefferson-health/jefferson-health-jhp-provider-directory-fhir-rules/)
+- [Jefferson Health — jsonschema rules](https://apis.io/rules/jefferson-health/jefferson-health-jsonschema-spectral-rules/)
+- [Jefferson Health API Rules](https://apis.io/rules/jefferson-health/jefferson-health-rules/)
+- [Jefferson Health — tjuh fhir r4 rules](https://apis.io/rules/jefferson-health/jefferson-health-tjuh-fhir-r4-rules/)
 
-MyJeffersonHealth is the patient-facing Epic MyChart deployment used by Jefferson Health patients to view test results, message providers, request prescription renewals, schedule appointments, pay bills, and grant third-party patient-access apps consent to retrieve their data through Jefferson's underlying FHIR R4 API. It also participates in Epic's MyChart Central, allowing single-login access across participating health systems.
+#### Security (2)
 
-- **Human URL:** [https://my.jeffersonhealth.org/](https://my.jeffersonhealth.org/)
-- **Base URL:** `https://my.jeffersonhealth.org/`
+Authentication, trust centre, and vulnerability disclosure.
 
-#### Tags
+- [Jefferson Health Authentication](https://apis.io/security/jefferson-health/jefferson-health-authentication/)
+- [Jefferson Health Domain Security](https://apis.io/security/jefferson-health/jefferson-health-domain-security/)
 
-- Epic
-- MyChart
-- Patient Portal
+#### OAuth scopes (1)
 
-#### Properties
+The permissions the API asks for.
 
-- [Patient Portal](https://my.jeffersonhealth.org/mychart/Authentication/Login)
-- [Documentation](https://my.jeffersonhealth.org/mychart/community/faq)
-- [My Chart Central](https://www.jeffersonhealth.org/your-health/my-jefferson-health/mychart-central)
-- [Patient Portal](https://mychart.jefferson.edu/mychart/Authentication/Login)
-- [Overview](https://www.jeffersonhealth.org/your-health/my-jefferson-health)
-- [Postman Collection](collections/jefferson-health-jhp-provider-directory-fhir-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/jefferson-health-jhp-provider-directory-fhir-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/jefferson-health-tjuh-fhir-r4-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/jefferson-health-tjuh-fhir-r4-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Jefferson Health Scopes](https://apis.io/scopes/jefferson-health/jefferson-health-scopes/)
 
-## Common Properties
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Jefferson Health Plans Pricing](https://apis.io/plans/jefferson-health/jefferson-health-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Jefferson Health Rate Limits](https://apis.io/rate-limits/jefferson-health/jefferson-health-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Jefferson Health Finops](https://apis.io/finops/jefferson-health/jefferson-health-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.jeffersonhealth.org/)
-- [Patient Portal](https://my.jeffersonhealth.org/)
-- [Patient Portal](https://mychart.jefferson.edu/)
-- [My Chart Central](https://www.jeffersonhealth.org/your-health/my-jefferson-health/mychart-central)
-- [Locations](https://www.jeffersonhealth.org/locations)
-- [Price Transparency](https://www.jeffersonhealth.org/pay-my-bill/charge-description)
-- [Price Estimator](https://www.jeffersonhealth.org/pay-my-bill/price-estimator)
-- [Privacy Policy](https://www.jeffersonhealth.org/about-us/notice-of-privacy-practices)
-- [Terms of Service](https://www.jeffersonhealth.org/terms-of-use)
-- [University](https://www.jefferson.edu/)
-- [Health Plans](https://www.jeffersonhealthplans.com/)
+- [Documentation](https://www.jeffersonhealthplans.com/home/about-us/interoperability/)
+- [Getting started](https://www.jeffersonhealthplans.com/home/about-us/interoperability/register-for-api-access.html)
+- [API reference](https://www.jeffersonhealthplans.com/home/about-us/interoperability/developer-resources/)
+- [Sign up](https://www.jeffersonhealthplans.com/home/about-us/interoperability/register-for-the-interoperability-portal.html)
+- [Blog](https://www.jeffersonhealth.org/your-health/living-well)
 - [Compliance](https://www.cms.gov/Regulations-and-Guidance/Guidance/Interoperability/index)
-- [Compliance](https://www.healthit.gov/curesrule/)
-- [JSON-LD](json-ld/jefferson-health-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [Vocabulary](vocabulary/jefferson-health-vocabulary.yml)
-- [JSON Schema](json-schema/jefferson-health-patient-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/jefferson-health-observation-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/jefferson-health-practitioner-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Structure](json-structure/jefferson-health-fhir-encounter-structure.json)
-- [Plans](plans/jefferson-health-plans-pricing.yml)
-- [Rate Limits](rate-limits/jefferson-health-rate-limits.yml)
-- [Fin Ops](finops/jefferson-health-finops.yml)
+- [Terms of service](https://www.jeffersonhealth.org/privacy-practices/website-terms-of-use)
+- [Privacy policy](https://www.jeffersonhealth.org/privacy-practices)
+- [GitHub](https://github.com/jefferson-health)
+
+## API Evangelist rating
+
+**Kin Score 59.2** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 74.1 |
+| Contract quality | 57.1 |
+| Contract governance | 35.6 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 58.9 |
+| Access clarity | 73.7 |
+
+**Agent readiness 38.8** — agent-native
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | served (partial credit) |
+| Idempotency | na |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | — |
+
+**Regulatory alignment 47.7** — Health
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/jefferson-health/](https://apis.io/providers/jefferson-health/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Jefferson Health: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/jefferson-health/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
